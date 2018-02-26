@@ -98,10 +98,9 @@ export class ListaComponent implements OnInit {
     this.popupConfermaElimina.apriModale();
   }
 
-  async confermaEliminaAndamento(andamento: Andamento) {
+  async confermaElimina(andamento: Andamento) {
     if (this.andamentoSelected) {
-      const andamentoS = this.andamentoSelected;
-      await this.andamentoService.elimina(this.andamentoSelected).toPromise();
+      await this.andamentoService.elimina(this.andamentoSelected.id).toPromise();
       this.popupConfermaElimina.chiudiModale();
       const title = 'Voce di spesa eliminata';
       const message = 'La voce di spesa è stata eliminata correttamente';

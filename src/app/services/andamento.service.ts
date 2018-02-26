@@ -18,16 +18,20 @@ export class AndamentoService {
     return this.http.get<Andamento[]>(`${this.endpoint}/andamento`);
   }
 
-  inserisci(item: Andamento): Observable<{} | Andamento> {
-    return this.http.post(`${this.endpoint}/gestitem/inserisci`, item);
+  get(id: number): Observable<Andamento> {
+    return this.http.get<Andamento>(`${this.endpoint}/andamento/${id}`);
   }
 
-  modifica(item: Andamento): Observable<{} | Andamento> {
-    return this.http.post(`${this.endpoint}/gestitem/modifica`, item);
+  inserisci(item: Andamento): Observable<Andamento> {
+    return this.http.post<Andamento>(`${this.endpoint}/andamento`, item);
   }
 
-  elimina(item: Andamento) {
-    return this.http.post(`${this.endpoint}/gestitem/elimina`, item);
+  modifica(item: Andamento): Observable<Andamento> {
+    return this.http.put<Andamento>(`${this.endpoint}/andamento/${item.id}`, item);
+  }
+
+  elimina(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.endpoint}/andamento/${id}`);
   }
 
 }

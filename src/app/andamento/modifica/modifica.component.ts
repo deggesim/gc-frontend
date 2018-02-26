@@ -47,6 +47,8 @@ export class ModificaComponent implements OnInit, OnChanges {
         costo: andamento.costo,
         tipoSpesa: andamento.tipoSpesa
       });
+    } else {
+      this.form.controls.giorno.setValue(new Date());
     }
   }
 

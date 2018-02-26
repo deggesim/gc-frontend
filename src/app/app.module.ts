@@ -1,8 +1,10 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgSelectModule } from '@ng-select/ng-select';
 import * as moment from 'moment';
 import { ToastyModule } from 'ng2-toasty';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -32,8 +34,6 @@ import { NotificheComponent } from './shared/notifiche/notifiche.component';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
-import { NgSelectModule } from '@ng-select/ng-select';
-
 
 @NgModule({
   declarations: [
@@ -53,6 +53,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    FlexLayoutModule,
     NgSelectModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
