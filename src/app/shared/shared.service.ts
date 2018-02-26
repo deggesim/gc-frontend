@@ -1,9 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
+import { defineLocale } from 'ngx-bootstrap/chronos';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { itLocale } from 'ngx-bootstrap/locale';
 
 import { Tipologica } from './../model/tipologica';
 import * as globals from './globals';
@@ -38,6 +41,7 @@ export class SharedService {
     // Assign the selected theme name to the `theme` property of the instance of ToastyConfig.
     // Possible values: default, bootstrap, material
     this.toastyConfig.position = 'top-right';
+    defineLocale('it', itLocale);
     this.localeService.use('it');
   }
 
@@ -56,24 +60,6 @@ export class SharedService {
     this.toastyService[type](toastOptions);
   }
 
-  public extractData(res: Response) {
-    let body;
-    // check if empty, before call json
-    if (res.text()) {
-      try {
-        body = res.json();
-      } catch (error) {
-        return res.text();
-      }
-    }
-
-    if (_.isNil(body)) {
-      return {};
-    } else {
-      return body;
-    }
-  }
-
   public compareTipologica(tipo1: Tipologica, tipo2: Tipologica) {
     if (!_.isEmpty(tipo1) && !_.isEmpty(tipo2)) {
       return _.isEqual(tipo1.codice, tipo2.codice);
@@ -82,56 +68,63 @@ export class SharedService {
     }
   }
 
-  notifyError(response: Response) {
-    let titolo;
-    let descrizione = '';
+  notifyError(response: HttpErrorResponse) {
+    // let titolo;
+    // let descrizione = '';
     const tipoOperazione = 'alert';
-
     console.error(response);
-    switch (response.status) {
-      case -1:
-      case 0:
-      case 401:
-      case 405:
-        titolo = 'Utente non autorizzato';
-        descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
-        break;
-      case 403:
-        titolo = 'Utente non autorizzato';
-        descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
-        break;
-      case 422:
-        titolo = 'Errori nella validazione';
-        let messaggio422 = response.json();
-        if (messaggio422 === undefined) {
-          messaggio422 = this.getMessaggiErrore(response.text());
-        }
-        _.forEach(messaggio422, function (e) {
-          descrizione += e + '. ';
-        });
-        break;
-      case 500:
-        titolo = 'Errore server';
 
-        let messaggio500 = response.json();
-        if (messaggio500 === undefined) {
-          messaggio500 = this.getMessaggiErrore(response.text());
-        }
-        if (messaggio500 === undefined) {
-          descrizione = 'Si è verificato un errore imprevisto';
-        } else {
-          _.forEach(messaggio500, function (e) {
-            descrizione += e + '. ';
-          });
-        }
-        break;
-      default:
-        titolo = 'Problema generico';
-        descrizione = 'Si è verificato un errore imprevisto';
-        break;
+    if (response.error instanceof Error) {
+      console.log('Client-side error occured.');
+    } else {
+      console.log('Server-side error occured.');
     }
 
-    this.notifica(globals.toastType.error, titolo, descrizione);
+
+    // switch (response.status) {
+    //   case -1:
+    //   case 0:
+    //   case 401:
+    //   case 405:
+    //     titolo = 'Utente non autorizzato';
+    //     descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
+    //     break;
+    //   case 403:
+    //     titolo = 'Utente non autorizzato';
+    //     descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
+    //     break;
+    //   case 422:
+    //     titolo = 'Errori nella validazione';
+    //     let messaggio422 = response.json();
+    //     if (messaggio422 === undefined) {
+    //       messaggio422 = this.getMessaggiErrore(response.text());
+    //     }
+    //     _.forEach(messaggio422, function (e) {
+    //       descrizione += e + '. ';
+    //     });
+    //     break;
+    //   case 500:
+    //     titolo = 'Errore server';
+
+    //     let messaggio500 = response.json();
+    //     if (messaggio500 === undefined) {
+    //       messaggio500 = this.getMessaggiErrore(response.text());
+    //     }
+    //     if (messaggio500 === undefined) {
+    //       descrizione = 'Si è verificato un errore imprevisto';
+    //     } else {
+    //       _.forEach(messaggio500, function (e) {
+    //         descrizione += e + '. ';
+    //       });
+    //     }
+    //     break;
+    //   default:
+    //     titolo = 'Problema generico';
+    //     descrizione = 'Si è verificato un errore imprevisto';
+    //     break;
+    // }
+
+    // this.notifica(globals.toastType.error, titolo, descrizione);
   }
 
   notifyErrorDownload(response: Response) {

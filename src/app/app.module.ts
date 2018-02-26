@@ -1,10 +1,8 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import * as moment from 'moment';
 import { ToastyModule } from 'ng2-toasty';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -18,16 +16,23 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
+import { ListaComponent } from './andamento/lista/lista.component';
+import { ModificaComponent } from './andamento/modifica/modifica.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { GlobalInterceptor } from './http-interceptors/global-interceptor.service';
 import { HeaderComponent } from './layout/header/header.component';
+import { AndamentoService } from './services/andamento.service';
+import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
+import { TipoSpesaService } from './services/tipo-spesa.service';
 import { ErrorPageComponent } from './shared/error-page.component';
 import { NotaComponent } from './shared/nota/nota.component';
 import { NotificheComponent } from './shared/notifiche/notifiche.component';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -39,6 +44,8 @@ import { SpinnerService } from './shared/spinner.service';
     NotificheComponent,
     ErrorPageComponent,
     HomeComponent,
+    ListaComponent,
+    ModificaComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +53,7 @@ import { SpinnerService } from './shared/spinner.service';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    NgSelectModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     PaginationModule.forRoot(),
@@ -60,7 +68,16 @@ import { SpinnerService } from './shared/spinner.service';
     AppRoutingModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalInterceptor,
+      multi: true,
+    },
+    // resolver
+    ListaAndamentoResolver,
     // altri servizi
+    AndamentoService,
+    TipoSpesaService,
     SpinnerService,
     SharedService
   ],

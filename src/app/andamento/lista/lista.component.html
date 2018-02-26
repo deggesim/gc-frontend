@@ -1,0 +1,83 @@
+<div class="text-right text-success">
+  <i class="fa fa-plus-circle fa-2x manina" aria-hidden="true" (click)="nuova()"></i>
+</div>
+
+<table class="table table-striped table-bordered table-responsive">
+  <thead class="table-header">
+    <tr>
+      <th>
+        Giorno
+        <div>
+          <i class="manina fa" [ngClass]="{'fa-chevron-up': !sortedByGiornoAsc, 'fa-chevron-circle-up': sortedByGiornoAsc}" aria-hidden="true"
+            (click)="sortByGiornoAsc()"></i>
+          <i class="manina fa" [ngClass]="{'fa-chevron-down': !sortedByGiornoDesc, 'fa-chevron-circle-down': sortedByGiornoDesc}" aria-hidden="true"
+            (click)="sortByGiornoDesc()"></i>
+        </div>
+      </th>
+      <th>
+        Descrizione
+        <div>
+          <i class="manina fa" [ngClass]="{'fa-chevron-up': !sortedByDescrizioneAsc, 'fa-chevron-circle-up': sortedByDescrizioneAsc}"
+            aria-hidden="true" (click)="sortByDescrizioneAsc()"></i>
+          <i class="manina fa" [ngClass]="{'fa-chevron-down': !sortedByDescrizioneDesc, 'fa-chevron-circle-down': sortedByDescrizioneDesc}"
+            aria-hidden="true" (click)="sortByDescrizioneDesc()"></i>
+        </div>
+      </th>
+      <th>
+        Costo
+        <div>
+          <i class="manina fa" [ngClass]="{'fa-chevron-up': !sortedByCostoAsc, 'fa-chevron-circle-up': sortedByCostoAsc}" aria-hidden="true"
+            (click)="sortByCostoAsc()"></i>
+          <i class="manina fa" [ngClass]="{'fa-chevron-down': !sortedByCostoDesc, 'fa-chevron-circle-down': sortedByCostoDesc}" aria-hidden="true"
+            (click)="sortByCostoDesc()"></i>
+        </div>
+      </th>
+      <th>Tipo spesa</th>
+      <th>Azioni</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of listaPaginata">
+      <td>{{item.giorno | date: 'dd/MM/yyyy'}}</td>
+      <td>{{item.descrizione}}</td>
+      <td>{{item.costo | currency: 'EUR'}}</td>
+      <td>{{item.tipoSpesa.descrizione}}</td>
+      <td class="text-nowrap">
+        <button type="button" class="btn btn-warning" (click)="modifica(item)" tooltip="Modifica" placement="top">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="btn btn-danger" (click)="apriPopupElimina(item)" tooltip="Elimina" placement="top">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center" *ngIf="abilitaPaginazione()">
+  <pagination [totalItems]="size" [(ngModel)]="page" [itemsPerPage]="pageSize" (pageChanged)="pageChange($event)" [maxSize]="maxSize"
+    [boundaryLinks]="boundaryLinks" firstText="<<" previousText="<" nextText=">" lastText=">>"></pagination>
+</div>
+
+<!-- popup elimina -->
+<app-popup-conferma #popupConfermaElimina titolo="Elimina voce di spesa" btnConferma="Elimina" btnAnnulla="Annulla" (conferma)="confermaElimina($event)"
+  (annulla)="popupConfermaElimina.chiudiModale()"></app-popup-conferma>
+
+<!-- popup inserimento/modifica voce di menu -->
+<div *ngIf="mostraPopupModifica" class="modal fade" bsModal #editMenu="bs-modal" [config]="{backdrop: 'static', keyboard: false, show: true}"
+  tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header titolo">
+        <h4 class="modal-title text-center">{{titoloModale}}</h4>
+      </div>
+
+      <div class="modal-body">
+        <app-modifica [andamento]="andamentoSelected" (salva)="salva($event)" (annulla)="annulla()"></app-modifica>
+      </div>
+    </div>
+
+  </div>
+</div>
