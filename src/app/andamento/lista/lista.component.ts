@@ -29,7 +29,7 @@ export class ListaComponent implements OnInit {
   size: number;
   page = 1;
   pageSize = 5;
-  maxSize = 7;
+  maxSize = 5;
   boundaryLinks = true;
   searchExecute = false;
 
@@ -56,6 +56,13 @@ export class ListaComponent implements OnInit {
         this.listaPaginata = this.buildPage();
       }
     );
+  }
+
+  nuova() {
+    console.log('nuovo andamento');
+    this.andamentoSelected = undefined;
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Nuova voce di spesa';
   }
 
   modifica(item: Andamento): void {
@@ -114,13 +121,6 @@ export class ListaComponent implements OnInit {
         }
       );
     }
-  }
-
-  nuova() {
-    console.log('nuovo andamento');
-    this.andamentoSelected = undefined;
-    this.mostraPopupModifica = true;
-    this.titoloModale = 'Nuova voce di spesa';
   }
 
   abilitaPaginazione() {

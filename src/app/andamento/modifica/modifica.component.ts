@@ -40,7 +40,7 @@ export class ModificaComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const andamento: Andamento = changes['andamento'].currentValue;
-    if (!_.isEmpty(andamento)) {
+    if (!_.isNil(andamento)) {
       this.form.patchValue({
         giorno: andamento.giorno,
         descrizione: andamento.descrizione,

@@ -30,8 +30,8 @@ export class AndamentoService {
     return this.http.put<Andamento>(`${this.endpoint}/andamento/${item.id}`, item);
   }
 
-  elimina(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.endpoint}/andamento/${id}`);
+  elimina(id: number): Observable<string> {
+    return this.http.delete(`${this.endpoint}/andamento/${id}`, { responseType: 'text' });
   }
 
 }

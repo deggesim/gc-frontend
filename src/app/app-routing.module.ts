@@ -4,7 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { HomeComponent } from './home/home.component';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
+import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver.service';
+import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver.service';
 import { ErrorPageComponent } from './shared/error-page.component';
+import { SpesaMensileComponent } from './statistiche/spesa-mensile/spesa-mensile.component';
+import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 
 const appRoutes: Routes = [
     {
@@ -19,6 +23,26 @@ const appRoutes: Routes = [
         component: ListaComponent,
         resolve: {
             lista: ListaAndamentoResolver
+        },
+        data: {
+            breadcrumb: 'Lista'
+        }
+    },
+    {
+        path: 'spese-frequenti',
+        component: SpeseFrequentiComponent,
+        resolve: {
+            tortaTipiSpesa: SpeseFrequentiResolver
+        },
+        data: {
+            breadcrumb: 'Lista'
+        }
+    },
+    {
+        path: 'spesa-mensile',
+        component: SpesaMensileComponent,
+        resolve: {
+            barreSpesaMensile: SpesaMensileResolver
         },
         data: {
             breadcrumb: 'Lista'

@@ -19,6 +19,17 @@
   border: 1px solid #CECECE;
 }
 
+.legend {
+  border: 1px solid #CECECE;
+  border-radius: 0.5rem;
+  background-color: white;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: inherit;
+  margin-bottom: auto;
+  font-size: 15px;
+}
+
 .ttable {
   padding: 1rem;
   @media (max-width: 599px) {
@@ -123,4 +134,9 @@ caption {
 
 .manina {
   cursor: pointer;
+}
+
+// statistiche
+.stretch {
+  height: calc(100vh - 70px);
 }

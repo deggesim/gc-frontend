@@ -4,7 +4,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import * as moment from 'moment';
 import { ToastyModule } from 'ng2-toasty';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -27,6 +29,9 @@ import { GlobalInterceptor } from './http-interceptors/global-interceptor.servic
 import { HeaderComponent } from './layout/header/header.component';
 import { AndamentoService } from './services/andamento.service';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
+import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver.service';
+import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver.service';
+import { StatisticheService } from './services/statistiche.service';
 import { TipoSpesaService } from './services/tipo-spesa.service';
 import { ErrorPageComponent } from './shared/error-page.component';
 import { NotaComponent } from './shared/nota/nota.component';
@@ -34,6 +39,8 @@ import { NotificheComponent } from './shared/notifiche/notifiche.component';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
+import { SpesaMensileComponent } from './statistiche/spesa-mensile/spesa-mensile.component';
+import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +53,12 @@ import { SpinnerService } from './shared/spinner.service';
     HomeComponent,
     ListaComponent,
     ModificaComponent,
+    SpeseFrequentiComponent,
+    SpesaMensileComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
@@ -66,6 +76,7 @@ import { SpinnerService } from './shared/spinner.service';
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
     ToastyModule.forRoot(),
+    NgxChartsModule,
     AppRoutingModule
   ],
   providers: [
@@ -76,9 +87,12 @@ import { SpinnerService } from './shared/spinner.service';
     },
     // resolver
     ListaAndamentoResolver,
+    SpeseFrequentiResolver,
+    SpesaMensileResolver,
     // altri servizi
     AndamentoService,
     TipoSpesaService,
+    StatisticheService,
     SpinnerService,
     SharedService
   ],

@@ -58,8 +58,10 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="center" *ngIf="abilitaPaginazione()">
-  <pagination [totalItems]="size" [(ngModel)]="page" [itemsPerPage]="pageSize" (pageChanged)="pageChange($event)" [maxSize]="maxSize"
-    [boundaryLinks]="boundaryLinks" firstText="<<" previousText="<" nextText=">" lastText=">>"></pagination>
+  <div fxFlex="nogrow">
+    <pagination [totalItems]="size" [(ngModel)]="page" [itemsPerPage]="pageSize" (pageChanged)="pageChange($event)" [maxSize]="maxSize"
+      [boundaryLinks]="boundaryLinks" firstText="<<" previousText="<" nextText=">" lastText=">>"></pagination>
+  </div>
 </div>
 
 <!-- popup elimina -->

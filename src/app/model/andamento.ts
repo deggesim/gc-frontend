@@ -4,6 +4,6 @@ export interface Andamento {
     id?: number;
     giorno: Date;
     descrizione: string;
-    costo: number;
+    costo?: number;
     tipoSpesa: TipoSpesa;
 }

@@ -1,41 +1,37 @@
-<div class="container">
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sollicitudin tincidunt lorem, ut scelerisque massa facilisis
-    quis. Cras lobortis dui eu orci semper cursus. Nulla non nunc turpis. Ut volutpat imperdiet odio non viverra. Pellentesque
-    porta arcu eget purus egestas, ac viverra justo ullamcorper. Curabitur pharetra dolor quis nibh laoreet auctor. Quisque
-    ultricies tortor sem, porttitor lacinia nunc fermentum sit amet. Praesent erat ex, congue et nunc condimentum, pellentesque
-    tempus eros. Etiam venenatis metus massa, sed pharetra diam elementum lacinia. Mauris quis nisi et libero hendrerit varius
-    eu et eros. Fusce tincidunt posuere suscipit. Donec justo dui, pharetra non leo a, iaculis laoreet libero.
-  </p>
-  <p>
-    Fusce condimentum metus dolor, et ultrices eros ultricies nec. Donec ante neque, convallis ac libero vitae, condimentum feugiat
-    dolor. Pellentesque nec tellus orci. In ut nunc cursus, ultrices sem ac, convallis tellus. Nunc orci arcu, viverra in
-    rhoncus nec, finibus id neque. Donec scelerisque dolor justo, vel molestie ligula ornare in. Nulla eu diam quam. Vestibulum
-    lacinia pulvinar lorem. Aliquam metus arcu, scelerisque et ipsum id, maximus tristique lectus. Ut non velit ut neque
-    vehicula porta at eget erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem
-    ipsum dolor sit amet, consectetur adipiscing elit.
-  </p>
-  <p>
-    Aliquam in imperdiet ex. Nulla et lorem lectus. Vestibulum ut gravida sem, luctus varius enim. Aliquam ut dui vehicula, rhoncus
-    sem vel, fringilla augue. Integer consequat tortor eu nulla euismod, a vehicula libero congue. Cras nisi nunc, pharetra
-    nec dui sed, viverra finibus ante. Cras convallis metus dolor, non luctus leo semper non. Quisque at gravida tortor.
-  </p>
-  <p>
-    Fusce gravida arcu eget ipsum faucibus, at iaculis ipsum varius. Quisque faucibus sagittis turpis et feugiat. Sed tempus
-    molestie metus. Duis interdum congue tellus non interdum. Mauris aliquam metus ante, sit amet malesuada ante auctor at.
-    In vitae congue lacus. Sed vehicula at felis sit amet finibus. Nam tincidunt, arcu mattis commodo scelerisque, libero
-    purus varius ligula, sed convallis enim eros vel ex. Sed venenatis nulla auctor congue elementum. Nam vitae hendrerit
-    diam. Pellentesque nisi diam, dapibus id ipsum sed, tristique gravida mauris. Mauris vitae ligula tempor, suscipit sapien
-    nec, accumsan ligula. Vivamus lorem ipsum, mollis id ligula in, auctor consectetur odio. Vivamus lectus lectus, maximus
-    eget euismod quis, interdum vitae urna.
-  </p>
-  <p>
-    Maecenas mattis sed odio et accumsan. Morbi vitae hendrerit mauris. Nam nisi nunc, scelerisque sed volutpat eget, molestie
-    eu velit. Donec quis faucibus turpis, sed accumsan urna. Sed eu vestibulum sapien, non ultricies orci. Integer eget turpis
-    sit amet ligula iaculis lobortis at ac nisi. Nulla ac velit et nisl lobortis pretium ac sit amet ex. In fringilla vulputate
-    arcu, non euismod ex semper non. Pellentesque mollis mauris non ex cursus mattis. Aliquam enim dolor, ultricies vel pretium
-    eget, volutpat vel velit. Vivamus pretium luctus ultricies. Suspendisse facilisis ac magna ut ultrices. Aliquam nisl
-    velit, gravida vitae vestibulum sed, fermentum id risus. Nam hendrerit nunc dictum purus blandit venenatis. Etiam a sollicitudin
-    turpis.
-  </p>
+<!-- ICONE -->
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="25" fxFlex.xs="50">
+    <i class="fa fa-shopping-cart manina icona" aria-hidden="true" (click)="spesa()" tooltip="Spesa"></i>
+  </div>
+
+  <div fxFlex="25" fxFlex.xs="50">
+    <i class="fa fa-car manina icona" aria-hidden="true" (click)="carburante()" tooltip="Carburante"></i>
+  </div>
+
+  <div fxFlex="25" fxFlex.xs="50">
+    <i class="fa fa-shower manina icona" aria-hidden="true" (click)="pulizie()" tooltip="Pulizie"></i>
+  </div>
+
+  <div fxFlex="25" fxFlex.xs="50">
+    <i class="fa fa-credit-card manina icona" aria-hidden="true" (click)="bolletta()" tooltip="Bolletta"></i>
+  </div>
+</div>
+
+<!-- popup inserimento voce di menu -->
+<div *ngIf="mostraPopup" class="modal fade" bsModal #editMenu="bs-modal" [config]="{backdrop: 'static', keyboard: false, show: true}"
+  tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header titolo">
+        <h4 class="modal-title">{{titoloModale}}</h4>
+      </div>
+
+      <div class="modal-body">
+        <app-modifica [andamento]="andamento" (salva)="salva($event)" (annulla)="annulla()"></app-modifica>
+      </div>
+    </div>
+
+  </div>
 </div>

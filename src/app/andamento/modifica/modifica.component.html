@@ -24,6 +24,15 @@
     </div>
 
     <div fxFlex="49" fxFlex.xs="100">
+      <div class="form-group" [ngClass]="{'is-invalid': form.controls.giorno.invalid && form.controls.giorno.dirty}">
+        <label for="tipoSpesa" class="control-label">Tipo spesa *</label>
+        <ng-select id="tipoSpesa" name="tipoSpesa" [items]="listaTipoSpesa" bindLabel="descrizione" formControlName="tipoSpesa" clearAllText="Elimina"
+          [ngClass]="{'ng-select-error': form.controls.tipoSpesa.invalid && form.controls.tipoSpesa.dirty}"></ng-select>
+        <div *ngIf="form.controls.tipoSpesa.hasError('required') && form.controls.tipoSpesa.dirty" class="invalid-feedback">Il campo tipo spesa è obbligatorio</div>
+      </div>
+    </div>
+
+    <div fxFlex="49" fxFlex.xs="100">
       <div class="form-group">
         <label for="descrizione" class="control-label">Descrizione *</label>
         <input type="text" class="form-control" id="descrizione" name="descrizione" formControlName="descrizione" [ngClass]="{'is-invalid': form.controls.descrizione.invalid && form.controls.descrizione.dirty}">
@@ -36,15 +45,6 @@
         <label for="costo" class="control-label">Costo *</label>
         <input type="number" step="0.5" class="form-control" id="costo" name="costo" formControlName="costo" [ngClass]="{'is-invalid': form.controls.costo.invalid && form.controls.costo.dirty}">
         <div *ngIf="form.controls.costo.hasError('required') && form.controls.costo.dirty" class="invalid-feedback">Il campo costo è obbligatorio</div>
-      </div>
-    </div>
-
-    <div fxFlex="49" fxFlex.xs="100">
-      <div class="form-group" [ngClass]="{'is-invalid': form.controls.giorno.invalid && form.controls.giorno.dirty}">
-        <label for="tipoSpesa" class="control-label">Tipo spesa *</label>
-        <ng-select id="tipoSpesa" name="tipoSpesa" [items]="listaTipoSpesa" bindLabel="descrizione" formControlName="tipoSpesa" clearAllText="Elimina"
-          [ngClass]="{'ng-select-error': form.controls.tipoSpesa.invalid && form.controls.tipoSpesa.dirty}"></ng-select>
-        <div *ngIf="form.controls.tipoSpesa.hasError('required') && form.controls.tipoSpesa.dirty" class="invalid-feedback">Il campo tipo spesa è obbligatorio</div>
       </div>
     </div>
   </div>

@@ -4,7 +4,9 @@
 @import 'colors';
 
 // padding per la navbar bootstrap fixed top
-body { padding-top: 70px; }
+body {
+  padding-top: 70px;
+}
 
 // Customizzazione ng2-toasty
 #toasty .toast {
@@ -21,4 +23,43 @@ body { padding-top: 70px; }
 
 .modal-content {
   border-radius: 0.5rem;
+}
+
+.dropdown-item {
+  &.active, &:active {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: #6C757D;
+  }
+  &:hover, &:focus {
+    color: #16181B;
+    text-decoration: none;
+    background-color: #F8F9FA;
+  }
+  &.active, &:active {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: #6C757D;
+  }
+}
+
+a {
+  color: #212529;
+}
+
+// customizzazione bootstrap
+.page-link {
+  color: #212529;
+  &:hover {
+    color: #212529;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(145, 145, 145, 0.25);
+  }
+}
+
+.page-item.active .page-link {
+  color: #FFFFFF;
+  background-color: #212529;
+  border-color: #212529;
 }

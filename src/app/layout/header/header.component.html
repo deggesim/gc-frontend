@@ -10,38 +10,21 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
     <ul class="navbar-nav">
-      <li class="dropdown" dropdown routerLinkActive="active">
-        <a href class="nav-link dropdown-toggle" dropdownToggle (click)="false">
-          Andamento
-        </a>
-        <ul *dropdownMenu class="dropdown-menu">
-          <li routerLinkActive="active">
-            <a class="dropdown-item" routerLink="/lista">Lista</a>
-          </li>
-          <li role="menuitem">
-            <a class="dropdown-item" routerLink="/nuova">Nuova</a>
-          </li>
-        </ul>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/lista">Lista</a>
       </li>
 
-      <li class="dropdown" dropdown routerLinkActive="active">
+      <li class="nav-item dropdown" dropdown>
         <a href class="nav-link dropdown-toggle" dropdownToggle (click)="false">
           Statistiche
         </a>
         <ul *dropdownMenu class="dropdown-menu">
-          <li role="menuitem">
-            <a class="dropdown-item" routerLink="/mensile">Mensile</a>
-          </li>
-          <li role="menuitem">
-            <a class="dropdown-item" routerLink="/carburante">Carburante</a>
-          </li>
-          <li role="menuitem">
-            <a class="dropdown-item" routerLink="/bollette">Bollette</a>
-          </li>
-          <li role="menuitem">
-            <a class="dropdown-item" routerLink="/custom">Statistiche custom</a>
-          </li>
-
+          <a class="dropdown-item" routerLink="/spese-frequenti" routerLinkActive="active">Spese frequenti</a>
+          <a class="dropdown-item" routerLink="/spesa-mensile" routerLinkActive="active">Spesa mensile</a>
+          <a class="dropdown-item" routerLink="/carburante" routerLinkActive="active">Carburante mensile</a>
+          <a class="dropdown-item" routerLink="/bollette" routerLinkActive="active">Bollette mensile</a>
+          <a class="dropdown-item" routerLink="/custom" routerLinkActive="active">Statistiche custom</a>
         </ul>
       </li>
 
