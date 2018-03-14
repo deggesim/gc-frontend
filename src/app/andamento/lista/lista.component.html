@@ -42,7 +42,7 @@
       <tr *ngFor="let item of listaPaginata">
         <td>{{item.giorno | date: 'dd/MM/yyyy'}}</td>
         <td>{{item.descrizione}}</td>
-        <td>{{item.costo | currency: 'EUR'}}</td>
+        <td>{{item.costo}}</td>
         <td>{{item.tipoSpesa.descrizione}}</td>
         <td class="text-nowrap">
           <button type="button" class="btn btn-warning" (click)="modifica(item)" tooltip="Modifica" placement="top">

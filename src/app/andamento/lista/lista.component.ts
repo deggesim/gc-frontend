@@ -54,6 +54,7 @@ export class ListaComponent implements OnInit {
         this.lista = data.lista;
         this.size = this.lista.length;
         this.listaPaginata = this.buildPage();
+        console.log(this.listaPaginata);
       }
     );
   }

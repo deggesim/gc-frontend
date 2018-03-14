@@ -4,13 +4,12 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 
 import { Statistica } from '../../model/statistica';
-
 @Component({
-  selector: 'app-spesa-mensile',
-  templateUrl: './spesa-mensile.component.html',
-  styleUrls: ['./spesa-mensile.component.scss']
+  selector: 'app-bolletta-mensile',
+  templateUrl: './bolletta-mensile.component.html',
+  styleUrls: ['./bolletta-mensile.component.scss']
 })
-export class SpesaMensileComponent implements OnInit {
+export class BollettaMensileComponent implements OnInit {
 
   // opzioni barre
   showXAxis = true;
@@ -19,18 +18,18 @@ export class SpesaMensileComponent implements OnInit {
   showYAxisLabel = true;
   showLegend = true;
 
-  barreSpesaMensile: Statistica[] = [];
+  barreBollettaMensile: Statistica[] = [];
 
   constructor(
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    console.log('init SpesaMensileComponent');
+    console.log('init BollettaMensileComponent');
     this.route.data.subscribe(
       (data) => {
-        this.barreSpesaMensile = data.barreSpesaMensile;
-        _.forEach(this.barreSpesaMensile, (item: Statistica) => {
+        this.barreBollettaMensile = data.barreBollettaMensile;
+        _.forEach(this.barreBollettaMensile, (item: Statistica) => {
           let mese = item.name;
           mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
           item.name = mese;
@@ -49,4 +48,5 @@ export class SpesaMensileComponent implements OnInit {
     const retValue = formatter.format(value);
     return retValue;
   }
+
 }

@@ -22,4 +22,12 @@ export class StatisticheService {
     return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/spesa-mensile`);
   }
 
+  carburanteMensile(): Observable<Statistica[]> {
+    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/carburante-mensile`);
+  }
+
+  bollettaMensile(): Observable<Statistica[]> {
+    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/bolletta-mensile`);
+  }
+
 }

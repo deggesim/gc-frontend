@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { SpesaMensileResolver } from './spesa-mensile-resolver.service';
+import { SpesaMensileResolver } from './spesa-mensile-resolver';
 
 describe('SpesaMensileResolver', () => {
   beforeEach(() => {

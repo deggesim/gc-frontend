@@ -28,9 +28,11 @@ import { HomeComponent } from './home/home.component';
 import { GlobalInterceptor } from './http-interceptors/global-interceptor.service';
 import { HeaderComponent } from './layout/header/header.component';
 import { AndamentoService } from './services/andamento.service';
+import { BollettaMensileResolver } from './services/resolvers/bolletta-mensile-resolver';
+import { CarburanteMensileResolver } from './services/resolvers/carburante-mensile-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
-import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver.service';
-import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver.service';
+import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver';
+import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
 import { StatisticheService } from './services/statistiche.service';
 import { TipoSpesaService } from './services/tipo-spesa.service';
 import { ErrorPageComponent } from './shared/error-page.component';
@@ -39,6 +41,8 @@ import { NotificheComponent } from './shared/notifiche/notifiche.component';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
+import { BollettaMensileComponent } from './statistiche/bolletta-mensile/bolletta-mensile.component';
+import { CarburanteMensileComponent } from './statistiche/carburante-mensile/carburante-mensile.component';
 import { SpesaMensileComponent } from './statistiche/spesa-mensile/spesa-mensile.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 
@@ -55,6 +59,8 @@ import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-fre
     ModificaComponent,
     SpeseFrequentiComponent,
     SpesaMensileComponent,
+    CarburanteMensileComponent,
+    BollettaMensileComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +95,8 @@ import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-fre
     ListaAndamentoResolver,
     SpeseFrequentiResolver,
     SpesaMensileResolver,
+    CarburanteMensileResolver,
+    BollettaMensileResolver,
     // altri servizi
     AndamentoService,
     TipoSpesaService,

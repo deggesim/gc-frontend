@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ListaComponent } from './andamento/lista/lista.component';
 import { HomeComponent } from './home/home.component';
+import { BollettaMensileResolver } from './services/resolvers/bolletta-mensile-resolver';
+import { CarburanteMensileResolver } from './services/resolvers/carburante-mensile-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
-import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver.service';
-import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver.service';
+import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver';
+import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
 import { ErrorPageComponent } from './shared/error-page.component';
+import { BollettaMensileComponent } from './statistiche/bolletta-mensile/bolletta-mensile.component';
+import { CarburanteMensileComponent } from './statistiche/carburante-mensile/carburante-mensile.component';
 import { SpesaMensileComponent } from './statistiche/spesa-mensile/spesa-mensile.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 
@@ -45,7 +49,27 @@ const appRoutes: Routes = [
             barreSpesaMensile: SpesaMensileResolver
         },
         data: {
-            breadcrumb: 'Lista'
+            breadcrumb: 'Spesa mensile'
+        }
+    },
+    {
+        path: 'carburante-mensile',
+        component: CarburanteMensileComponent,
+        resolve: {
+            barreCarburanteMensile: CarburanteMensileResolver
+        },
+        data: {
+            breadcrumb: 'Carburante mensile'
+        }
+    },
+    {
+        path: 'bolletta-mensile',
+        component: BollettaMensileComponent,
+        resolve: {
+            barreBollettaMensile: BollettaMensileResolver
+        },
+        data: {
+            breadcrumb: 'Bolletta mensile'
         }
     },
 

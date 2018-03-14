@@ -137,6 +137,10 @@ caption {
 }
 
 // statistiche
-.stretch {
-  height: calc(100vh - 70px);
+.barre-orizzontali {
+  height: calc((100vh - 160px) * 3);
+}
+
+.torta {
+  height: calc(100vh - 160px);
 }

@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { SpeseFrequentiResolver } from './spese-frequenti-resolver.service';
+import { SpeseFrequentiResolver } from './spese-frequenti-resolver';
 
 describe('SpeseFrequentiResolver', () => {
   beforeEach(() => {

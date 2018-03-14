@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Statistica } from '../../model/statistica';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
@@ -38,12 +39,13 @@ export class SpeseFrequentiComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      range: [undefined, Validators.required]
+      range: ['M', Validators.required]
     });
 
     this.form.controls.range.valueChanges.subscribe(
       (value: string) => {
-        this.statisticheService.speseFrequenti(this.form.value.range).subscribe(
+        console.log('value = ' + value);
+        this.statisticheService.speseFrequenti(value).subscribe(
           (data: Statistica[]) => { this.tortaTipiSpesa = data; }
         );
       }
