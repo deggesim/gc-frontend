@@ -137,10 +137,14 @@ caption {
 }
 
 // statistiche
-.barre-orizzontali {
-  height: calc((100vh - 160px) * 3);
+.barre-orizzontali-mensile {
+  height: calc((100vh - 210px) * 3);
+}
+
+.barre-orizzontali-annuale {
+  height: calc(100vh - 210px);
 }
 
 .torta {
-  height: calc(100vh - 160px);
+  height: calc(100vh - 210px);
 }

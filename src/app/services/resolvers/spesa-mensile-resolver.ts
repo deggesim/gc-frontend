@@ -13,7 +13,7 @@ export class SpesaMensileResolver implements Resolve<Statistica[]> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Statistica[] | Observable<Statistica[]> | Promise<Statistica[]> {
-    return this.statisticaService.spesaMensile();
+    return this.statisticaService.spesa('M');
   }
 
 }

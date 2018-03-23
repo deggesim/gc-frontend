@@ -9,10 +9,11 @@ import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-res
 import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver';
 import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
 import { ErrorPageComponent } from './shared/error-page.component';
-import { BollettaMensileComponent } from './statistiche/bolletta-mensile/bolletta-mensile.component';
-import { CarburanteMensileComponent } from './statistiche/carburante-mensile/carburante-mensile.component';
-import { SpesaMensileComponent } from './statistiche/spesa-mensile/spesa-mensile.component';
+import { BollettaComponent } from './statistiche/bolletta/bolletta.component';
+import { CarburanteComponent } from './statistiche/carburante/carburante.component';
+import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
+import { StatisticheComponent } from './statistiche/statistiche.component';
 
 const appRoutes: Routes = [
     {
@@ -33,46 +34,54 @@ const appRoutes: Routes = [
         }
     },
     {
-        path: 'spese-frequenti',
-        component: SpeseFrequentiComponent,
-        resolve: {
-            tortaTipiSpesa: SpeseFrequentiResolver
-        },
+        path: 'statistiche',
+        component: StatisticheComponent,
         data: {
-            breadcrumb: 'Lista'
-        }
-    },
-    {
-        path: 'spesa-mensile',
-        component: SpesaMensileComponent,
-        resolve: {
-            barreSpesaMensile: SpesaMensileResolver
+            breadcrumb: 'Statistiche'
         },
-        data: {
-            breadcrumb: 'Spesa mensile'
-        }
+        children: [
+            {
+                path: 'spese-frequenti',
+                component: SpeseFrequentiComponent,
+                resolve: {
+                    tortaTipiSpesa: SpeseFrequentiResolver
+                },
+                data: {
+                    breadcrumb: 'Lista'
+                }
+            },
+            {
+                path: 'spesa',
+                component: SpesaComponent,
+                resolve: {
+                    barreSpesa: SpesaMensileResolver
+                },
+                data: {
+                    breadcrumb: 'Spesa'
+                }
+            },
+            {
+                path: 'carburante',
+                component: CarburanteComponent,
+                resolve: {
+                    barreCarburante: CarburanteMensileResolver
+                },
+                data: {
+                    breadcrumb: 'Carburante'
+                }
+            },
+            {
+                path: 'bolletta',
+                component: BollettaComponent,
+                resolve: {
+                    barreBolletta: BollettaMensileResolver
+                },
+                data: {
+                    breadcrumb: 'Bollette'
+                }
+            }
+        ]
     },
-    {
-        path: 'carburante-mensile',
-        component: CarburanteMensileComponent,
-        resolve: {
-            barreCarburanteMensile: CarburanteMensileResolver
-        },
-        data: {
-            breadcrumb: 'Carburante mensile'
-        }
-    },
-    {
-        path: 'bolletta-mensile',
-        component: BollettaMensileComponent,
-        resolve: {
-            barreBollettaMensile: BollettaMensileResolver
-        },
-        data: {
-            breadcrumb: 'Bolletta mensile'
-        }
-    },
-
     { path: 'error', component: ErrorPageComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: ErrorPageComponent }

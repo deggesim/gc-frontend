@@ -41,10 +41,11 @@ import { NotificheComponent } from './shared/notifiche/notifiche.component';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
-import { BollettaMensileComponent } from './statistiche/bolletta-mensile/bolletta-mensile.component';
-import { CarburanteMensileComponent } from './statistiche/carburante-mensile/carburante-mensile.component';
-import { SpesaMensileComponent } from './statistiche/spesa-mensile/spesa-mensile.component';
+import { BollettaComponent } from './statistiche/bolletta/bolletta.component';
+import { CarburanteComponent } from './statistiche/carburante/carburante.component';
+import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
+import { StatisticheComponent } from './statistiche/statistiche.component';
 
 @NgModule({
   declarations: [
@@ -58,9 +59,10 @@ import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-fre
     ListaComponent,
     ModificaComponent,
     SpeseFrequentiComponent,
-    SpesaMensileComponent,
-    CarburanteMensileComponent,
-    BollettaMensileComponent,
+    SpesaComponent,
+    CarburanteComponent,
+    BollettaComponent,
+    StatisticheComponent,
   ],
   imports: [
     BrowserModule,

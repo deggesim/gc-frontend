@@ -18,16 +18,16 @@ export class StatisticheService {
     return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/spese-frequenti/${range}`);
   }
 
-  spesaMensile(): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/spesa-mensile`);
+  spesa(frequenza: string): Observable<Statistica[]> {
+    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/spesa/${frequenza}`);
   }
 
-  carburanteMensile(): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/carburante-mensile`);
+  carburante(frequenza: string): Observable<Statistica[]> {
+    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/carburante/${frequenza}`);
   }
 
-  bollettaMensile(): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/bolletta-mensile`);
+  bolletta(frequenza: string): Observable<Statistica[]> {
+    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/bolletta/${frequenza}`);
   }
 
 }

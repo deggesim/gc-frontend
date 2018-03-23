@@ -13,7 +13,7 @@ export class BollettaMensileResolver implements Resolve<Statistica[]> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Statistica[] | Observable<Statistica[]> | Promise<Statistica[]> {
-    return this.statisticaService.bollettaMensile();
+    return this.statisticaService.bolletta('M');
   }
 
 }
