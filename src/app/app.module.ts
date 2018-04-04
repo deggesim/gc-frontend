@@ -19,6 +19,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 import { ListaComponent } from './andamento/lista/lista.component';
 import { ModificaComponent } from './andamento/modifica/modifica.component';
@@ -84,6 +85,7 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
     ToastyModule.forRoot(),
+    DeviceDetectorModule.forRoot(),
     NgxChartsModule,
     AppRoutingModule
   ],

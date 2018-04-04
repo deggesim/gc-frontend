@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as _ from 'lodash';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { Andamento } from '../../model/andamento';
-import { PopupConfermaComponent } from '../../shared/popup-conferma/popup-conferma.component';
 import { AndamentoService } from '../../services/andamento.service';
-import { SharedService } from '../../shared/shared.service';
-
 import * as globals from '../../shared/globals';
-import * as _ from 'lodash';
+import { PopupConfermaComponent } from '../../shared/popup-conferma/popup-conferma.component';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-lista',
@@ -41,8 +41,11 @@ export class ListaComponent implements OnInit {
   sortedByCostoAsc = false;
   sortedByCostoDesc = false;
 
+  deviceInfo = null;
+
   constructor(
     private route: ActivatedRoute,
+    public deviceService: DeviceDetectorService,
     private sharedService: SharedService,
     private andamentoService: AndamentoService
   ) { }
@@ -142,7 +145,7 @@ export class ListaComponent implements OnInit {
   sortByGiornoAsc() {
     console.log('sortByGiornoAsc');
     this.lista.sort((item1: Andamento, item2: Andamento) => {
-      return this.compare(item1.giorno, item2.giorno);
+      return this.compare(true, item1.giorno, item2.giorno);
     });
     this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
@@ -152,7 +155,7 @@ export class ListaComponent implements OnInit {
   sortByGiornoDesc() {
     console.log('sortByGiornoDesc');
     this.lista.sort((item1: Andamento, item2: Andamento) => {
-      return this.compare(item2.giorno, item1.giorno);
+      return this.compare(true, item2.giorno, item1.giorno);
     });
     this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
@@ -162,7 +165,7 @@ export class ListaComponent implements OnInit {
   sortByDescrizioneAsc() {
     console.log('sortByDescrizioneAsc');
     this.lista.sort((item1: Andamento, item2: Andamento) => {
-      return this.compare(item1.descrizione, item2.descrizione);
+      return this.compare(true, item1.descrizione, item2.descrizione);
     });
     this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
@@ -172,7 +175,7 @@ export class ListaComponent implements OnInit {
   sortByDescrizioneDesc() {
     console.log('sortByDescrizioneDesc');
     this.lista.sort((item1: Andamento, item2: Andamento) => {
-      return this.compare(item2.descrizione, item1.descrizione);
+      return this.compare(true, item2.descrizione, item1.descrizione);
     });
     this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
@@ -182,7 +185,7 @@ export class ListaComponent implements OnInit {
   sortByCostoAsc() {
     console.log('sortByCostoAsc');
     this.lista.sort((item1: Andamento, item2: Andamento) => {
-      return this.compare(item1.costo, item2.costo);
+      return this.compare(false, item1.costo, item2.costo);
     });
     this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
@@ -192,7 +195,7 @@ export class ListaComponent implements OnInit {
   sortByCostoDesc() {
     console.log('sortByCostoDesc');
     this.lista.sort((item1: Andamento, item2: Andamento) => {
-      return this.compare(item2.costo, item1.costo);
+      return this.compare(false, item2.costo, item1.costo);
     });
     this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
@@ -208,14 +211,18 @@ export class ListaComponent implements OnInit {
     this.sortedByCostoDesc = false;
   }
 
-  private compare(arg1, arg2): number {
-    if (arg1 > arg2) {
-      return 1;
+  private compare(lexicographic: boolean, arg1: any, arg2: any): number {
+    if (lexicographic) {
+      if (arg1 > arg2) {
+        return 1;
+      }
+      if (arg1 < arg2) {
+        return -1;
+      }
+      return 0;
+    } else {
+      return arg1 - arg2;
     }
-    if (arg1 < arg2) {
-      return -1;
-    }
-    return 0;
   }
 
 }
