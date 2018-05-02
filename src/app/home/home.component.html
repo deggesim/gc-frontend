@@ -1,19 +1,35 @@
+<div class="float manina" (click)="nuova()">
+  <i class="fa fa-plus my-float" aria-hidden="true"></i>
+</div>
+
 <!-- ICONE -->
 <div fxLayout="row wrap">
   <div fxFlex="25" fxFlex.xs="50">
-    <i class="fa fa-shopping-cart manina icona" aria-hidden="true" (click)="spesa()" tooltip="Spesa"></i>
+    <div class="text-center">
+      <i class="fa fa-shopping-cart manina icona" aria-hidden="true" (click)="spesa()"></i>
+      Spesa
+    </div>
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
-    <i class="fa fa-car manina icona" aria-hidden="true" (click)="carburante()" tooltip="Carburante"></i>
+    <div class="text-center">
+      <i class="fa fa-car manina icona" aria-hidden="true" (click)="carburante()"></i>
+      Carburante
+    </div>
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
-    <i class="fa fa-shower manina icona" aria-hidden="true" (click)="pulizie()" tooltip="Pulizie"></i>
+    <div class="text-center">
+      <i class="fa fa-shower manina icona" aria-hidden="true" (click)="pulizie()"></i>
+      Pulizie
+    </div>
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
-    <i class="fa fa-credit-card manina icona" aria-hidden="true" (click)="bolletta()" tooltip="Bolletta"></i>
+    <div class="text-center">
+      <i class="fa fa-credit-card manina icona" aria-hidden="true" (click)="bolletta()"></i>
+      Bolletta
+    </div>
   </div>
 </div>
 

@@ -22,13 +22,14 @@ export class ListaComponent implements OnInit {
   andamentoSelected: Andamento;
   mostraPopupModifica: boolean;
   titoloModale: string;
+  filter: string;
 
   @ViewChild('popupConfermaElimina') public popupConfermaElimina: PopupConfermaComponent;
 
   // paginazione
   size: number;
   page = 1;
-  pageSize = 5;
+  pageSize = 50;
   maxSize = 5;
   boundaryLinks = true;
   searchExecute = false;
@@ -56,10 +57,22 @@ export class ListaComponent implements OnInit {
       (data) => {
         this.lista = data.lista;
         this.size = this.lista.length;
-        this.listaPaginata = this.buildPage();
+        this.listaPaginata = this.buildPage(this.lista);
         console.log(this.listaPaginata);
       }
     );
+  }
+
+  applicaFiltro(filtro: string) {
+    if (!_.isEmpty(filtro)) {
+      const listaFiltrata = _.filter(this.lista, (andamento: Andamento) => {
+        const descrizioneFound = andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
+        const tipoSpesaFound = andamento.tipoSpesa.descrizione.indexOf(filtro) >= 0;
+        return descrizioneFound || tipoSpesaFound;
+      });
+      this.size = listaFiltrata.length;
+      this.listaPaginata = this.buildPage(listaFiltrata);
+    }
   }
 
   nuova() {
@@ -76,15 +89,30 @@ export class ListaComponent implements OnInit {
     this.titoloModale = 'Modifica voce di spesa';
   }
 
+  clona(item: Andamento): void {
+    console.log('clona');
+    this.andamentoSelected = {
+      giorno: new Date(),
+      descrizione: item.descrizione,
+      costo: item.costo,
+      tipoSpesa: {
+        id: item.tipoSpesa.id,
+        descrizione: item.tipoSpesa.descrizione
+      }
+    };
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Clona voce di spesa';
+  }
+
   async salva(andamento: Andamento) {
-    if (_.isNil(this.andamentoSelected)) {
+    console.log(andamento);
+    if (_.isNil(andamento.id)) {
       await this.andamentoService.inserisci(andamento).toPromise();
       this.mostraPopupModifica = false;
       const title = 'Nuova voce di spesa';
       const message = 'Nuova voce di spesa inserita correttamente';
       this.sharedService.notifica(globals.toastType.success, title, message);
     } else {
-      andamento.id = this.andamentoSelected.id;
       await this.andamentoService.modifica(andamento).toPromise();
       this.mostraPopupModifica = false;
       const title = 'Modifica voce di spesa';
@@ -95,7 +123,7 @@ export class ListaComponent implements OnInit {
     this.andamentoService.lista().subscribe(
       (lista: Andamento[]) => {
         this.lista = lista;
-        this.listaPaginata = this.buildPage();
+        this.listaPaginata = this.buildPage(this.lista);
       }
     );
   }
@@ -121,7 +149,7 @@ export class ListaComponent implements OnInit {
       this.andamentoService.lista().subscribe(
         (lista: Andamento[]) => {
           this.lista = lista;
-          this.listaPaginata = this.buildPage();
+          this.listaPaginata = this.buildPage(this.lista);
         }
       );
     }
@@ -133,13 +161,13 @@ export class ListaComponent implements OnInit {
 
   pageChange(event) {
     this.page = event.page;
-    this.listaPaginata = this.buildPage();
+    this.listaPaginata = this.buildPage(this.lista);
   }
 
-  buildPage() {
+  buildPage(lista: Andamento[]) {
     const first = this.pageSize * (this.page - 1);
     const last = first + this.pageSize;
-    return this.lista.slice(first, last);
+    return lista.slice(first, last);
   }
 
   sortByGiornoAsc() {
@@ -147,7 +175,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item1.giorno, item2.giorno);
     });
-    this.listaPaginata = this.buildPage();
+    this.listaPaginata = this.buildPage(this.lista);
     this.clearAllSortIcons();
     this.sortedByGiornoAsc = true;
   }
@@ -157,7 +185,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item2.giorno, item1.giorno);
     });
-    this.listaPaginata = this.buildPage();
+    this.listaPaginata = this.buildPage(this.lista);
     this.clearAllSortIcons();
     this.sortedByGiornoDesc = true;
   }
@@ -167,7 +195,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item1.descrizione, item2.descrizione);
     });
-    this.listaPaginata = this.buildPage();
+    this.listaPaginata = this.buildPage(this.lista);
     this.clearAllSortIcons();
     this.sortedByDescrizioneAsc = true;
   }
@@ -177,7 +205,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item2.descrizione, item1.descrizione);
     });
-    this.listaPaginata = this.buildPage();
+    this.listaPaginata = this.buildPage(this.lista);
     this.clearAllSortIcons();
     this.sortedByDescrizioneDesc = true;
   }
@@ -187,7 +215,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(false, item1.costo, item2.costo);
     });
-    this.listaPaginata = this.buildPage();
+    this.listaPaginata = this.buildPage(this.lista);
     this.clearAllSortIcons();
     this.sortedByCostoAsc = true;
   }
@@ -197,7 +225,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(false, item2.costo, item1.costo);
     });
-    this.listaPaginata = this.buildPage();
+    this.listaPaginata = this.buildPage(this.lista);
     this.clearAllSortIcons();
     this.sortedByCostoDesc = true;
   }

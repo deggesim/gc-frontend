@@ -79,7 +79,18 @@ export class HomeComponent implements OnInit {
     this.titoloModale = 'Bolletta';
   }
 
+  nuova() {
+    this.andamento = {
+      giorno: new Date(),
+      descrizione: undefined,
+      tipoSpesa: undefined
+    };
+    this.mostraPopup = true;
+    this.titoloModale = 'Nuova voce di spesa';
+  }
+
   async salva(andamento: Andamento) {
+    console.log(andamento);
     await this.andamentoService.inserisci(andamento).toPromise();
     this.mostraPopup = false;
     const title = 'Nuova voce di spesa';

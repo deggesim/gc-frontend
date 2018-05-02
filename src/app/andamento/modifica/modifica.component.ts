@@ -42,6 +42,7 @@ export class ModificaComponent implements OnInit, OnChanges {
     const andamento: Andamento = changes['andamento'].currentValue;
     if (!_.isNil(andamento)) {
       this.form.patchValue({
+        id: andamento.id,
         giorno: andamento.giorno,
         descrizione: andamento.descrizione,
         costo: andamento.costo,
@@ -54,9 +55,10 @@ export class ModificaComponent implements OnInit, OnChanges {
 
   createForm() {
     this.form = this.fb.group({
+      id: undefined,
       giorno: [undefined, Validators.required],
       descrizione: [undefined, Validators.required],
-      costo: [undefined, Validators.required],
+      costo: [undefined, [Validators.required, Validators.pattern('^[1-9]\\d*(\\.\\d{1,2})?$')]],
       tipoSpesa: [undefined, Validators.required]
     });
   }
@@ -68,6 +70,7 @@ export class ModificaComponent implements OnInit, OnChanges {
   salvaAndamento(): void {
     console.log('salvaAndamento');
     const andamento: Andamento = {
+      id: this.form.value.id,
       giorno: this.form.value.giorno,
       descrizione: this.form.value.descrizione,
       costo: this.form.value.costo,

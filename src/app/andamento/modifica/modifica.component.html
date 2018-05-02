@@ -1,5 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="salvaAndamento()" class="needs-validation" novalidate>
 
+  <input type="hidden" formControlName="id">
+
   <div fxLayout="row wrap" fxLayoutAlign="space-between">
 
     <div fxFlex="49" fxFlex.xs="100">
@@ -43,8 +45,9 @@
     <div fxFlex="49" fxFlex.xs="100">
       <div class="form-group">
         <label for="costo" class="control-label">Costo *</label>
-        <input type="number" step="0.5" class="form-control" id="costo" name="costo" formControlName="costo" [ngClass]="{'is-invalid': form.controls.costo.invalid && form.controls.costo.dirty}">
+        <input type="text" class="form-control" id="costo" name="costo" formControlName="costo" [ngClass]="{'is-invalid': form.controls.costo.invalid && form.controls.costo.dirty}">
         <div *ngIf="form.controls.costo.hasError('required') && form.controls.costo.dirty" class="invalid-feedback">Il campo costo è obbligatorio</div>
+        <div *ngIf="form.controls.costo.hasError('pattern') && form.controls.costo.dirty" class="invalid-feedback">Il campo costo deve essere numerico</div>
       </div>
     </div>
   </div>
