@@ -29,7 +29,7 @@ export class ListaComponent implements OnInit {
   // paginazione
   size: number;
   page = 1;
-  pageSize = 50;
+  pageSize = 20;
   maxSize = 5;
   boundaryLinks = true;
   searchExecute = false;

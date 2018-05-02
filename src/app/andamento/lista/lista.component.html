@@ -2,11 +2,10 @@
   <i class="fa fa-plus my-float" aria-hidden="true"></i>
 </div>
 
-<form #form="ngForm" class="form-inline">
+<form #form="ngForm" class="form-inline pb-1">
   <div class="form-group">
-    <label for="filtro">Filtro</label>
     <input type="text" class="form-control" id="filtro" name="filtro" #filtro="ngModel" [(ngModel)]="filter" (keyup)="applicaFiltro(filtro.value)"
-      (paste)="applicaFiltro($event.clipboardData.getData('Text'))">
+      (paste)="applicaFiltro($event.clipboardData.getData('Text'))" placeholder="Filtro">
   </div>
 </form>
 
