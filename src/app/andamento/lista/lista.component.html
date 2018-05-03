@@ -3,9 +3,12 @@
 </div>
 
 <form #form="ngForm" class="form-inline pb-1">
-  <div class="form-group">
+  <div class="input-group">
     <input type="text" class="form-control" id="filtro" name="filtro" #filtro="ngModel" [(ngModel)]="filter" (keyup)="applicaFiltro(filtro.value)"
       (paste)="applicaFiltro($event.clipboardData.getData('Text'))" placeholder="Filtro">
+    <div class="input-group-append manina" (click)="pulisciFiltro()">
+      <div class="input-group-text">x</div>
+    </div>
   </div>
 </form>
 

@@ -75,6 +75,12 @@ export class ListaComponent implements OnInit {
     }
   }
 
+  pulisciFiltro(): void {
+    this.filter = null;
+    this.size = this.lista.length;
+    this.listaPaginata = this.buildPage(this.lista);
+  }
+
   nuova() {
     console.log('nuovo andamento');
     this.andamentoSelected = undefined;
