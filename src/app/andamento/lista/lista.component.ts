@@ -90,7 +90,16 @@ export class ListaComponent implements OnInit {
 
   modifica(item: Andamento): void {
     console.log('modifica');
-    this.andamentoSelected = item;
+    this.andamentoSelected = {
+      id: item.id,
+      giorno: new Date(item.giorno),
+      descrizione: item.descrizione,
+      costo: item.costo,
+      tipoSpesa: {
+        id: item.tipoSpesa.id,
+        descrizione: item.tipoSpesa.descrizione
+      }
+    };
     this.mostraPopupModifica = true;
     this.titoloModale = 'Modifica voce di spesa';
   }
