@@ -15,13 +15,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   constructor(
     private cdRef: ChangeDetectorRef,
-    private router: Router,
     public spinnerService: SpinnerService,
   ) {
-
-    router.events.subscribe((event: RouterEvent) => {
-      this.navigationInterceptor(event);
-    });
   }
 
   ngOnInit() {
@@ -31,28 +26,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
     this.loading = this.spinnerService.isLoading();
     this.cdRef.detectChanges();
-  }
-
-  // Shows and hides the loading spinner during RouterEvent changes
-  navigationInterceptor(event: RouterEvent): void {
-    if (event instanceof NavigationStart) {
-      this.spinnerService.start();
-      console.log('NavigationStart.url -> [' + event.url + ']');
-    }
-    if (event instanceof NavigationEnd) {
-      this.spinnerService.end();
-      console.log('NavigationEnd.urlAfterRedirects -> [' + event.urlAfterRedirects + ']');
-    }
-
-    // Set loading state to false in both of the below events to hide the spinner in case a request fails
-    if (event instanceof NavigationCancel) {
-      this.spinnerService.end();
-      console.log('NavigationCancel.reason -> [' + event.reason + ']');
-    }
-    if (event instanceof NavigationError) {
-      this.spinnerService.end();
-      console.log('NavigationError.error -> [' + event.error + ']');
-    }
   }
 
 }

@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { itLocale } from 'ngx-bootstrap/locale';
 
 import { Tipologica } from './../model/tipologica';
 import * as globals from './globals';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class SharedService {
@@ -34,13 +34,9 @@ export class SharedService {
   };
 
   constructor(
-    private toastyService: ToastyService,
-    private toastyConfig: ToastyConfig,
-    private localeService: BsLocaleService
+    private localeService: BsLocaleService,
+    private toastr: ToastrService
   ) {
-    // Assign the selected theme name to the `theme` property of the instance of ToastyConfig.
-    // Possible values: default, bootstrap, material
-    this.toastyConfig.position = 'top-right';
     defineLocale('it', itLocale);
     this.localeService.use('it');
   }
@@ -50,14 +46,7 @@ export class SharedService {
   }
 
   public notifica(type: string, title: string, message: string) {
-    const toastOptions: ToastOptions = {
-      title,
-      msg: message,
-      showClose: true,
-      timeout: 5000,
-      theme: 'bootstrap'
-    };
-    this.toastyService[type](toastOptions);
+    this.toastr[type](message, title);
   }
 
   public compareTipologica(tipo1: Tipologica, tipo2: Tipologica) {
@@ -69,62 +58,41 @@ export class SharedService {
   }
 
   notifyError(response: HttpErrorResponse) {
-    // let titolo;
-    // let descrizione = '';
-    const tipoOperazione = 'alert';
+    let titolo = '';
+    let descrizione = '';
     console.error(response);
 
-    if (response.error instanceof Error) {
-      console.log('Client-side error occured.');
-    } else {
-      console.log('Server-side error occured.');
+    switch (response.status) {
+      case -1:
+      case 0:
+      case 401:
+      case 405:
+      case 403:
+        titolo = 'Utente non autorizzato';
+        descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
+        break;
+      case 422:
+        titolo = 'Errori nella validazione';
+        descrizione = response.message;
+        break;
+      case 500:
+        titolo = 'Errore server';
+        const messaggio500 = response.message;
+        if (messaggio500 === undefined) {
+          descrizione = 'Si è verificato un errore imprevisto';
+        } else {
+          _.forEach(messaggio500, function (e) {
+            descrizione += e + '. ';
+          });
+        }
+        break;
+      default:
+        titolo = 'Problema generico';
+        descrizione = 'Si è verificato un errore imprevisto';
+        break;
     }
 
-
-    // switch (response.status) {
-    //   case -1:
-    //   case 0:
-    //   case 401:
-    //   case 405:
-    //     titolo = 'Utente non autorizzato';
-    //     descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
-    //     break;
-    //   case 403:
-    //     titolo = 'Utente non autorizzato';
-    //     descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
-    //     break;
-    //   case 422:
-    //     titolo = 'Errori nella validazione';
-    //     let messaggio422 = response.json();
-    //     if (messaggio422 === undefined) {
-    //       messaggio422 = this.getMessaggiErrore(response.text());
-    //     }
-    //     _.forEach(messaggio422, function (e) {
-    //       descrizione += e + '. ';
-    //     });
-    //     break;
-    //   case 500:
-    //     titolo = 'Errore server';
-
-    //     let messaggio500 = response.json();
-    //     if (messaggio500 === undefined) {
-    //       messaggio500 = this.getMessaggiErrore(response.text());
-    //     }
-    //     if (messaggio500 === undefined) {
-    //       descrizione = 'Si è verificato un errore imprevisto';
-    //     } else {
-    //       _.forEach(messaggio500, function (e) {
-    //         descrizione += e + '. ';
-    //       });
-    //     }
-    //     break;
-    //   default:
-    //     titolo = 'Problema generico';
-    //     descrizione = 'Si è verificato un errore imprevisto';
-    //     break;
-    // }
-
-    // this.notifica(globals.toastType.error, titolo, descrizione);
+    this.notifica(globals.toastType.error, titolo, descrizione);
   }
 
   notifyErrorDownload(response: Response) {
@@ -134,23 +102,6 @@ export class SharedService {
     titolo = 'Errore server';
     descrizione = 'Si è verificato un problema nel download del documento';
     this.notifica(globals.toastType.error, titolo, descrizione);
-  }
-
-  getMessaggiErrore(erroreStringa) {
-    const indexStartArray = erroreStringa.indexOf('[\"');
-    const indexEndArray = erroreStringa.lastIndexOf('\"]');
-    console.log('start : ' + indexStartArray);
-    console.log('end : ' + indexEndArray);
-    let messaggio = [];
-    if (indexStartArray !== -1 && indexEndArray !== -1) {
-      const errori = erroreStringa.substring(indexStartArray + 2, indexEndArray);
-      console.log('stringa errori : ' + errori);
-      messaggio = errori.split('\",\"');
-    } else {
-      messaggio = erroreStringa;
-    }
-    console.log('messaggio : ' + messaggio);
-    return messaggio;
   }
 
   /**************************************

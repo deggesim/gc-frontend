@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import * as moment from 'moment';
-import { ToastyModule } from 'ng2-toasty';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
@@ -38,7 +37,6 @@ import { StatisticheService } from './services/statistiche.service';
 import { TipoSpesaService } from './services/tipo-spesa.service';
 import { ErrorPageComponent } from './shared/error-page.component';
 import { NotaComponent } from './shared/nota/nota.component';
-import { NotificheComponent } from './shared/notifiche/notifiche.component';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
@@ -47,6 +45,7 @@ import { CarburanteComponent } from './statistiche/carburante/carburante.compone
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
+import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -54,7 +53,6 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     HeaderComponent,
     PopupConfermaComponent,
     NotaComponent,
-    NotificheComponent,
     ErrorPageComponent,
     HomeComponent,
     ListaComponent,
@@ -84,9 +82,10 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     AccordionModule.forRoot(),
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
-    ToastyModule.forRoot(),
     DeviceDetectorModule.forRoot(),
     NgxChartsModule,
+    ToastrModule.forRoot(), // ToastrModule added
+    ToastContainerModule,
     AppRoutingModule
   ],
   providers: [

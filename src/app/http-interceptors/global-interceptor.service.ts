@@ -1,6 +1,6 @@
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
-import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/finally';
 
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,15 +20,12 @@ export class GlobalInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinnerService.start();
     return next.handle(req)
-      .do((event: HttpEvent<any>) => {
-        this.spinnerService.end();
-      })
       .catch((err: HttpErrorResponse) => {
         this.spinnerService.end();
         this.sharedService.notifyError(err);
         return Observable.empty<HttpEvent<any>>();
-        // return Observable.throw(err);
-      });
+      })
+      .finally(() => this.spinnerService.end());
   }
 
 }
