@@ -18,6 +18,7 @@ export class ListaComponent implements OnInit {
 
   lista: Andamento[];
   listaPaginata: Andamento[];
+  listaFiltrata: Andamento[];
 
   andamentoSelected: Andamento;
   mostraPopupModifica: boolean;
@@ -57,28 +58,28 @@ export class ListaComponent implements OnInit {
       (data) => {
         this.lista = data.lista;
         this.size = this.lista.length;
-        this.listaPaginata = this.buildPage(this.lista);
+        this.listaPaginata = this.buildPage();
         console.log(this.listaPaginata);
       }
     );
   }
 
   applicaFiltro(filtro: string) {
-    if (!_.isEmpty(filtro)) {
-      const listaFiltrata = _.filter(this.lista, (andamento: Andamento) => {
+    if (!_.isNil(filtro) && !_.isEmpty(filtro)) {
+      this.listaFiltrata = _.filter(this.lista, (andamento: Andamento) => {
         const descrizioneFound = andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
         const tipoSpesaFound = andamento.tipoSpesa.descrizione.indexOf(filtro) >= 0;
         return descrizioneFound || tipoSpesaFound;
       });
-      this.size = listaFiltrata.length;
-      this.listaPaginata = this.buildPage(listaFiltrata);
+      this.size = this.listaFiltrata.length;
+      this.listaPaginata = this.buildPage();
     }
   }
 
   pulisciFiltro(): void {
     this.filter = null;
     this.size = this.lista.length;
-    this.listaPaginata = this.buildPage(this.lista);
+    this.listaPaginata = this.buildPage();
   }
 
   nuova() {
@@ -138,7 +139,8 @@ export class ListaComponent implements OnInit {
     this.andamentoService.lista().subscribe(
       (lista: Andamento[]) => {
         this.lista = lista;
-        this.listaPaginata = this.buildPage(this.lista);
+        this.applicaFiltro(this.filter);
+        this.listaPaginata = this.buildPage();
       }
     );
   }
@@ -164,7 +166,8 @@ export class ListaComponent implements OnInit {
       this.andamentoService.lista().subscribe(
         (lista: Andamento[]) => {
           this.lista = lista;
-          this.listaPaginata = this.buildPage(this.lista);
+          this.applicaFiltro(this.filter);
+          this.listaPaginata = this.buildPage();
         }
       );
     }
@@ -176,10 +179,16 @@ export class ListaComponent implements OnInit {
 
   pageChange(event) {
     this.page = event.page;
-    this.listaPaginata = this.buildPage(this.lista);
+    this.listaPaginata = this.buildPage();
   }
 
-  buildPage(lista: Andamento[]) {
+  buildPage() {
+    let lista: Andamento[] = [];
+    if (!_.isNil(this.filter) && !_.isEmpty(this.filter)) {
+      lista = this.listaFiltrata;
+    } else {
+      lista = this.lista;
+    }
     const first = this.pageSize * (this.page - 1);
     const last = first + this.pageSize;
     return lista.slice(first, last);
@@ -190,7 +199,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item1.giorno, item2.giorno);
     });
-    this.listaPaginata = this.buildPage(this.lista);
+    this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
     this.sortedByGiornoAsc = true;
   }
@@ -200,7 +209,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item2.giorno, item1.giorno);
     });
-    this.listaPaginata = this.buildPage(this.lista);
+    this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
     this.sortedByGiornoDesc = true;
   }
@@ -210,7 +219,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item1.descrizione, item2.descrizione);
     });
-    this.listaPaginata = this.buildPage(this.lista);
+    this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
     this.sortedByDescrizioneAsc = true;
   }
@@ -220,7 +229,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item2.descrizione, item1.descrizione);
     });
-    this.listaPaginata = this.buildPage(this.lista);
+    this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
     this.sortedByDescrizioneDesc = true;
   }
@@ -230,7 +239,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(false, item1.costo, item2.costo);
     });
-    this.listaPaginata = this.buildPage(this.lista);
+    this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
     this.sortedByCostoAsc = true;
   }
@@ -240,7 +249,7 @@ export class ListaComponent implements OnInit {
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(false, item2.costo, item1.costo);
     });
-    this.listaPaginata = this.buildPage(this.lista);
+    this.listaPaginata = this.buildPage();
     this.clearAllSortIcons();
     this.sortedByCostoDesc = true;
   }
