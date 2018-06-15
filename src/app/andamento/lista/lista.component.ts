@@ -47,7 +47,6 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public deviceService: DeviceDetectorService,
     private sharedService: SharedService,
     private andamentoService: AndamentoService
   ) { }

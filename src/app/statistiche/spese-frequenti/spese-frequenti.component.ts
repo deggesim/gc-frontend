@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
@@ -13,8 +14,8 @@ import { StatisticheService } from '../../services/statistiche.service';
 export class SpeseFrequentiComponent implements OnInit {
 
   // opzioni torta
-  showLegend = true;
-  showLabels = true;
+  showLegend: boolean;
+  showLabels: boolean;
 
   tortaTipiSpesa: Statistica[];
 
@@ -23,6 +24,7 @@ export class SpeseFrequentiComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private deviceService: DeviceDetectorService,
     private statisticheService: StatisticheService
   ) {
     this.createForm();
@@ -35,6 +37,8 @@ export class SpeseFrequentiComponent implements OnInit {
         this.tortaTipiSpesa = data.tortaTipiSpesa;
       }
     );
+    this.showLabels = this.deviceService.isDesktop();
+    this.showLegend = this.deviceService.isDesktop() || this.deviceService.isTablet();
   }
 
   createForm() {
