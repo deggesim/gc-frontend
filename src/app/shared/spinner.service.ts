@@ -10,16 +10,16 @@ export class SpinnerService {
 
   public start() {
     this.loading++;
-    console.log(`start -> loading = ${this.loading}`);
+    // console.log(`start -> loading = ${this.loading}`);
   }
 
   public end() {
     this.loading--;
-    console.log(`end -> loading = ${this.loading}`);
+    // console.log(`end -> loading = ${this.loading}`);
   }
 
   public isLoading() {
-    console.log(`isLoading -> loading = ${this.loading}`);
+    // console.log(`isLoading -> loading = ${this.loading}`);
     return this.loading > 0;
   }
 
