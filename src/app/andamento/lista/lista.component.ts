@@ -67,7 +67,7 @@ export class ListaComponent implements OnInit {
     if (!_.isNil(filtro) && !_.isEmpty(filtro)) {
       this.listaFiltrata = _.filter(this.lista, (andamento: Andamento) => {
         const descrizioneFound = andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
-        const tipoSpesaFound = andamento.tipoSpesa.descrizione.indexOf(filtro) >= 0;
+        const tipoSpesaFound = andamento.tipoSpesa.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
         return descrizioneFound || tipoSpesaFound;
       });
       this.size = this.listaFiltrata.length;
