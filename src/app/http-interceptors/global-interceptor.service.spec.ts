@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { GlobalInterceptor } from './global-interceptor.service';
+import { GlobalInterceptor } from './GlobalInterceptor';
 
 describe('GlobalInterceptor', () => {
   beforeEach(() => {

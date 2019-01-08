@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Params, ActivatedRoute, Router, NavigationEnd, PRIMARY_OUTLET } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, Router } from '@angular/router';
+
+import { filter } from 'rxjs/operators';
 
 interface IBreadcrumb {
   label: string;
@@ -28,11 +30,14 @@ export class HeaderComponent implements OnInit {
     const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
 
     // subscribe to the NavigationEnd event
-    this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
-      // set breadcrumbs
-      const root: ActivatedRoute = this.activatedRoute.root;
-      this.breadcrumbs = this.getBreadcrumbs(root);
-    });
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        // set breadcrumbs
+        const root: ActivatedRoute = this.activatedRoute.root;
+        this.breadcrumbs = this.getBreadcrumbs(root);
+      }
+      );
   }
 
   private getBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {

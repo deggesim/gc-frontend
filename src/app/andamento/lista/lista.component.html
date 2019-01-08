@@ -19,10 +19,10 @@
         <th>
           Giorno
           <div>
-            <i class="manina fa" [ngClass]="{'fa-chevron-up': !sortedByGiornoAsc, 'fa-chevron-circle-up': sortedByGiornoAsc}" aria-hidden="true"
-              (click)="sortByGiornoAsc()"></i>
-            <i class="manina fa" [ngClass]="{'fa-chevron-down': !sortedByGiornoDesc, 'fa-chevron-circle-down': sortedByGiornoDesc}" aria-hidden="true"
-              (click)="sortByGiornoDesc()"></i>
+            <i class="manina fa" [ngClass]="{'fa-chevron-up': !sortedByGiornoAsc, 'fa-chevron-circle-up': sortedByGiornoAsc}"
+              aria-hidden="true" (click)="sortByGiornoAsc()"></i>
+            <i class="manina fa" [ngClass]="{'fa-chevron-down': !sortedByGiornoDesc, 'fa-chevron-circle-down': sortedByGiornoDesc}"
+              aria-hidden="true" (click)="sortByGiornoDesc()"></i>
           </div>
         </th>
         <th>
@@ -37,10 +37,10 @@
         <th>
           Costo
           <div>
-            <i class="manina fa" [ngClass]="{'fa-chevron-up': !sortedByCostoAsc, 'fa-chevron-circle-up': sortedByCostoAsc}" aria-hidden="true"
-              (click)="sortByCostoAsc()"></i>
-            <i class="manina fa" [ngClass]="{'fa-chevron-down': !sortedByCostoDesc, 'fa-chevron-circle-down': sortedByCostoDesc}" aria-hidden="true"
-              (click)="sortByCostoDesc()"></i>
+            <i class="manina fa" [ngClass]="{'fa-chevron-up': !sortedByCostoAsc, 'fa-chevron-circle-up': sortedByCostoAsc}"
+              aria-hidden="true" (click)="sortByCostoAsc()"></i>
+            <i class="manina fa" [ngClass]="{'fa-chevron-down': !sortedByCostoDesc, 'fa-chevron-circle-down': sortedByCostoDesc}"
+              aria-hidden="true" (click)="sortByCostoDesc()"></i>
           </div>
         </th>
         <th>Tipo spesa</th>
@@ -57,10 +57,10 @@
         <td class="text-nowrap">
           <button type="button" class="btn btn-warning" (click)="modifica(item)" tooltip="Modifica" placement="top">
             <i class="fa fa-pencil" aria-hidden="true"></i>
-          </button>
+          </button>&nbsp;
           <button type="button" class="btn btn-success" (click)="clona(item)" tooltip="Clona" placement="top">
             <i class="fa fa-clone" aria-hidden="true"></i>
-          </button>
+          </button>&nbsp;
           <button type="button" class="btn btn-danger" (click)="apriPopupElimina(item)" tooltip="Elimina" placement="top">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </button>
@@ -72,14 +72,14 @@
 
 <div fxLayout="row" fxLayoutAlign="center" *ngIf="abilitaPaginazione()">
   <div fxFlex="nogrow">
-    <pagination [totalItems]="size" [(ngModel)]="page" [itemsPerPage]="pageSize" (pageChanged)="pageChange($event)" [maxSize]="maxSize"
-      [boundaryLinks]="boundaryLinks" firstText="<<" previousText="<" nextText=">" lastText=">>"></pagination>
+    <pagination [totalItems]="size" [(ngModel)]="page" [itemsPerPage]="pageSize" (pageChanged)="pageChange($event)"
+      [maxSize]="maxSize" [boundaryLinks]="boundaryLinks" firstText="<<" previousText="<" nextText=">" lastText=">>"></pagination>
   </div>
 </div>
 
 <!-- popup elimina -->
-<app-popup-conferma #popupConfermaElimina titolo="Elimina voce di spesa" btnConferma="Elimina" btnAnnulla="Annulla" (conferma)="confermaElimina($event)"
-  (annulla)="popupConfermaElimina.chiudiModale()"></app-popup-conferma>
+<app-popup-conferma #popupConfermaElimina titolo="Elimina voce di spesa" btnConferma="Elimina" btnAnnulla="Annulla"
+  (conferma)="confermaElimina($event)" (annulla)="popupConfermaElimina.chiudiModale()"></app-popup-conferma>
 
 <!-- popup inserimento/modifica voce di menu -->
 <div *ngIf="mostraPopupModifica" class="modal fade" bsModal #editMenu="bs-modal" [config]="{backdrop: 'static', keyboard: false, show: true}"
