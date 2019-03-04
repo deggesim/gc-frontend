@@ -1,12 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { SharedService } from '../../shared/shared.service';
-
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 import { Andamento } from '../../model/andamento';
 import { TipoSpesa } from '../../model/tipo-spesa';
 import { TipoSpesaService } from '../../services/tipo-spesa.service';
-
+import { SharedService } from '../../shared/shared.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-modifica',
@@ -41,15 +40,16 @@ export class ModificaComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const andamento: Andamento = changes['andamento'].currentValue;
     if (!_.isNil(andamento)) {
+      const day: Date = moment(andamento.giorno).startOf('day').toDate();
       this.form.patchValue({
         id: andamento.id,
-        giorno: andamento.giorno,
+        giorno: day,
         descrizione: andamento.descrizione,
         costo: andamento.costo,
         tipoSpesa: andamento.tipoSpesa
       });
     } else {
-      this.form.controls.giorno.setValue(new Date());
+      this.form.controls.giorno.setValue(moment().startOf('day'));
     }
   }
 

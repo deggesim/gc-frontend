@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Andamento } from '../model/andamento';
 import { AndamentoService } from '../services/andamento.service';
+import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 
-import * as globals from '../shared/globals';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',

@@ -6,10 +6,9 @@ import * as moment from 'moment';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { itLocale } from 'ngx-bootstrap/locale';
-
+import { ToastrService } from 'ngx-toastr';
 import { Tipologica } from './../model/tipologica';
 import * as globals from './globals';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class SharedService {

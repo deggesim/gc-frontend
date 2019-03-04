@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 

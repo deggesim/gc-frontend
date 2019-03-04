@@ -1,5 +1,5 @@
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { Component, OnInit, EventEmitter, Output, ViewChild, Input } from '@angular/core';
 
 @Component({
   selector: 'app-popup-conferma',

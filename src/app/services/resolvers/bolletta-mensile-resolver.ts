@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../statistiche.service';
 

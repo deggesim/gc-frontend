@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
-import { DeviceDetectorService } from 'ngx-device-detector';
-
 import { Andamento } from '../../model/andamento';
 import { AndamentoService } from '../../services/andamento.service';
 import * as globals from '../../shared/globals';

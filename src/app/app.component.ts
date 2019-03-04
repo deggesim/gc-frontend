@@ -1,6 +1,4 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
-
 import { SpinnerService } from './shared/spinner.service';
 
 @Component({
@@ -16,8 +14,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
   constructor(
     private cdRef: ChangeDetectorRef,
     public spinnerService: SpinnerService,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     console.log('ngOnInit AppComponent');
