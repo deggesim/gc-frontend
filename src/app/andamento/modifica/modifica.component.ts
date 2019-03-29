@@ -49,7 +49,7 @@ export class ModificaComponent implements OnInit, OnChanges {
         tipoSpesa: andamento.tipoSpesa
       });
     } else {
-      this.form.controls.giorno.setValue(moment().startOf('day'));
+      this.form.controls.giorno.setValue(moment().startOf('day').toDate());
     }
   }
 
