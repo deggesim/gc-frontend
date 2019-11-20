@@ -1,7 +1,7 @@
 
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { empty as observableEmpty, Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { SharedService } from './../shared/shared.service';
 import { SpinnerService } from './../shared/spinner.service';
@@ -20,7 +20,7 @@ export class GlobalInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         this.spinnerService.end();
         this.sharedService.notifyError(err);
-        return observableEmpty();
+        return EMPTY;
       }),
       finalize(() => this.spinnerService.end()));
   }

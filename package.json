@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve -o",
     "build": "ng build --prod --sourceMap=false",
     "test": "ng test",
     "lint": "ng lint",
@@ -36,7 +36,7 @@
     "moment": "^2.23.0",
     "ngx-bootstrap": "^3.1.4",
     "ngx-device-detector": "^1.3.5",
-    "ngx-toastr": "^9.1.1",
+    "ngx-toastr": "10.1.0",
     "popper.js": "^1.14.6",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
