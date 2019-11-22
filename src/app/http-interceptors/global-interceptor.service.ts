@@ -5,13 +5,15 @@ import { EMPTY, Observable } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { SharedService } from './../shared/shared.service';
 import { SpinnerService } from './../shared/spinner.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GlobalInterceptor implements HttpInterceptor {
 
   constructor(
     private sharedService: SharedService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private router: Router
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -20,6 +22,9 @@ export class GlobalInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         this.spinnerService.end();
         this.sharedService.notifyError(err);
+        if (401 === err.status || 403 === err.status) {
+          this.router.navigate(['home']);
+        }
         return EMPTY;
       }),
       finalize(() => this.spinnerService.end()));

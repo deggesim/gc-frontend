@@ -1,8 +1,8 @@
 import { Token } from './token';
 
 export interface Utente {
-  id: number;
+  id?: number;
   email: string;
   password: string;
-  tokens: Token[];
+  tokens?: Token[];
 }

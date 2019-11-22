@@ -24,9 +24,12 @@ import { ModificaComponent } from './andamento/modifica/modifica.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { AuthInterceptor } from './http-interceptors/auth-interceptor.service';
 import { GlobalInterceptor } from './http-interceptors/global-interceptor.service';
 import { HeaderComponent } from './layout/header/header.component';
+import { LoginComponent } from './login/login.component';
 import { AndamentoService } from './services/andamento.service';
+import { AuthService } from './services/auth.service';
 import { BollettaMensileResolver } from './services/resolvers/bolletta-mensile-resolver';
 import { CarburanteMensileResolver } from './services/resolvers/carburante-mensile-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
@@ -60,6 +63,7 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     CarburanteComponent,
     BollettaComponent,
     StatisticheComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,11 +89,8 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     AppRoutingModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: GlobalInterceptor,
-      multi: true,
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true },
     // resolver
     ListaAndamentoResolver,
     SpeseFrequentiResolver,
@@ -101,7 +102,8 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     TipoSpesaService,
     StatisticheService,
     SpinnerService,
-    SharedService
+    SharedService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

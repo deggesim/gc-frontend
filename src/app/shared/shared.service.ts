@@ -16,16 +16,6 @@ export class SharedService {
     dateInputFormat: 'DD/MM/YYYY'
   };
 
-  private _logged: boolean;
-
-  public get logged(): boolean {
-    return this._logged;
-  }
-
-  public set logged(value: boolean) {
-    this._logged = value;
-  }
-
   constructor(
     private localeService: BsLocaleService,
     private toastr: ToastrService
@@ -51,24 +41,22 @@ export class SharedService {
       case -1:
       case 0:
       case 401:
-      case 405:
       case 403:
         titolo = 'Utente non autorizzato';
-        descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
+        descrizione = response.error || response.message;
+        if (_.isNil(descrizione)) {
+          descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
+        }
         break;
       case 422:
         titolo = 'Errori nella validazione';
-        descrizione = response.message;
+        descrizione = response.error || response.message;
         break;
       case 500:
         titolo = 'Errore server';
-        const messaggio500 = response.message;
-        if (messaggio500 === undefined) {
+        descrizione = response.error || response.message;
+        if (_.isNil(descrizione)) {
           descrizione = 'Si è verificato un errore imprevisto';
-        } else {
-          _.forEach(messaggio500, function (e) {
-            descrizione += e + '. ';
-          });
         }
         break;
       default:

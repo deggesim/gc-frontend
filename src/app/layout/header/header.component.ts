@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
+import { Utente } from '../../model/utente';
 
 interface IBreadcrumb {
   label: string;
@@ -19,9 +21,12 @@ export class HeaderComponent implements OnInit {
 
   breadcrumbs: IBreadcrumb[] = [];
 
+  mostraPopupLogin: boolean;
+
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -37,6 +42,31 @@ export class HeaderComponent implements OnInit {
         this.breadcrumbs = this.getBreadcrumbs(root);
       }
       );
+  }
+
+  public openLoginPage() {
+    this.mostraPopupLogin = true;
+  }
+
+  public async login(utente: Utente) {
+    await this.authService.login(utente).toPromise();
+    this.mostraPopupLogin = false;
+  }
+
+  public annulla() {
+    this.mostraPopupLogin = false;
+  }
+
+  public isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  public logout() {
+    return this.authService.logout();
+  }
+
+  public profilePage() {
+    console.log('profile page');
   }
 
   private getBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
