@@ -1,9 +1,9 @@
-<div class="float manina" (click)="nuova()">
+<div class="float manina" (click)="nuova()" *ngIf="isLoggedIn()">
   <i class="fa fa-plus my-float" aria-hidden="true"></i>
 </div>
 
 <!-- ICONE -->
-<div fxLayout="row wrap">
+<div fxLayout="row wrap" *ngIf="isLoggedIn();else notLogged">
   <div fxFlex="25" fxFlex.xs="50">
     <div class="text-center box">
       <div>
@@ -41,9 +41,49 @@
   </div>
 </div>
 
+<ng-template #notLogged>
+  <div fxLayout="row wrap">
+    <div fxFlex="25" fxFlex.xs="50">
+      <div class="text-center box grey">
+        <div>
+          <i class="fa fa-shopping-cart icona" aria-hidden="true"></i>
+        </div>
+        <div>Spesa</div>
+      </div>
+    </div>
+
+    <div fxFlex="25" fxFlex.xs="50">
+      <div class="text-center box grey">
+        <div>
+          <i class="fa fa-car icona" aria-hidden="true"></i>
+        </div>
+        <div>Carburante</div>
+      </div>
+    </div>
+
+    <div fxFlex="25" fxFlex.xs="50">
+      <div class="text-center box grey">
+        <div>
+          <i class="fa fa-shower icona" aria-hidden="true"></i>
+        </div>
+        <div>Pulizie</div>
+      </div>
+    </div>
+
+    <div fxFlex="25" fxFlex.xs="50">
+      <div class="text-center box grey">
+        <div>
+          <i class="fa fa-credit-card icona" aria-hidden="true"></i>
+        </div>
+        <div>Bolletta</div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
 <!-- popup inserimento voce di menu -->
-<div *ngIf="mostraPopup" class="modal fade" bsModal #editMenu="bs-modal" [config]="{backdrop: 'static', keyboard: false, show: true}"
-  tabindex="-1" role="dialog" aria-hidden="true">
+<div *ngIf="mostraPopup" class="modal fade" bsModal #editMenu="bs-modal"
+  [config]="{backdrop: 'static', keyboard: false, show: true}" tabindex="-1" role="dialog" aria-hidden="true">
 
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

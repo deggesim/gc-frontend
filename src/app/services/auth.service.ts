@@ -15,10 +15,36 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  login(utente: Utente) {
+  public login(utente: Utente) {
     return this.http.post<{ utente: Utente, token: string }>(`${this.endpoint}/utente/login`, utente)
       .pipe(
         tap((res: { utente: Utente, token: string }) => this.setSession(res)), shareReplay());
+  }
+
+  public logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expires_at');
+    return this.http.post<Utente>(`${this.endpoint}/utente/logout`, {});
+  }
+
+  public salva(utente: Utente) {
+    return this.http.patch<{ utente: Utente, token: string }>(`${this.endpoint}/utente/me`, utente)
+      .pipe(
+        tap((res: { utente: Utente, token: string }) => this.setSession(res)), shareReplay());
+  }
+
+  public isLoggedIn() {
+    return moment().isBefore(this.getExpiration());
+  }
+
+  public isLoggedOut() {
+    return !this.isLoggedIn();
+  }
+
+  private getExpiration() {
+    const expiration = localStorage.getItem('expires_at');
+    const expiresAt = JSON.parse(expiration);
+    return moment(expiresAt);
   }
 
   private setSession(authResult: { utente: Utente, token: string }) {
@@ -32,24 +58,5 @@ export class AuthService {
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
-    return this.http.post<Utente>(`${this.endpoint}/utente/logout`, {});
-  }
-
-  public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
-  }
-
-  isLoggedOut() {
-    return !this.isLoggedIn();
-  }
-
-  getExpiration() {
-    const expiration = localStorage.getItem('expires_at');
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
-  }
 }
 

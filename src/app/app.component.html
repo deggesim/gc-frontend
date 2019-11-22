@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (openLogin)="openLogin($event)" (logout)="logout($event)" (profile)="profile($event)"></app-header>
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>
@@ -6,5 +6,43 @@
 <div class="loading-div" *ngIf="loading">
   <div class="loading-icon">
     <i class="fa fa-spinner fa-pulse fa-4x" aria-hidden="true"></i>
+  </div>
+</div>
+
+<!-- popup login -->
+<div *ngIf="mostraPopupLogin" class="modal fade" bsModal #loginPage="bs-modal"
+  [config]="{backdrop: 'static', keyboard: false, show: true}" tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+
+      <div class="modal-header titolo">
+        <h4 class="modal-title">Login</h4>
+      </div>
+
+      <div class="modal-body">
+        <app-login (login)="login($event)" (annulla)="annulla()"></app-login>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- popup login -->
+<div *ngIf="mostraPopupUserProfile" class="modal fade" bsModal #userProfilePage="bs-modal"
+  [config]="{backdrop: 'static', keyboard: false, show: true}" tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+
+      <div class="modal-header titolo">
+        <h4 class="modal-title">Login</h4>
+      </div>
+
+      <div class="modal-body">
+        <app-user-profile (salva)="salva($event)" (annulla)="annulla()"></app-user-profile>
+      </div>
+    </div>
+
   </div>
 </div>

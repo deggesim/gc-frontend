@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
-import { Utente } from '../../model/utente';
 
 interface IBreadcrumb {
   label: string;
@@ -17,11 +16,12 @@ interface IBreadcrumb {
 })
 export class HeaderComponent implements OnInit {
 
+  @Output() openLogin: EventEmitter<any> = new EventEmitter(true);
+  @Output() logout: EventEmitter<any> = new EventEmitter(true);
+  @Output() profile: EventEmitter<any> = new EventEmitter(true);
+
   isCollapsed = true;
-
   breadcrumbs: IBreadcrumb[] = [];
-
-  mostraPopupLogin: boolean;
 
   constructor(
     private router: Router,
@@ -44,25 +44,8 @@ export class HeaderComponent implements OnInit {
       );
   }
 
-  public openLoginPage() {
-    this.mostraPopupLogin = true;
-  }
-
-  public async login(utente: Utente) {
-    await this.authService.login(utente).toPromise();
-    this.mostraPopupLogin = false;
-  }
-
-  public annulla() {
-    this.mostraPopupLogin = false;
-  }
-
   public isLoggedIn() {
     return this.authService.isLoggedIn();
-  }
-
-  public logout() {
-    return this.authService.logout();
   }
 
   public profilePage() {

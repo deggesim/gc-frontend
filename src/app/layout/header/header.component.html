@@ -33,7 +33,7 @@
     </ul>
     <ul class="navbar-nav" *ngIf="!isLoggedIn(); else userPage">
       <li class="nav-item">
-        <a class="nav-link manina" (click)="openLoginPage()">
+        <a class="nav-link manina" (click)="openLogin.emit()">
           <i class="fa fa-sign-in menu-padding" aria-hidden="true"></i>Login
         </a>
       </li>
@@ -41,12 +41,12 @@
     <ng-template #userPage>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link manina" (click)="logout()">
+          <a class="nav-link manina" (click)="logout.emit()">
             <i class="fa fa-sign-out menu-padding" aria-hidden="true"></i>Logout
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link manina" (click)="profilePage()">
+          <a class="nav-link manina" (click)="profile.emit()">
             <i class="fa fa-user-circle menu-padding" aria-hidden="true"></i>Profilo Utente
           </a>
         </li>
@@ -69,22 +69,3 @@
     </li>
   </ol>
 </nav>
-
-<!-- popup login -->
-<div *ngIf="mostraPopupLogin" class="modal fade" bsModal #editMenu="bs-modal"
-  [config]="{backdrop: 'static', keyboard: false, show: true}" tabindex="-1" role="dialog" aria-hidden="true">
-
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-
-      <div class="modal-header titolo">
-        <h4 class="modal-title">Login</h4>
-      </div>
-
-      <div class="modal-body">
-        <app-login (login)="login($event)" (annulla)="annulla()"></app-login>
-      </div>
-    </div>
-
-  </div>
-</div>

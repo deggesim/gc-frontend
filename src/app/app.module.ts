@@ -47,6 +47,7 @@ import { CarburanteComponent } from './statistiche/carburante/carburante.compone
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     BollettaComponent,
     StatisticheComponent,
     LoginComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

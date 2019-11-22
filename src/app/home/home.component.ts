@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Andamento } from '../model/andamento';
 import { AndamentoService } from '../services/andamento.service';
+import { AuthService } from '../services/auth.service';
 import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 
@@ -20,11 +21,16 @@ export class HomeComponent implements OnInit {
   constructor(
     private route: Router,
     private sharedService: SharedService,
-    private andamentoService: AndamentoService
+    private andamentoService: AndamentoService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     console.log('init HomeComponent');
+  }
+
+  public isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 
   spesa() {
