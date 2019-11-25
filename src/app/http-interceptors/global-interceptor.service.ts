@@ -1,7 +1,7 @@
 
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { SharedService } from './../shared/shared.service';
 import { SpinnerService } from './../shared/spinner.service';
@@ -25,7 +25,7 @@ export class GlobalInterceptor implements HttpInterceptor {
         if (401 === err.status || 403 === err.status) {
           this.router.navigate(['home']);
         }
-        return EMPTY;
+        return throwError(err);
       }),
       finalize(() => this.spinnerService.end()));
   }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { shareReplay, tap } from 'rxjs/operators';
+import { shareReplay, tap, catchError } from 'rxjs/operators';
 import { Utente } from '../model/utente';
 import { environment } from './../../environments/environment';
 import * as jwt_decode from 'jwt-decode';
@@ -30,7 +30,7 @@ export class AuthService {
   public salva(utente: Utente) {
     return this.http.patch<{ utente: Utente, token: string }>(`${this.endpoint}/utente/me`, utente)
       .pipe(
-        tap((res: { utente: Utente, token: string }) => this.setSession(res)), shareReplay());
+        tap((res: { utente: Utente, token: string }) => localStorage.setItem('utente', JSON.stringify(utente))), shareReplay());
   }
 
   public isLoggedIn() {

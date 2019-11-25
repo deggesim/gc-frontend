@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   }
 
   confirm(): void {
-    console.log('login');
     const utente: Utente = {
       email: this.form.value.email,
       password: this.form.value.password,

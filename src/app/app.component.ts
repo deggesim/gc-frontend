@@ -43,18 +43,26 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   public async login(utente: Utente) {
-    await this.authService.login(utente).toPromise();
-    this.mostraPopupLogin = false;
-    const title = 'Login';
-    const message = 'Login effettuato correttamente';
-    this.sharedService.notifica(globals.toastType.success, title, message);
+    try {
+      this.mostraPopupLogin = false;
+      await this.authService.login(utente).toPromise();
+      const title = 'Login';
+      const message = 'Login effettuato correttamente';
+      this.sharedService.notifica(globals.toastType.success, title, message);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   public async logout() {
-    await this.authService.logout();
-    const title = 'Logout';
-    const message = 'Logout effettuato correttamente';
-    this.sharedService.notifica(globals.toastType.warning, title, message);
+    try {
+      await this.authService.logout();
+      const title = 'Logout';
+      const message = 'Logout effettuato correttamente';
+      this.sharedService.notifica(globals.toastType.warning, title, message);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   public annulla() {
@@ -63,11 +71,15 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   public async salva(utente: Utente) {
-    await this.authService.salva(utente).toPromise();
-    this.mostraPopupLogin = false;
-    const title = 'Login';
-    const message = 'Login effettuato correttamente';
-    this.sharedService.notifica(globals.toastType.success, title, message);
+    try {
+      this.mostraPopupUserProfile = false;
+      await this.authService.salva(utente).toPromise();
+      const title = 'Modifica utente';
+      const message = 'Utente modificato correttamente';
+      this.sharedService.notifica(globals.toastType.success, title, message);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 }

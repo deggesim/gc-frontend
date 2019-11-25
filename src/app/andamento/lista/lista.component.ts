@@ -118,28 +118,31 @@ export class ListaComponent implements OnInit {
   }
 
   async salva(andamento: Andamento) {
-    console.log(andamento);
-    if (_.isNil(andamento.id)) {
-      await this.andamentoService.inserisci(andamento).toPromise();
-      this.mostraPopupModifica = false;
-      const title = 'Nuova voce di spesa';
-      const message = 'Nuova voce di spesa inserita correttamente';
-      this.sharedService.notifica(globals.toastType.success, title, message);
-    } else {
-      await this.andamentoService.modifica(andamento).toPromise();
-      this.mostraPopupModifica = false;
-      const title = 'Modifica voce di spesa';
-      const message = 'Voce di spesa modificata correttamente';
-      this.sharedService.notifica(globals.toastType.success, title, message);
-    }
-    this.andamentoSelected = undefined;
-    this.andamentoService.lista().subscribe(
-      (lista: Andamento[]) => {
-        this.lista = lista;
-        this.applicaFiltro(this.filter);
-        this.listaPaginata = this.buildPage();
+    try {
+      if (_.isNil(andamento.id)) {
+        await this.andamentoService.inserisci(andamento).toPromise();
+        this.mostraPopupModifica = false;
+        const title = 'Nuova voce di spesa';
+        const message = 'Nuova voce di spesa inserita correttamente';
+        this.sharedService.notifica(globals.toastType.success, title, message);
+      } else {
+        await this.andamentoService.modifica(andamento).toPromise();
+        this.mostraPopupModifica = false;
+        const title = 'Modifica voce di spesa';
+        const message = 'Voce di spesa modificata correttamente';
+        this.sharedService.notifica(globals.toastType.success, title, message);
       }
-    );
+      this.andamentoSelected = undefined;
+      this.andamentoService.lista().subscribe(
+        (lista: Andamento[]) => {
+          this.lista = lista;
+          this.applicaFiltro(this.filter);
+          this.listaPaginata = this.buildPage();
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   annulla(): void {
@@ -152,21 +155,25 @@ export class ListaComponent implements OnInit {
   }
 
   async confermaElimina(andamento: Andamento) {
-    if (this.andamentoSelected) {
-      await this.andamentoService.elimina(this.andamentoSelected.id).toPromise();
-      this.popupConfermaElimina.chiudiModale();
-      const title = 'Voce di spesa eliminata';
-      const message = 'La voce di spesa è stata eliminata correttamente';
-      this.sharedService.notifica(globals.toastType.success, title, message);
-      this.andamentoSelected = undefined;
+    try {
+      if (this.andamentoSelected) {
+        await this.andamentoService.elimina(this.andamentoSelected.id).toPromise();
+        this.popupConfermaElimina.chiudiModale();
+        const title = 'Voce di spesa eliminata';
+        const message = 'La voce di spesa è stata eliminata correttamente';
+        this.sharedService.notifica(globals.toastType.success, title, message);
+        this.andamentoSelected = undefined;
 
-      this.andamentoService.lista().subscribe(
-        (lista: Andamento[]) => {
-          this.lista = lista;
-          this.applicaFiltro(this.filter);
-          this.listaPaginata = this.buildPage();
-        }
-      );
+        this.andamentoService.lista().subscribe(
+          (lista: Andamento[]) => {
+            this.lista = lista;
+            this.applicaFiltro(this.filter);
+            this.listaPaginata = this.buildPage();
+          }
+        );
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
