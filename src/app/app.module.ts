@@ -46,7 +46,6 @@ import { BollettaComponent } from './statistiche/bolletta/bolletta.component';
 import { CarburanteComponent } from './statistiche/carburante/carburante.component';
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
-import { StatisticheComponent } from './statistiche/statistiche.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
@@ -63,7 +62,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     SpesaComponent,
     CarburanteComponent,
     BollettaComponent,
-    StatisticheComponent,
     LoginComponent,
     UserProfileComponent,
   ],

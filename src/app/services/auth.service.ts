@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
-import { shareReplay, tap, catchError } from 'rxjs/operators';
+import { shareReplay, tap } from 'rxjs/operators';
 import { Utente } from '../model/utente';
 import { environment } from './../../environments/environment';
-import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {

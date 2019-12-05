@@ -12,7 +12,6 @@ import { BollettaComponent } from './statistiche/bolletta/bolletta.component';
 import { CarburanteComponent } from './statistiche/carburante/carburante.component';
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
-import { StatisticheComponent } from './statistiche/statistiche.component';
 
 const appRoutes: Routes = [
     {
@@ -34,7 +33,6 @@ const appRoutes: Routes = [
     },
     {
         path: 'statistiche',
-        component: StatisticheComponent,
         data: {
             breadcrumb: 'Statistiche'
         },
