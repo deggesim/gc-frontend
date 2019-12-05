@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListaComponent } from './andamento/lista/lista.component';
+import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { BollettaMensileResolver } from './services/resolvers/bolletta-mensile-resolver';
 import { CarburanteMensileResolver } from './services/resolvers/carburante-mensile-resolver';
@@ -29,13 +30,15 @@ const appRoutes: Routes = [
         },
         data: {
             breadcrumb: 'Lista'
-        }
+        },
+        canActivate: [AuthGuard],
     },
     {
         path: 'statistiche',
         data: {
             breadcrumb: 'Statistiche'
         },
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'spese-frequenti',
@@ -45,7 +48,8 @@ const appRoutes: Routes = [
                 },
                 data: {
                     breadcrumb: 'Lista'
-                }
+                },
+                canActivate: [AuthGuard],
             },
             {
                 path: 'spesa',
@@ -55,7 +59,8 @@ const appRoutes: Routes = [
                 },
                 data: {
                     breadcrumb: 'Spesa'
-                }
+                },
+                canActivate: [AuthGuard],
             },
             {
                 path: 'carburante',
@@ -65,7 +70,8 @@ const appRoutes: Routes = [
                 },
                 data: {
                     breadcrumb: 'Carburante'
-                }
+                },
+                canActivate: [AuthGuard],
             },
             {
                 path: 'bolletta',
@@ -75,7 +81,8 @@ const appRoutes: Routes = [
                 },
                 data: {
                     breadcrumb: 'Bollette'
-                }
+                },
+                canActivate: [AuthGuard],
             }
         ]
     },

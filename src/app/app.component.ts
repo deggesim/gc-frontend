@@ -1,4 +1,5 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Utente } from './model/utente';
 import { AuthService } from './services/auth.service';
 import * as globals from './shared/globals';
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private cdRef: ChangeDetectorRef,
     public spinnerService: SpinnerService,
     private sharedService: SharedService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -60,6 +62,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       const title = 'Logout';
       const message = 'Logout effettuato correttamente';
       this.sharedService.notifica(globals.toastType.warning, title, message);
+      this.router.navigate(['home']);
     } catch (error) {
       console.error(error);
     }
