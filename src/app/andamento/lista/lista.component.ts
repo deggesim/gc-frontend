@@ -137,7 +137,6 @@ export class ListaComponent implements OnInit {
         (lista: Andamento[]) => {
           this.lista = lista;
           this.applicaFiltro(this.filter);
-          this.listaPaginata = this.buildPage();
         }
       );
     } catch (error) {
@@ -168,7 +167,6 @@ export class ListaComponent implements OnInit {
           (lista: Andamento[]) => {
             this.lista = lista;
             this.applicaFiltro(this.filter);
-            this.listaPaginata = this.buildPage();
           }
         );
       }
