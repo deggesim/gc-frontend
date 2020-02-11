@@ -41,8 +41,6 @@ export class ListaComponent implements OnInit {
   sortedByCostoAsc = false;
   sortedByCostoDesc = false;
 
-  deviceInfo = null;
-
   constructor(
     private route: ActivatedRoute,
     private sharedService: SharedService,
@@ -62,15 +60,17 @@ export class ListaComponent implements OnInit {
   }
 
   applicaFiltro(filtro: string) {
-    if (!_.isNil(filtro) && !_.isEmpty(filtro)) {
-      this.listaFiltrata = _.filter(this.lista, (andamento: Andamento) => {
+    if (filtro != null && filtro.length > 2) {
+      this.listaFiltrata = this.lista.filter((andamento: Andamento) => {
         const descrizioneFound = andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
         const tipoSpesaFound = andamento.tipoSpesa.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
         return descrizioneFound || tipoSpesaFound;
       });
-      this.size = this.listaFiltrata.length;
-      this.listaPaginata = this.buildPage();
+    } else {
+      this.listaFiltrata = this.lista;
     }
+    this.size = this.listaFiltrata.length;
+    this.listaPaginata = this.buildPage();
   }
 
   pulisciFiltro(): void {
@@ -188,7 +188,7 @@ export class ListaComponent implements OnInit {
 
   buildPage() {
     let lista: Andamento[] = [];
-    if (!_.isNil(this.filter) && !_.isEmpty(this.filter)) {
+    if (this.filter != null && this.filter.length > 2) {
       lista = this.listaFiltrata;
     } else {
       lista = this.lista;
