@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SharedService } from '../shared/shared.service';
-import { SpinnerService } from '../shared/spinner.service';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
