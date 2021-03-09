@@ -17,7 +17,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ToastrModule } from 'ngx-toastr';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { ModificaComponent } from './andamento/modifica/modifica.component';
@@ -83,7 +82,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AccordionModule.forRoot(),
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
-    DeviceDetectorModule.forRoot(),
     NgxChartsModule,
     ToastrModule.forRoot(), // ToastrModule added
     AppRoutingModule
