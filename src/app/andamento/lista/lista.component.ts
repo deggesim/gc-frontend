@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as _ from 'lodash';
+import { isNil } from 'lodash-es';
 import { Andamento } from '../../model/andamento';
 import { AndamentoService } from '../../services/andamento.service';
 import * as globals from '../../shared/globals';
@@ -119,7 +119,7 @@ export class ListaComponent implements OnInit {
 
   async salva(andamento: Andamento) {
     try {
-      if (_.isNil(andamento.id)) {
+      if (isNil(andamento.id)) {
         await this.andamentoService.inserisci(andamento).toPromise();
         this.mostraPopupModifica = false;
         const title = 'Nuova voce di spesa';

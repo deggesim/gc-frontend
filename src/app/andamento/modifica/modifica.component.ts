@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as _ from 'lodash';
 import { Andamento } from '../../model/andamento';
 import { TipoSpesa } from '../../model/tipo-spesa';
 import { TipoSpesaService } from '../../services/tipo-spesa.service';
 import { SharedService } from '../../shared/shared.service';
 import * as moment from 'moment';
+import { isNil } from 'lodash-es';
 
 @Component({
   selector: 'app-modifica',
@@ -39,7 +39,7 @@ export class ModificaComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const andamento: Andamento = changes['andamento'].currentValue;
-    if (!_.isNil(andamento)) {
+    if (!isNil(andamento)) {
       const day: Date = moment(andamento.giorno).startOf('day').toDate();
       this.form.patchValue({
         id: andamento.id,

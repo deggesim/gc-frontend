@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 import { shareReplay, tap } from 'rxjs/operators';
 import { Utente } from '../model/utente';

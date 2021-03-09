@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as _ from 'lodash';
+import { isNil } from 'lodash-es';
 
 @Component({
   selector: 'app-nota',
@@ -17,7 +17,7 @@ export class NotaComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.classNota = 'nota-' + (!_.isNil(this.type) ? this.type : 'info');
+    this.classNota = 'nota-' + (!isNil(this.type) ? this.type : 'info');
     switch (this.type) {
       case 'info':
         this.classIcona = 'fa-info-circle';

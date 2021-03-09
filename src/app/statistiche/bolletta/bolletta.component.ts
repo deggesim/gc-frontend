@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import * as _ from 'lodash';
-import * as moment from 'moment';
-import { Statistica } from '../../model/statistica';
-import { StatisticheService } from '../../services/statistiche.service';
-
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { forEach, isEqual } from "lodash-es";
+import * as moment from "moment";
+import { Statistica } from "../../model/statistica";
+import { StatisticheService } from "../../services/statistiche.service";
 
 @Component({
-  selector: 'app-bolletta',
-  templateUrl: './bolletta.component.html',
-  styleUrls: ['./bolletta.component.scss']
+  selector: "app-bolletta",
+  templateUrl: "./bolletta.component.html",
+  styleUrls: ["./bolletta.component.scss"],
 })
 export class BollettaComponent implements OnInit {
-
   // opzioni barre
   showXAxis = true;
   showYAxis = true;
@@ -34,60 +32,55 @@ export class BollettaComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('init BollettaComponent');
-    this.route.data.subscribe(
-      (data) => {
-        this.barreBolletta = data.barreBolletta;
-        _.forEach(this.barreBolletta, (item: Statistica) => {
-          let mese = item.name;
-          mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
-          item.name = mese;
-        });
-      }
-    );
+    console.log("init BollettaComponent");
+    this.route.data.subscribe((data) => {
+      this.barreBolletta = data.barreBolletta;
+      forEach(this.barreBolletta, (item: Statistica) => {
+        let mese = item.name;
+        mese = moment(mese, "YYYYMM").format("MMMM YYYY");
+        item.name = mese;
+      });
+    });
   }
 
   createForm() {
     this.form = this.fb.group({
-      frequenza: ['M', Validators.required]
+      frequenza: ["M", Validators.required],
     });
 
-    this.form.controls.frequenza.valueChanges.subscribe(
-      (value: string) => {
-        console.log('value = ' + value);
-        this.statisticheService.bolletta(value).subscribe(
-          (data: Statistica[]) => {
-            this.barreBolletta = data;
-            if (this.mensile()) {
-              _.forEach(this.barreBolletta, (item: Statistica) => {
-                let mese = item.name;
-                mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
-                item.name = mese;
-              });
-            }
+    this.form.controls.frequenza.valueChanges.subscribe((value: string) => {
+      console.log("value = " + value);
+      this.statisticheService
+        .bolletta(value)
+        .subscribe((data: Statistica[]) => {
+          this.barreBolletta = data;
+          if (this.mensile()) {
+            forEach(this.barreBolletta, (item: Statistica) => {
+              let mese = item.name;
+              mese = moment(mese, "YYYYMM").format("MMMM YYYY");
+              item.name = mese;
+            });
           }
-        );
-      }
-    );
+        });
+    });
   }
 
   xAxisTickFormatting(value) {
-    const formatter = new Intl.NumberFormat('it-IT', {
-      style: 'currency',
-      currency: 'EUR',
+    const formatter = new Intl.NumberFormat("it-IT", {
+      style: "currency",
+      currency: "EUR",
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
+      maximumFractionDigits: 0,
     });
     const retValue = formatter.format(value);
     return retValue;
   }
 
   mensile(): boolean {
-    return _.isEqual(this.form.value.frequenza, 'M');
+    return isEqual(this.form.value.frequenza, "M");
   }
 
   annuale(): boolean {
-    return _.isEqual(this.form.value.frequenza, 'Y');
+    return isEqual(this.form.value.frequenza, "Y");
   }
-
 }
