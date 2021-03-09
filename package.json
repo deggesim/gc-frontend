@@ -18,8 +18,7 @@
     "build": "ng build --prod --sourceMap=false",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ngcc"
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/animations": "^9.1.13",
@@ -27,7 +26,7 @@
     "@angular/common": "^9.1.13",
     "@angular/compiler": "^9.1.13",
     "@angular/core": "^9.1.13",
-    "@angular/flex-layout": "^7.0.0-beta.24",
+    "@angular/flex-layout": "^10.0.0-beta.32",
     "@angular/forms": "^9.1.13",
     "@angular/platform-browser": "^9.1.13",
     "@angular/platform-browser-dynamic": "^9.1.13",
