@@ -23,7 +23,7 @@ export class ListaComponent implements OnInit {
   titoloModale: string;
   filter: string;
 
-  @ViewChild('popupConfermaElimina') public popupConfermaElimina: PopupConfermaComponent;
+  @ViewChild('popupConfermaElimina', { static: true }) public popupConfermaElimina: PopupConfermaComponent;
 
   // paginazione
   size: number;

@@ -14,7 +14,7 @@ export class PopupConfermaComponent implements OnInit {
   @Output() conferma: EventEmitter<any> = new EventEmitter();
   @Output() annulla: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('modal') private modal: ModalDirective;
+  @ViewChild('modal', { static: true }) private modal: ModalDirective;
 
   constructor() { }
 
