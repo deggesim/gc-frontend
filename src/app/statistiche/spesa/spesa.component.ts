@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { forEach } from "lodash-es";
+import { forEach, isEqual } from "lodash-es";
 import * as moment from "moment";
 import { Statistica } from "../../model/statistica";
 import { StatisticheService } from "../../services/statistiche.service";
@@ -53,7 +53,7 @@ export class SpesaComponent implements OnInit {
       this.statisticheService.spesa(value).subscribe((data: Statistica[]) => {
         this.barreSpesa = data;
         if (this.mensile()) {
-          _.forEach(this.barreSpesa, (item: Statistica) => {
+          forEach(this.barreSpesa, (item: Statistica) => {
             let mese = item.name;
             mese = moment(mese, "YYYYMM").format("MMMM YYYY");
             item.name = mese;
@@ -75,10 +75,10 @@ export class SpesaComponent implements OnInit {
   }
 
   mensile(): boolean {
-    return _.isEqual(this.form.value.frequenza, "M");
+    return isEqual(this.form.value.frequenza, "M");
   }
 
   annuale(): boolean {
-    return _.isEqual(this.form.value.frequenza, "Y");
+    return isEqual(this.form.value.frequenza, "Y");
   }
 }
