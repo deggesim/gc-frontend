@@ -7,24 +7,19 @@ import { SharedService } from '../shared/shared.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-
   @Output() salva: EventEmitter<any> = new EventEmitter(true);
   @Output() annulla: EventEmitter<any> = new EventEmitter(true);
 
   form: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private sharedService: SharedService
-  ) {
+  constructor(private fb: FormBuilder, private sharedService: SharedService) {
     this.createForm();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   createForm() {
     const utente: Utente = JSON.parse(localStorage.getItem('utente'));
@@ -50,5 +45,4 @@ export class UserProfileComponent implements OnInit {
       this.sharedService.notifica(globals.toastType.warning, title, message);
     }
   }
-
 }

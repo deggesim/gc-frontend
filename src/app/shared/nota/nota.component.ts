@@ -4,17 +4,16 @@ import { isNil } from 'lodash-es';
 @Component({
   selector: 'app-nota',
   templateUrl: './nota.component.html',
-  styleUrls: ['./nota.component.scss']
+  styleUrls: ['./nota.component.scss'],
 })
 export class NotaComponent implements OnInit {
-
   @Input() type: string;
   @Input() messages: string[];
 
   classNota: string;
   classIcona: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.classNota = 'nota-' + (!isNil(this.type) ? this.type : 'info');
@@ -39,5 +38,4 @@ export class NotaComponent implements OnInit {
         break;
     }
   }
-
 }

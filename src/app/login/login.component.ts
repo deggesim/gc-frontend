@@ -5,23 +5,19 @@ import { Utente } from '../model/utente';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   @Output() login: EventEmitter<any> = new EventEmitter(true);
   @Output() annulla: EventEmitter<any> = new EventEmitter(true);
 
   form: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-  ) {
+  constructor(private fb: FormBuilder) {
     this.createForm();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   createForm() {
     this.form = this.fb.group({
@@ -37,5 +33,4 @@ export class LoginComponent implements OnInit {
     };
     this.login.emit(utente);
   }
-
 }

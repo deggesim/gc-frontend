@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { isEmpty, isNil } from "lodash-es";
-import { Andamento } from "../../model/andamento";
-import { AndamentoService } from "../../services/andamento.service";
-import * as globals from "../../shared/globals";
-import { PopupConfermaComponent } from "../../shared/popup-conferma/popup-conferma.component";
-import { SharedService } from "../../shared/shared.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { isEmpty, isNil } from 'lodash-es';
+import { Andamento } from '../../model/andamento';
+import { AndamentoService } from '../../services/andamento.service';
+import * as globals from '../../shared/globals';
+import { PopupConfermaComponent } from '../../shared/popup-conferma/popup-conferma.component';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
-  selector: "app-lista",
-  templateUrl: "./lista.component.html",
-  styleUrls: ["./lista.component.scss"],
+  selector: 'app-lista',
+  templateUrl: './lista.component.html',
+  styleUrls: ['./lista.component.scss'],
 })
 export class ListaComponent implements OnInit {
   lista: Andamento[];
@@ -22,7 +22,7 @@ export class ListaComponent implements OnInit {
   titoloModale: string;
   filter: string;
 
-  @ViewChild("popupConfermaElimina", { static: true })
+  @ViewChild('popupConfermaElimina', { static: true })
   public popupConfermaElimina: PopupConfermaComponent;
 
   // paginazione
@@ -41,32 +41,21 @@ export class ListaComponent implements OnInit {
   sortedByCostoAsc = false;
   sortedByCostoDesc = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private sharedService: SharedService,
-    private andamentoService: AndamentoService
-  ) {}
+  constructor(private route: ActivatedRoute, private sharedService: SharedService, private andamentoService: AndamentoService) {}
 
   ngOnInit() {
-    console.log("init ListaComponent");
     this.route.data.subscribe((data) => {
       this.lista = data.lista;
       this.size = this.lista.length;
       this.listaPaginata = this.buildPage();
-      console.log(this.listaPaginata);
     });
   }
 
   applicaFiltro(filtro: string) {
     if (filtro != null && filtro.length > 2) {
       this.listaFiltrata = this.lista.filter((andamento: Andamento) => {
-        const descrizioneFound =
-          andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >=
-          0;
-        const tipoSpesaFound =
-          andamento.tipoSpesa.descrizione
-            .toLowerCase()
-            .indexOf(filtro.toLowerCase()) >= 0;
+        const descrizioneFound = andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
+        const tipoSpesaFound = andamento.tipoSpesa.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
         return descrizioneFound || tipoSpesaFound;
       });
     } else {
@@ -83,14 +72,12 @@ export class ListaComponent implements OnInit {
   }
 
   nuova() {
-    console.log("nuovo andamento");
     this.andamentoSelected = undefined;
     this.mostraPopupModifica = true;
-    this.titoloModale = "Nuova voce di spesa";
+    this.titoloModale = 'Nuova voce di spesa';
   }
 
   modifica(item: Andamento): void {
-    console.log("modifica");
     this.andamentoSelected = {
       id: item.id,
       giorno: new Date(item.giorno),
@@ -102,11 +89,10 @@ export class ListaComponent implements OnInit {
       },
     };
     this.mostraPopupModifica = true;
-    this.titoloModale = "Modifica voce di spesa";
+    this.titoloModale = 'Modifica voce di spesa';
   }
 
   clona(item: Andamento): void {
-    console.log("clona");
     this.andamentoSelected = {
       giorno: new Date(),
       descrizione: item.descrizione,
@@ -117,7 +103,7 @@ export class ListaComponent implements OnInit {
       },
     };
     this.mostraPopupModifica = true;
-    this.titoloModale = "Clona voce di spesa";
+    this.titoloModale = 'Clona voce di spesa';
   }
 
   async salva(andamento: Andamento) {
@@ -125,14 +111,14 @@ export class ListaComponent implements OnInit {
       if (isNil(andamento.id)) {
         await this.andamentoService.inserisci(andamento).toPromise();
         this.mostraPopupModifica = false;
-        const title = "Nuova voce di spesa";
-        const message = "Nuova voce di spesa inserita correttamente";
+        const title = 'Nuova voce di spesa';
+        const message = 'Nuova voce di spesa inserita correttamente';
         this.sharedService.notifica(globals.toastType.success, title, message);
       } else {
         await this.andamentoService.modifica(andamento).toPromise();
         this.mostraPopupModifica = false;
-        const title = "Modifica voce di spesa";
-        const message = "Voce di spesa modificata correttamente";
+        const title = 'Modifica voce di spesa';
+        const message = 'Voce di spesa modificata correttamente';
         this.sharedService.notifica(globals.toastType.success, title, message);
       }
       this.andamentoSelected = undefined;
@@ -157,12 +143,10 @@ export class ListaComponent implements OnInit {
   async confermaElimina(andamento: Andamento) {
     try {
       if (this.andamentoSelected) {
-        await this.andamentoService
-          .elimina(this.andamentoSelected.id)
-          .toPromise();
+        await this.andamentoService.elimina(this.andamentoSelected.id).toPromise();
         this.popupConfermaElimina.chiudiModale();
-        const title = "Voce di spesa eliminata";
-        const message = "La voce di spesa è stata eliminata correttamente";
+        const title = 'Voce di spesa eliminata';
+        const message = 'La voce di spesa è stata eliminata correttamente';
         this.sharedService.notifica(globals.toastType.success, title, message);
         this.andamentoSelected = undefined;
 
@@ -198,7 +182,6 @@ export class ListaComponent implements OnInit {
   }
 
   sortByGiornoAsc() {
-    console.log("sortByGiornoAsc");
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item1.giorno, item2.giorno);
     });
@@ -208,7 +191,6 @@ export class ListaComponent implements OnInit {
   }
 
   sortByGiornoDesc() {
-    console.log("sortByGiornoDesc");
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item2.giorno, item1.giorno);
     });
@@ -218,7 +200,6 @@ export class ListaComponent implements OnInit {
   }
 
   sortByDescrizioneAsc() {
-    console.log("sortByDescrizioneAsc");
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item1.descrizione, item2.descrizione);
     });
@@ -228,7 +209,6 @@ export class ListaComponent implements OnInit {
   }
 
   sortByDescrizioneDesc() {
-    console.log("sortByDescrizioneDesc");
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(true, item2.descrizione, item1.descrizione);
     });
@@ -238,7 +218,6 @@ export class ListaComponent implements OnInit {
   }
 
   sortByCostoAsc() {
-    console.log("sortByCostoAsc");
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(false, item1.costo, item2.costo);
     });
@@ -248,7 +227,6 @@ export class ListaComponent implements OnInit {
   }
 
   sortByCostoDesc() {
-    console.log("sortByCostoDesc");
     this.lista.sort((item1: Andamento, item2: Andamento) => {
       return this.compare(false, item2.costo, item1.costo);
     });

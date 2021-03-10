@@ -5,25 +5,31 @@
     <div fxLayout="row" fxLayoutAlign="center">
       <div fxFlex="nogrow">
         <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="mese" value="M" formControlName="range">
+          <input type="radio" class="form-check-input" id="mese" value="M" formControlName="range" />
           <label class="form-check-label" for="mese">Ultimo mese</label>
         </div>
         <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="anno" value="Y" formControlName="range">
+          <input type="radio" class="form-check-input" id="anno" value="Y" formControlName="range" />
           <label class="form-check-label" for="anno">Ultimo anno</label>
         </div>
         <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="tutto" value="A" formControlName="range">
+          <input type="radio" class="form-check-input" id="tutto" value="A" formControlName="range" />
           <label class="form-check-label" for="tutto">Tutto</label>
         </div>
       </div>
     </div>
   </fieldset>
-
 </form>
 
 <div class="torta">
-  <ngx-charts-pie-chart [scheme]="'natural'" [results]="tortaTipiSpesa" [legend]="showLegend" legendTitle="Legenda" [labels]="showLabels"
-    (select)="onSelectTorta($event)" [tooltipText]="tooltipTorta">
+  <ngx-charts-pie-chart
+    [scheme]="'natural'"
+    [results]="tortaTipiSpesa"
+    [legend]="showLegend"
+    legendTitle="Legenda"
+    [labels]="showLabels"
+    (select)="onSelectTorta($event)"
+    [tooltipText]="tooltipTorta"
+  >
   </ngx-charts-pie-chart>
 </div>

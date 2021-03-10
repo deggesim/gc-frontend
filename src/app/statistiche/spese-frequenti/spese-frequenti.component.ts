@@ -8,10 +8,9 @@ import { StatisticheService } from '../../services/statistiche.service';
 @Component({
   selector: 'app-spese-frequenti',
   templateUrl: './spese-frequenti.component.html',
-  styleUrls: ['./spese-frequenti.component.scss']
+  styleUrls: ['./spese-frequenti.component.scss'],
 })
 export class SpeseFrequentiComponent implements OnInit {
-
   // opzioni torta
   showLegend: boolean;
   showLabels: boolean;
@@ -30,35 +29,29 @@ export class SpeseFrequentiComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('init TipiSpesaComponent');
-    this.route.data.subscribe(
-      (data) => {
-        this.tortaTipiSpesa = data.tortaTipiSpesa;
-      }
-    );
+    this.route.data.subscribe((data) => {
+      this.tortaTipiSpesa = data.tortaTipiSpesa;
+    });
     this.showLabels = this.deviceService.isDesktop();
     this.showLegend = this.deviceService.isDesktop() || this.deviceService.isTablet();
   }
 
   createForm() {
     this.form = this.fb.group({
-      range: ['M', Validators.required]
+      range: ['M', Validators.required],
     });
 
-    this.form.controls.range.valueChanges.subscribe(
-      (value: string) => {
-        console.log('value = ' + value);
-        this.statisticheService.speseFrequenti(value).subscribe(
-          (data: Statistica[]) => { this.tortaTipiSpesa = data; }
-        );
-      }
-    );
+    this.form.controls.range.valueChanges.subscribe((value: string) => {
+      this.statisticheService.speseFrequenti(value).subscribe((data: Statistica[]) => {
+        this.tortaTipiSpesa = data;
+      });
+    });
   }
 
   refresh() {
-    this.statisticheService.speseFrequenti(this.form.value.range).subscribe(
-      (data: Statistica[]) => { this.tortaTipiSpesa = data; }
-    );
+    this.statisticheService.speseFrequenti(this.form.value.range).subscribe((data: Statistica[]) => {
+      this.tortaTipiSpesa = data;
+    });
   }
 
   tooltipTorta(arg: any) {
@@ -72,8 +65,5 @@ export class SpeseFrequentiComponent implements OnInit {
     return '<b>' + arg.data.name + '</b>: ' + formattedValue;
   }
 
-  onSelectTorta(event) {
-    console.log(event);
-  }
-
+  onSelectTorta(event) {}
 }

@@ -12,10 +12,9 @@ interface IBreadcrumb {
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   @Output() openLogin: EventEmitter<any> = new EventEmitter(true);
   @Output() logout: EventEmitter<any> = new EventEmitter(true);
   @Output() profile: EventEmitter<any> = new EventEmitter(true);
@@ -23,34 +22,24 @@ export class HeaderComponent implements OnInit {
   isCollapsed = true;
   breadcrumbs: IBreadcrumb[] = [];
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private authService: AuthService
-  ) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
 
   ngOnInit() {
-    console.log('HeaderComponent');
     const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
 
     // subscribe to the NavigationEnd event
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        // set breadcrumbs
-        const root: ActivatedRoute = this.activatedRoute.root;
-        this.breadcrumbs = this.getBreadcrumbs(root);
-      }
-      );
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      // set breadcrumbs
+      const root: ActivatedRoute = this.activatedRoute.root;
+      this.breadcrumbs = this.getBreadcrumbs(root);
+    });
   }
 
   public isLoggedIn() {
     return this.authService.isLoggedIn();
   }
 
-  public profilePage() {
-    console.log('profile page');
-  }
+  public profilePage() {}
 
   private getBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
     const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
@@ -76,7 +65,7 @@ export class HeaderComponent implements OnInit {
       }
 
       // get the route's URL segment
-      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+      const routeURL: string = child.snapshot.url.map((segment) => segment.path).join('/');
 
       // append route URL to URL
       url += `/${routeURL}`;
@@ -85,7 +74,7 @@ export class HeaderComponent implements OnInit {
       const breadcrumb: IBreadcrumb = {
         label: child.snapshot.data[ROUTE_DATA_BREADCRUMB],
         params: child.snapshot.params,
-        url: url
+        url: url,
       };
       breadcrumbs.push(breadcrumb);
 

@@ -1,4 +1,4 @@
 export interface Tipologica {
-    codice: string;
-    descrizione?: string;
+  codice: string;
+  descrizione?: string;
 }

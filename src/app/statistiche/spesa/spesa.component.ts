@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { forEach, isEqual } from "lodash-es";
-import * as moment from "moment";
-import { Statistica } from "../../model/statistica";
-import { StatisticheService } from "../../services/statistiche.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { forEach, isEqual } from 'lodash-es';
+import * as moment from 'moment';
+import { Statistica } from '../../model/statistica';
+import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-  selector: "app-spesa",
-  templateUrl: "./spesa.component.html",
-  styleUrls: ["./spesa.component.scss"],
+  selector: 'app-spesa',
+  templateUrl: './spesa.component.html',
+  styleUrls: ['./spesa.component.scss'],
 })
 export class SpesaComponent implements OnInit {
   // opzioni barre
@@ -23,21 +23,16 @@ export class SpesaComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private statisticheService: StatisticheService
-  ) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private statisticheService: StatisticheService) {
     this.createForm();
   }
 
   ngOnInit() {
-    console.log("init SpesaComponent");
     this.route.data.subscribe((data) => {
       this.barreSpesa = data.barreSpesa;
       forEach(this.barreSpesa, (item: Statistica) => {
         let mese = item.name;
-        mese = moment(mese, "YYYYMM").format("MMMM YYYY");
+        mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
         item.name = mese;
       });
     });
@@ -45,17 +40,16 @@ export class SpesaComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      frequenza: ["M", Validators.required],
+      frequenza: ['M', Validators.required],
     });
 
     this.form.controls.frequenza.valueChanges.subscribe((value: string) => {
-      console.log("value = " + value);
       this.statisticheService.spesa(value).subscribe((data: Statistica[]) => {
         this.barreSpesa = data;
         if (this.mensile()) {
           forEach(this.barreSpesa, (item: Statistica) => {
             let mese = item.name;
-            mese = moment(mese, "YYYYMM").format("MMMM YYYY");
+            mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
             item.name = mese;
           });
         }
@@ -64,9 +58,9 @@ export class SpesaComponent implements OnInit {
   }
 
   xAxisTickFormatting(value) {
-    const formatter = new Intl.NumberFormat("it-IT", {
-      style: "currency",
-      currency: "EUR",
+    const formatter = new Intl.NumberFormat('it-IT', {
+      style: 'currency',
+      currency: 'EUR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     });
@@ -75,10 +69,10 @@ export class SpesaComponent implements OnInit {
   }
 
   mensile(): boolean {
-    return isEqual(this.form.value.frequenza, "M");
+    return isEqual(this.form.value.frequenza, 'M');
   }
 
   annuale(): boolean {
-    return isEqual(this.form.value.frequenza, "Y");
+    return isEqual(this.form.value.frequenza, 'Y');
   }
 }

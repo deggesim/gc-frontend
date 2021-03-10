@@ -12,7 +12,7 @@
   }
   .nota-testo {
     text-align: justify;
-  };
+  }
 }
 .nota-info {
   @include nota($color_blu_05, $color_blu_60);

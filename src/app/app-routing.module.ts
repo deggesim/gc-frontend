@@ -15,89 +15,63 @@ import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 
 const appRoutes: Routes = [
-    {
-        path: 'home',
-        component: HomeComponent,
-        data: {
-            breadcrumb: 'Home'
-        }
+  {
+    path: 'home',
+    component: HomeComponent,
+    data: { breadcrumb: 'Home' },
+  },
+  {
+    path: 'lista',
+    component: ListaComponent,
+    resolve: { lista: ListaAndamentoResolver },
+    data: {
+      breadcrumb: 'Lista',
     },
-    {
-        path: 'lista',
-        component: ListaComponent,
-        resolve: {
-            lista: ListaAndamentoResolver
-        },
-        data: {
-            breadcrumb: 'Lista'
-        },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'statistiche',
+    data: { breadcrumb: 'Statistiche' },
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'spese-frequenti',
+        component: SpeseFrequentiComponent,
+        resolve: { tortaTipiSpesa: SpeseFrequentiResolver },
+        data: { breadcrumb: 'Lista' },
         canActivate: [AuthGuard],
-    },
-    {
-        path: 'statistiche',
-        data: {
-            breadcrumb: 'Statistiche'
-        },
+      },
+      {
+        path: 'spesa',
+        component: SpesaComponent,
+        resolve: { barreSpesa: SpesaMensileResolver },
+        data: { breadcrumb: 'Spesa' },
         canActivate: [AuthGuard],
-        children: [
-            {
-                path: 'spese-frequenti',
-                component: SpeseFrequentiComponent,
-                resolve: {
-                    tortaTipiSpesa: SpeseFrequentiResolver
-                },
-                data: {
-                    breadcrumb: 'Lista'
-                },
-                canActivate: [AuthGuard],
-            },
-            {
-                path: 'spesa',
-                component: SpesaComponent,
-                resolve: {
-                    barreSpesa: SpesaMensileResolver
-                },
-                data: {
-                    breadcrumb: 'Spesa'
-                },
-                canActivate: [AuthGuard],
-            },
-            {
-                path: 'carburante',
-                component: CarburanteComponent,
-                resolve: {
-                    barreCarburante: CarburanteMensileResolver
-                },
-                data: {
-                    breadcrumb: 'Carburante'
-                },
-                canActivate: [AuthGuard],
-            },
-            {
-                path: 'bolletta',
-                component: BollettaComponent,
-                resolve: {
-                    barreBolletta: BollettaMensileResolver
-                },
-                data: {
-                    breadcrumb: 'Bollette'
-                },
-                canActivate: [AuthGuard],
-            }
-        ]
-    },
-    { path: 'error', component: ErrorPageComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: '**', component: ErrorPageComponent }
+      },
+      {
+        path: 'carburante',
+        component: CarburanteComponent,
+        resolve: { barreCarburante: CarburanteMensileResolver },
+        data: { breadcrumb: 'Carburante' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'bolletta',
+        component: BollettaComponent,
+        resolve: { barreBolletta: BollettaMensileResolver },
+        data: { breadcrumb: 'Bollette' },
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
+  { path: 'error', component: ErrorPageComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', component: ErrorPageComponent },
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })
-    ],
-    exports: [
-        RouterModule
-    ],
-    providers: [],
+  imports: [RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })],
+  exports: [RouterModule],
+  providers: [],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

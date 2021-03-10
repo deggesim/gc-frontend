@@ -20,20 +20,23 @@ body {
 }
 
 .dropdown-item {
-  &.active, &:active {
-    color: #FFFFFF;
+  &.active,
+  &:active {
+    color: #ffffff;
     text-decoration: none;
-    background-color: #6C757D;
+    background-color: #6c757d;
   }
-  &:hover, &:focus {
-    color: #16181B;
+  &:hover,
+  &:focus {
+    color: #16181b;
     text-decoration: none;
-    background-color: #F8F9FA;
+    background-color: #f8f9fa;
   }
-  &.active, &:active {
-    color: #FFFFFF;
+  &.active,
+  &:active {
+    color: #ffffff;
     text-decoration: none;
-    background-color: #6C757D;
+    background-color: #6c757d;
   }
 }
 
@@ -53,7 +56,7 @@ a {
 }
 
 .page-item.active .page-link {
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: #212529;
   border-color: #212529;
 }

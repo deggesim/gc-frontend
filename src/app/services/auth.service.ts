@@ -8,17 +8,15 @@ import { environment } from './../../environments/environment';
 
 @Injectable()
 export class AuthService {
-
   private endpoint = environment.endpoint;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   public login(utente: Utente) {
-    return this.http.post<{ utente: Utente, token: string }>(`${this.endpoint}/utente/login`, utente)
-      .pipe(
-        tap((res: { utente: Utente, token: string }) => this.setSession(res)), shareReplay());
+    return this.http.post<{ utente: Utente; token: string }>(`${this.endpoint}/utente/login`, utente).pipe(
+      tap((res: { utente: Utente; token: string }) => this.setSession(res)),
+      shareReplay()
+    );
   }
 
   public logout() {
@@ -28,9 +26,10 @@ export class AuthService {
   }
 
   public salva(utente: Utente) {
-    return this.http.patch<{ utente: Utente, token: string }>(`${this.endpoint}/utente/me`, utente)
-      .pipe(
-        tap((res: { utente: Utente, token: string }) => localStorage.setItem('utente', JSON.stringify(utente))), shareReplay());
+    return this.http.patch<{ utente: Utente; token: string }>(`${this.endpoint}/utente/me`, utente).pipe(
+      tap((res: { utente: Utente; token: string }) => localStorage.setItem('utente', JSON.stringify(utente))),
+      shareReplay()
+    );
   }
 
   public isLoggedIn() {
@@ -47,7 +46,7 @@ export class AuthService {
     return moment(expiresAt);
   }
 
-  private setSession(authResult: { utente: Utente, token: string }) {
+  private setSession(authResult: { utente: Utente; token: string }) {
     const utente = authResult.utente;
     const token = authResult.token;
     const exp = jwt_decode(token)['exp'];
@@ -57,6 +56,4 @@ export class AuthService {
     localStorage.setItem('utente', JSON.stringify(utente));
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
-
 }
-

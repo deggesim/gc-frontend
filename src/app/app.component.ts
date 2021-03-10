@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Utente } from './model/utente';
 import { AuthService } from './services/auth.service';
@@ -9,10 +9,9 @@ import { SpinnerService } from './shared/spinner.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewChecked {
-
+export class AppComponent implements AfterViewChecked {
   // Sets initial value to true to show loading spinner on first load
   loading = true;
 
@@ -25,11 +24,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private sharedService: SharedService,
     private authService: AuthService,
     private router: Router
-  ) { }
-
-  ngOnInit() {
-    console.log('ngOnInit AppComponent');
-  }
+  ) {}
 
   ngAfterViewChecked(): void {
     this.loading = this.spinnerService.isLoading();
@@ -84,5 +79,4 @@ export class AppComponent implements OnInit, AfterViewChecked {
       console.error(error);
     }
   }
-
 }

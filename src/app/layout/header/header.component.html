@@ -2,48 +2,43 @@
   <a class="navbar-brand" routerLink="/home">
     <i class="fa fa-money fa-2x" aria-hidden="true"></i>
   </a>
-  <button class="navbar-toggler" type="button" aria-expanded="false" aria-controls="collapseExample"
-    (click)="isCollapsed = !isCollapsed">
+  <button class="navbar-toggler" type="button" aria-expanded="false" aria-controls="collapseExample" (click)="isCollapsed = !isCollapsed">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" [collapse]="isCollapsed">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/lista" (click)="isCollapsed = true;">
+        <a class="nav-link" routerLink="/lista" (click)="isCollapsed = true">
           <i class="fa fa-list menu-padding" aria-hidden="true"></i>Lista
         </a>
       </li>
       <li class="nav-item dropdown" dropdown>
-        <a href class="nav-link dropdown-toggle" dropdownToggle (click)="false">
+        <a href class="nav-link dropdown-toggle" dropdownToggle (click)="(false)">
           <i class="fa fa-pie-chart menu-padding" aria-hidden="true"></i>Statistiche
         </a>
         <ul *dropdownMenu class="dropdown-menu">
-          <a class="dropdown-item" routerLink="/statistiche/spese-frequenti" routerLinkActive="active"
-            (click)="isCollapsed = true;">Spese frequenti</a>
-          <a class="dropdown-item" routerLink="/statistiche/spesa" routerLinkActive="active"
-            (click)="isCollapsed = true;">Spesa</a>
-          <a class="dropdown-item" routerLink="/statistiche/carburante" routerLinkActive="active"
-            (click)="isCollapsed = true;">Carburante</a>
-          <a class="dropdown-item" routerLink="/statistiche/bolletta" routerLinkActive="active"
-            (click)="isCollapsed = true;">Bollette</a>
+          <a class="dropdown-item" routerLink="/statistiche/spese-frequenti" routerLinkActive="active" (click)="isCollapsed = true"
+            >Spese frequenti</a
+          >
+          <a class="dropdown-item" routerLink="/statistiche/spesa" routerLinkActive="active" (click)="isCollapsed = true">Spesa</a>
+          <a class="dropdown-item" routerLink="/statistiche/carburante" routerLinkActive="active" (click)="isCollapsed = true"
+            >Carburante</a
+          >
+          <a class="dropdown-item" routerLink="/statistiche/bolletta" routerLinkActive="active" (click)="isCollapsed = true">Bollette</a>
           <!-- <a class="dropdown-item" routerLink="/statistiche/custom" routerLinkActive="active" (click)="isCollapsed = true;">Statistiche custom</a> -->
         </ul>
       </li>
     </ul>
     <ul class="navbar-nav" *ngIf="!isLoggedIn(); else userPage">
       <li class="nav-item">
-        <a class="nav-link manina" (click)="openLogin.emit()">
-          <i class="fa fa-sign-in menu-padding" aria-hidden="true"></i>Login
-        </a>
+        <a class="nav-link manina" (click)="openLogin.emit()"> <i class="fa fa-sign-in menu-padding" aria-hidden="true"></i>Login </a>
       </li>
     </ul>
     <ng-template #userPage>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link manina" (click)="logout.emit()">
-            <i class="fa fa-sign-out menu-padding" aria-hidden="true"></i>Logout
-          </a>
+          <a class="nav-link manina" (click)="logout.emit()"> <i class="fa fa-sign-out menu-padding" aria-hidden="true"></i>Logout </a>
         </li>
         <li class="nav-item">
           <a class="nav-link manina" (click)="profile.emit()">
@@ -53,18 +48,16 @@
       </ul>
     </ng-template>
   </div>
-
 </nav>
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" *ngFor="let b of breadcrumbs; let i = index">
       <span *ngIf="i != breadcrumbs.length - 1; else elseLink">
-        <a [routerLink]="[b.url, b.params]" routerLinkActive="selezionato"
-          [routerLinkActiveOptions]="{ exact: true }">{{b.label}}</a>
+        <a [routerLink]="[b.url, b.params]" routerLinkActive="selezionato" [routerLinkActiveOptions]="{ exact: true }">{{ b.label }}</a>
       </span>
       <ng-template #elseLink>
-        <span>{{b.label}}</span>
+        <span>{{ b.label }}</span>
       </ng-template>
     </li>
   </ol>

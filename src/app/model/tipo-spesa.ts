@@ -1,4 +1,4 @@
 export interface TipoSpesa {
-    id: number;
-    descrizione: string;
+  id: number;
+  descrizione: string;
 }

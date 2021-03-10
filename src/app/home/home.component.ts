@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Andamento } from '../model/andamento';
 import { AndamentoService } from '../services/andamento.service';
@@ -6,14 +6,12 @@ import { AuthService } from '../services/auth.service';
 import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-
+export class HomeComponent {
   andamento: Andamento;
   mostraPopup: boolean;
   titoloModale: string;
@@ -23,11 +21,7 @@ export class HomeComponent implements OnInit {
     private sharedService: SharedService,
     private andamentoService: AndamentoService,
     private authService: AuthService
-  ) { }
-
-  ngOnInit() {
-    console.log('init HomeComponent');
-  }
+  ) {}
 
   public isLoggedIn() {
     return this.authService.isLoggedIn();
@@ -39,8 +33,8 @@ export class HomeComponent implements OnInit {
       descrizione: 'Spesa Conad',
       tipoSpesa: {
         id: 1,
-        descrizione: 'Spesa'
-      }
+        descrizione: 'Spesa',
+      },
     };
     this.mostraPopup = true;
     this.titoloModale = 'Spesa';
@@ -52,8 +46,8 @@ export class HomeComponent implements OnInit {
       descrizione: 'Gasolio Fiesta',
       tipoSpesa: {
         id: 2,
-        descrizione: 'Carburante'
-      }
+        descrizione: 'Carburante',
+      },
     };
     this.mostraPopup = true;
     this.titoloModale = 'Carburante';
@@ -65,8 +59,8 @@ export class HomeComponent implements OnInit {
       descrizione: 'Mariangela pulizie',
       tipoSpesa: {
         id: 7,
-        descrizione: 'Casa'
-      }
+        descrizione: 'Casa',
+      },
     };
     this.mostraPopup = true;
     this.titoloModale = 'Pulizie casa';
@@ -78,8 +72,8 @@ export class HomeComponent implements OnInit {
       descrizione: '',
       tipoSpesa: {
         id: 3,
-        descrizione: 'Bollette'
-      }
+        descrizione: 'Bollette',
+      },
     };
     this.mostraPopup = true;
     this.titoloModale = 'Bolletta';
@@ -89,14 +83,13 @@ export class HomeComponent implements OnInit {
     this.andamento = {
       giorno: new Date(),
       descrizione: undefined,
-      tipoSpesa: undefined
+      tipoSpesa: undefined,
     };
     this.mostraPopup = true;
     this.titoloModale = 'Nuova voce di spesa';
   }
 
   async salva(andamento: Andamento) {
-    console.log(andamento);
     await this.andamentoService.inserisci(andamento).toPromise();
     this.mostraPopup = false;
     const title = 'Nuova voce di spesa';
@@ -109,5 +102,4 @@ export class HomeComponent implements OnInit {
   annulla(): void {
     this.mostraPopup = false;
   }
-
 }

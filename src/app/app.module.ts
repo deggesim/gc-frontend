@@ -84,7 +84,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AlertModule.forRoot(),
     NgxChartsModule,
     ToastrModule.forRoot(), // ToastrModule added
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -101,11 +101,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     StatisticheService,
     SpinnerService,
     SharedService,
-    AuthService
+    AuthService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
 export class AppModule {
   constructor() {
     moment.locale('it');

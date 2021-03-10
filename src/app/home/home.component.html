@@ -3,7 +3,7 @@
 </div>
 
 <!-- ICONE -->
-<div fxLayout="row wrap" *ngIf="isLoggedIn();else notLogged">
+<div fxLayout="row wrap" *ngIf="isLoggedIn(); else notLogged">
   <div fxFlex="25" fxFlex.xs="50">
     <div class="text-center box">
       <div>
@@ -82,20 +82,25 @@
 </ng-template>
 
 <!-- popup inserimento voce di menu -->
-<div *ngIf="mostraPopup" class="modal fade" bsModal #editMenu="bs-modal"
-  [config]="{backdrop: 'static', keyboard: false, show: true}" tabindex="-1" role="dialog" aria-hidden="true">
-
+<div
+  *ngIf="mostraPopup"
+  class="modal fade"
+  bsModal
+  #editMenu="bs-modal"
+  [config]="{ backdrop: 'static', keyboard: false, show: true }"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-
       <div class="modal-header titolo">
-        <h4 class="modal-title">{{titoloModale}}</h4>
+        <h4 class="modal-title">{{ titoloModale }}</h4>
       </div>
 
       <div class="modal-body">
         <app-modifica [andamento]="andamento" (salva)="salva($event)" (annulla)="annulla()"></app-modifica>
       </div>
     </div>
-
   </div>
 </div>

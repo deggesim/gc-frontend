@@ -9,17 +9,13 @@ import * as globals from './globals';
 
 @Injectable()
 export class SharedService {
-
   private bsConfig: Partial<BsDatepickerConfig> = {
     containerClass: 'theme-dark-blue',
     showWeekNumbers: false,
-    dateInputFormat: 'DD/MM/YYYY'
+    dateInputFormat: 'DD/MM/YYYY',
   };
 
-  constructor(
-    private localeService: BsLocaleService,
-    private toastr: ToastrService
-  ) {
+  constructor(private localeService: BsLocaleService, private toastr: ToastrService) {
     defineLocale('it', itLocale);
     this.localeService.use('it');
   }
@@ -45,7 +41,7 @@ export class SharedService {
         titolo = 'Utente non autorizzato';
         descrizione = response.error || response.message;
         if (isNil(descrizione)) {
-          descrizione = 'L\'utente non è autorizzato ad eseguire l\'operazione richiesta';
+          descrizione = "L'utente non è autorizzato ad eseguire l'operazione richiesta";
         }
         break;
       case 422:

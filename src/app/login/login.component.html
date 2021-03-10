@@ -1,9 +1,4 @@
-<form
-  [formGroup]="form"
-  (ngSubmit)="confirm()"
-  class="needs-validation"
-  novalidate
->
+<form [formGroup]="form" (ngSubmit)="confirm()" class="needs-validation" novalidate>
   <div fxLayout="row wrap" fxLayoutAlign="space-between">
     <div fxFlex="49" fxFlex.xs="100">
       <div class="form-group">
@@ -16,16 +11,10 @@
           formControlName="email"
           autocomplete="username"
           [ngClass]="{
-            'is-invalid':
-              form.controls.email.invalid && form.controls.email.dirty
+            'is-invalid': form.controls.email.invalid && form.controls.email.dirty
           }"
         />
-        <div
-          *ngIf="
-            form.get('email').hasError('required') && form.get('email').dirty
-          "
-          class="invalid-feedback"
-        >
+        <div *ngIf="form.get('email').hasError('required') && form.get('email').dirty" class="invalid-feedback">
           Il campo email è obbligatorio
         </div>
       </div>
@@ -42,17 +31,10 @@
           formControlName="password"
           autocomplete="current-password"
           [ngClass]="{
-            'is-invalid':
-              form.controls.password.invalid && form.controls.password.dirty
+            'is-invalid': form.controls.password.invalid && form.controls.password.dirty
           }"
         />
-        <div
-          *ngIf="
-            form.get('password').hasError('required') &&
-            form.get('password').dirty
-          "
-          class="invalid-feedback"
-        >
+        <div *ngIf="form.get('password').hasError('required') && form.get('password').dirty" class="invalid-feedback">
           Il campo password è obbligatorio
         </div>
       </div>
@@ -60,11 +42,7 @@
   </div>
 
   <div class="text-center">
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-      Login</button
-    >&nbsp;
-    <button type="button" class="btn btn-primary" (click)="annulla.emit()">
-      Annulla
-    </button>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>&nbsp;
+    <button type="button" class="btn btn-primary" (click)="annulla.emit()">Annulla</button>
   </div>
 </form>

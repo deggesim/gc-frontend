@@ -6,12 +6,9 @@ import { environment } from './../../environments/environment';
 
 @Injectable()
 export class StatisticheService {
-
   private endpoint = environment.endpoint;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   speseFrequenti(range: string): Observable<Statistica[]> {
     return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/spese-frequenti/${range}`);
@@ -28,5 +25,4 @@ export class StatisticheService {
   bolletta(frequenza: string): Observable<Statistica[]> {
     return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/bolletta/${frequenza}`);
   }
-
 }

@@ -6,12 +6,9 @@ import { environment } from './../../environments/environment';
 
 @Injectable()
 export class AndamentoService {
-
   private endpoint = environment.endpoint;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   lista(): Observable<Andamento[]> {
     return this.http.get<Andamento[]>(`${this.endpoint}/andamento`);
@@ -32,5 +29,4 @@ export class AndamentoService {
   elimina(id: number): Observable<string> {
     return this.http.delete(`${this.endpoint}/andamento/${id}`, { responseType: 'text' });
   }
-
 }
