@@ -17,7 +17,7 @@ export class GlobalInterceptor implements HttpInterceptor {
         this.spinnerService.end();
         this.sharedService.notifyError(err);
         if (401 === err.status || 403 === err.status) {
-          this.router.navigate(['home']);
+          window.location.reload();
         }
         return throwError(err);
       }),
