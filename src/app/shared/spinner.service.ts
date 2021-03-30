@@ -12,7 +12,7 @@ export class SpinnerService {
   }
 
   public end() {
-    this.loading--;
+    this.loading > 0 ? this.loading-- : this.loading = 0;
   }
 
   public isLoading() {

@@ -14,10 +14,12 @@ export class GlobalInterceptor implements HttpInterceptor {
     this.spinnerService.start();
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        this.spinnerService.end();
         this.sharedService.notifyError(err);
         if (401 === err.status || 403 === err.status) {
-          window.location.reload();
+          localStorage.removeItem('token');
+          localStorage.removeItem('expires_at');
+          localStorage.removeItem('utente');
+          this.router.navigate(['home']);
         }
         return throwError(err);
       }),
