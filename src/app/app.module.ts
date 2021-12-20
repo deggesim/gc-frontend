@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import * as moment from 'moment';
@@ -17,7 +18,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { ToastrModule } from 'ngx-toastr';
+import { environment } from '../environments/environment';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { ModificaComponent } from './andamento/modifica/modifica.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -46,8 +49,19 @@ import { CarburanteComponent } from './statistiche/carburante/carburante.compone
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+
+export const customCurrencyMaskConfig = {
+  align: 'right',
+  allowNegative: false,
+  allowZero: false,
+  decimal: ',',
+  precision: 2,
+  prefix: '€ ',
+  suffix: '',
+  thousands: '.',
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.FINANCIAL,
+};
 
 @NgModule({
   declarations: [
@@ -85,13 +99,15 @@ import { environment } from '../environments/environment';
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
     NgxChartsModule,
-    ToastrModule.forRoot(), // ToastrModule added
-    AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', {
-  enabled: environment.production,
-  // Register the ServiceWorker as soon as the app is stable
-  // or after 30 seconds (whichever comes first).
-  registrationStrategy: 'registerWhenStable:30000'
-}),
+    ToastrModule.forRoot(),
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

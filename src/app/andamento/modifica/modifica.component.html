@@ -78,6 +78,7 @@
           name="costo"
           formControlName="costo"
           [ngClass]="{ 'is-invalid': form.controls.costo.invalid && form.controls.costo.dirty }"
+          currencyMask
         />
         <div *ngIf="form.get('costo').hasError('required') && form.get('costo').dirty" class="invalid-feedback">
           Il campo costo è obbligatorio

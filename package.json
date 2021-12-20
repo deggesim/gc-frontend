@@ -50,6 +50,7 @@
     "lodash-es": "^4.17.21",
     "moment": "^2.29.1",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-currency": "^2.5.3",
     "ngx-device-detector": "^3.0.0",
     "ngx-toastr": "^13.2.1",
     "popper.js": "^1.16.1",
