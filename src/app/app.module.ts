@@ -46,6 +46,20 @@ import { CarburanteComponent } from './statistiche/carburante/carburante.compone
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
+
+export const customCurrencyMaskConfig = {
+  align: "right",
+  allowNegative: false,
+  allowZero: false,
+  decimal: ",",
+  precision: 2,
+  prefix: "€ ",
+  suffix: "",
+  thousands: ".",
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.FINANCIAL
+};
 
 @NgModule({
   declarations: [
@@ -83,7 +97,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
     NgxChartsModule,
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot(),
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     AppRoutingModule,
   ],
   providers: [
