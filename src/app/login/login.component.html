@@ -11,10 +11,10 @@
           formControlName="email"
           autocomplete="username"
           [ngClass]="{
-            'is-invalid': form.controls.email.invalid && form.controls.email.dirty
+            'is-invalid': form.get('email')?.invalid && form.get('email')?.dirty
           }"
         />
-        <div *ngIf="form.get('email').hasError('required') && form.get('email').dirty" class="invalid-feedback">
+        <div *ngIf="form.get('email')?.hasError('required') && form.get('email')?.dirty" class="invalid-feedback">
           Il campo email è obbligatorio
         </div>
       </div>
@@ -31,10 +31,10 @@
           formControlName="password"
           autocomplete="current-password"
           [ngClass]="{
-            'is-invalid': form.controls.password.invalid && form.controls.password.dirty
+            'is-invalid': form.get('password')?.invalid && form.get('password')?.dirty
           }"
         />
-        <div *ngIf="form.get('password').hasError('required') && form.get('password').dirty" class="invalid-feedback">
+        <div *ngIf="form.get('password')?.hasError('required') && form.get('password')?.dirty" class="invalid-feedback">
           Il campo password è obbligatorio
         </div>
       </div>

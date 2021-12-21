@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import jwt_decode from 'jwt-decode';
+import jwt_decode, { JwtPayload } from 'jwt-decode';
 import * as moment from 'moment';
 import { shareReplay, tap } from 'rxjs/operators';
 import { Utente } from '../model/utente';
@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   private getExpiration() {
-    const expiration = localStorage.getItem('expires_at');
+    const expiration = localStorage.getItem('expires_at') as string;
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
@@ -49,7 +49,7 @@ export class AuthService {
   private setSession(authResult: { utente: Utente; token: string }) {
     const utente = authResult.utente;
     const token = authResult.token;
-    const exp = jwt_decode(token)['exp'];
+    const exp = jwt_decode<JwtPayload>(token)['exp'];
     const expiresAt = moment().add(exp);
 
     localStorage.setItem('token', token);

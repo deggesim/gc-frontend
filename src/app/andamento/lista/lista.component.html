@@ -12,7 +12,7 @@
       #filtro="ngModel"
       [(ngModel)]="filter"
       (keyup)="applicaFiltro(filtro.value)"
-      (paste)="applicaFiltro($event.clipboardData.getData('Text'))"
+      (paste)="applicaFiltro($event.clipboardData?.getData('Text'))"
       placeholder="Filtro"
     />
     <div class="input-group-append manina" (click)="pulisciFiltro()">

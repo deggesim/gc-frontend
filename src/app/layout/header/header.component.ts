@@ -25,10 +25,8 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
 
   ngOnInit() {
-    const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
-
     // subscribe to the NavigationEnd event
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       // set breadcrumbs
       const root: ActivatedRoute = this.activatedRoute.root;
       this.breadcrumbs = this.getBreadcrumbs(root);

@@ -15,8 +15,8 @@ export class AppComponent implements AfterViewChecked {
   // Sets initial value to true to show loading spinner on first load
   loading = true;
 
-  mostraPopupLogin: boolean;
-  mostraPopupUserProfile: boolean;
+  mostraPopupLogin: boolean = false;
+  mostraPopupUserProfile: boolean = false;
 
   constructor(
     private cdRef: ChangeDetectorRef,

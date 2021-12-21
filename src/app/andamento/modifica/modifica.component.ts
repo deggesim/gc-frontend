@@ -13,13 +13,13 @@ import { SharedService } from '../../shared/shared.service';
   styleUrls: ['./modifica.component.scss'],
 })
 export class ModificaComponent implements OnInit, OnChanges {
-  @Input() andamento: Andamento;
+  @Input() andamento: Andamento | undefined;
   @Output() salva: EventEmitter<any> = new EventEmitter(true);
   @Output() annulla: EventEmitter<any> = new EventEmitter(true);
 
-  listaTipoSpesa: TipoSpesa[];
+  listaTipoSpesa: TipoSpesa[] = [];
 
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(private fb: FormBuilder, public sharedService: SharedService, private tipoSpesaService: TipoSpesaService) {
     this.createForm();
@@ -43,7 +43,7 @@ export class ModificaComponent implements OnInit, OnChanges {
         tipoSpesa: andamento.tipoSpesa,
       });
     } else {
-      this.form.controls.giorno.setValue(moment().startOf('day').toDate());
+      this.form.get('giorno')?.setValue(moment().startOf('day').toDate());
     }
   }
 
@@ -58,7 +58,7 @@ export class ModificaComponent implements OnInit, OnChanges {
   }
 
   clearGiorno() {
-    this.form.controls.giorno.reset();
+    this.form.get('giorno')?.reset();
   }
 
   salvaAndamento(): void {

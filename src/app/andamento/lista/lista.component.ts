@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { isEmpty, isNil } from 'lodash-es';
 import { Andamento } from '../../model/andamento';
 import { AndamentoService } from '../../services/andamento.service';
@@ -13,20 +13,20 @@ import { SharedService } from '../../shared/shared.service';
   styleUrls: ['./lista.component.scss'],
 })
 export class ListaComponent implements OnInit {
-  lista: Andamento[];
-  listaPaginata: Andamento[];
-  listaFiltrata: Andamento[];
+  lista: Andamento[] = [];
+  listaPaginata: Andamento[] = [];
+  listaFiltrata: Andamento[] = [];
 
-  andamentoSelected: Andamento;
-  mostraPopupModifica: boolean;
-  titoloModale: string;
-  filter: string;
+  andamentoSelected: Andamento | undefined;
+  mostraPopupModifica: boolean = false;
+  titoloModale: string = '';
+  filter: string = '';
 
   @ViewChild('popupConfermaElimina', { static: true })
-  public popupConfermaElimina: PopupConfermaComponent;
+  public popupConfermaElimina!: PopupConfermaComponent;
 
   // paginazione
-  size: number;
+  size!: number;
   page = 1;
   pageSize = 20;
   maxSize = 5;
@@ -44,14 +44,14 @@ export class ListaComponent implements OnInit {
   constructor(private route: ActivatedRoute, private sharedService: SharedService, private andamentoService: AndamentoService) {}
 
   ngOnInit() {
-    this.route.data.subscribe((data) => {
-      this.lista = data.lista;
+    this.route.data.subscribe((data: Data) => {
+      this.lista = data['lista'];
       this.size = this.lista.length;
       this.listaPaginata = this.buildPage();
     });
   }
 
-  applicaFiltro(filtro: string) {
+  applicaFiltro(filtro: string | undefined) {
     if (filtro != null && filtro.length > 2) {
       this.listaFiltrata = this.lista.filter((andamento: Andamento) => {
         const descrizioneFound = andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
@@ -66,7 +66,7 @@ export class ListaComponent implements OnInit {
   }
 
   pulisciFiltro(): void {
-    this.filter = null;
+    this.filter = '';
     this.size = this.lista.length;
     this.listaPaginata = this.buildPage();
   }
@@ -142,18 +142,19 @@ export class ListaComponent implements OnInit {
 
   async confermaElimina(andamento: Andamento) {
     try {
-      if (this.andamentoSelected) {
-        await this.andamentoService.elimina(this.andamentoSelected.id).toPromise();
-        this.popupConfermaElimina.chiudiModale();
-        const title = 'Voce di spesa eliminata';
-        const message = 'La voce di spesa è stata eliminata correttamente';
-        this.sharedService.notifica(globals.toastType.success, title, message);
-        this.andamentoSelected = undefined;
-
-        this.andamentoService.lista().subscribe((lista: Andamento[]) => {
-          this.lista = lista;
-          this.applicaFiltro(this.filter);
-        });
+      if (this.andamentoSelected && this.andamentoSelected.id) {
+        this.andamentoService.elimina(this.andamentoSelected.id).subscribe(() => {
+          this.popupConfermaElimina.chiudiModale();
+          const title = 'Voce di spesa eliminata';
+          const message = 'La voce di spesa è stata eliminata correttamente';
+          this.sharedService.notifica(globals.toastType.success, title, message);
+          this.andamentoSelected = undefined;
+  
+          this.andamentoService.lista().subscribe((lista: Andamento[]) => {
+            this.lista = lista;
+            this.applicaFiltro(this.filter);
+          });
+        })
       }
     } catch (error) {
       console.error(error);
@@ -164,7 +165,7 @@ export class ListaComponent implements OnInit {
     return !isEmpty(this.lista) && this.lista.length > this.pageSize;
   }
 
-  pageChange(event) {
+  pageChange(event: { page: number; itemsPerPage: number }) {
     this.page = event.page;
     this.listaPaginata = this.buildPage();
   }

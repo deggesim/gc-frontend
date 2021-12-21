@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { forEach, isEqual } from 'lodash-es';
 import * as moment from 'moment';
 import { Statistica } from '../../model/statistica';
@@ -21,20 +21,24 @@ export class CarburanteComponent implements OnInit {
 
   barreCarburante: Statistica[] = [];
 
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private statisticheService: StatisticheService) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data) => {
-      this.barreCarburante = data.barreCarburante;
-      forEach(this.barreCarburante, (item: Statistica) => {
-        let mese = item.name;
-        mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
-        item.name = mese;
-      });
+    this.route.data.subscribe((data: Data) => {
+      this.barreCarburante = data['barreCarburante'];
+      this.formatMese();
+    });
+  }
+
+  private formatMese() {
+    forEach(this.barreCarburante, (item: Statistica) => {
+      let mese = item.name;
+      mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
+      item.name = mese;
     });
   }
 
@@ -43,29 +47,24 @@ export class CarburanteComponent implements OnInit {
       frequenza: ['M', Validators.required],
     });
 
-    this.form.controls.frequenza.valueChanges.subscribe((value: string) => {
+    this.form.get('frequenza')?.valueChanges.subscribe((value: string) => {
       this.statisticheService.carburante(value).subscribe((data: Statistica[]) => {
         this.barreCarburante = data;
         if (this.mensile()) {
-          forEach(this.barreCarburante, (item: Statistica) => {
-            let mese = item.name;
-            mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
-            item.name = mese;
-          });
+          this.formatMese();
         }
       });
     });
   }
 
-  xAxisTickFormatting(value) {
+  xAxisTickFormatting(value: number | bigint) {
     const formatter = new Intl.NumberFormat('it-IT', {
       style: 'currency',
       currency: 'EUR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     });
-    const retValue = formatter.format(value);
-    return retValue;
+    return formatter.format(value);
   }
 
   mensile(): boolean {

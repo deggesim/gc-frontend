@@ -25,7 +25,30 @@ export class SharedService {
   }
 
   public notifica(type: string, title: string, message: string) {
-    this.toastr[type](message, title);
+    switch (type) {
+      case 'show':
+        this.toastr.show(message, title);
+        break;
+
+      case 'success':
+        this.toastr.success(message, title);
+        break;
+
+      case 'error':
+        this.toastr.error(message, title);
+        break;
+
+      case 'info':
+        this.toastr.info(message, title);
+        break;
+
+      case 'warning':
+        this.toastr.warning(message, title);
+        break;
+
+      default:
+        break;
+    }
   }
 
   notifyError(response: HttpErrorResponse) {
