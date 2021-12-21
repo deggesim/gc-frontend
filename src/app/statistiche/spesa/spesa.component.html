@@ -20,7 +20,7 @@
 <div [ngClass]="{ 'barre-orizzontali-mensile': mensile(), 'barre-orizzontali-annuale': annuale() }">
   <ngx-charts-bar-horizontal
     [scheme]="'solar'"
-    schemeType="linear"
+    [schemeType]="ScaleType.Linear"
     [results]="barreSpesa"
     [xAxis]="showXAxis"
     [yAxis]="showYAxis"

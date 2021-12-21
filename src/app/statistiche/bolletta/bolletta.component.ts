@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
+import { ScaleType } from '@swimlane/ngx-charts';
 import { forEach, isEqual } from 'lodash-es';
 import * as moment from 'moment';
 import { Statistica } from '../../model/statistica';
@@ -13,6 +14,7 @@ import { StatisticheService } from '../../services/statistiche.service';
 })
 export class BollettaComponent implements OnInit {
   // opzioni barre
+  ScaleType = ScaleType;
   showXAxis = true;
   showYAxis = true;
   showXAxisLabel = true;
