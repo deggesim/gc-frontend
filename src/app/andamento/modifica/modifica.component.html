@@ -83,8 +83,8 @@
         <div *ngIf="form.get('costo')?.hasError('required') && form.get('costo')?.dirty" class="invalid-feedback">
           Il campo costo è obbligatorio
         </div>
-        <div *ngIf="form.get('costo')?.hasError('pattern') && form.get('costo')?.dirty" class="invalid-feedback">
-          Il campo costo deve essere numerico
+        <div *ngIf="form.get('costo')?.hasError('min') && form.get('costo')?.dirty" class="invalid-feedback">
+          Il campo costo deve essere maggiore di zero
         </div>
       </div>
     </div>

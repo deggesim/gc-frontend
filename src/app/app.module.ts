@@ -1,5 +1,7 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import localeIt from '@angular/common/locales/it';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +19,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { ToastrModule } from 'ngx-toastr';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { ModificaComponent } from './andamento/modifica/modifica.component';
@@ -46,19 +49,20 @@ import { CarburanteComponent } from './statistiche/carburante/carburante.compone
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
+
+registerLocaleData(localeIt);
 
 export const customCurrencyMaskConfig = {
-  align: "right",
+  align: 'right',
   allowNegative: false,
   allowZero: false,
-  decimal: ",",
+  decimal: ',',
   precision: 2,
-  prefix: "€ ",
-  suffix: "",
-  thousands: ".",
+  prefix: '€ ',
+  suffix: '',
+  thousands: '.',
   nullable: false,
-  inputMode: CurrencyMaskInputMode.FINANCIAL
+  inputMode: CurrencyMaskInputMode.FINANCIAL,
 };
 
 @NgModule({
@@ -104,6 +108,8 @@ export const customCurrencyMaskConfig = {
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'it' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     // resolver
     ListaAndamentoResolver,
     SpeseFrequentiResolver,

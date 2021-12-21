@@ -49,11 +49,11 @@ export class ModificaComponent implements OnInit, OnChanges {
 
   createForm() {
     this.form = this.fb.group({
-      id: undefined,
-      giorno: [undefined, Validators.required],
-      descrizione: [undefined, Validators.required],
-      costo: [undefined, [Validators.required, Validators.pattern('^[1-9]\\d*(\\.\\d{1,2})?$')]],
-      tipoSpesa: [undefined, Validators.required],
+      id: [],
+      giorno: [null, Validators.required],
+      descrizione: [null, Validators.required],
+      costo: [null, [Validators.required, Validators.min(0.01)]],
+      tipoSpesa: [null, Validators.required],
     });
   }
 

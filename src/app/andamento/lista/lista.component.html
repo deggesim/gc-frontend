@@ -22,10 +22,10 @@
 </form>
 
 <div class="table-responsive">
-  <table class="table table-hover">
+  <table class="table table-hover" aria-label="andamento">
     <thead class="thead-dark">
       <tr>
-        <th>
+        <th id="giorno">
           Giorno
           <div>
             <i
@@ -42,7 +42,7 @@
             ></i>
           </div>
         </th>
-        <th>
+        <th id="descrizione">
           Descrizione
           <div>
             <i
@@ -59,7 +59,7 @@
             ></i>
           </div>
         </th>
-        <th>
+        <th id="costo" class="text-right pr-4">
           Costo
           <div>
             <i
@@ -76,8 +76,8 @@
             ></i>
           </div>
         </th>
-        <th>Tipo spesa</th>
-        <th>Azioni</th>
+        <th id="tipoSpesa">Tipo spesa</th>
+        <th id="azioni">Azioni</th>
       </tr>
     </thead>
 
@@ -85,7 +85,7 @@
       <tr *ngFor="let item of listaPaginata">
         <td>{{ item.giorno | date: 'dd/MM/yyyy' }}</td>
         <td>{{ item.descrizione }}</td>
-        <td>{{ item.costo }}</td>
+        <td class="text-right pr-4">{{ item.costo | currency }}</td>
         <td>{{ item.tipoSpesa.descrizione }}</td>
         <td class="text-nowrap">
           <button type="button" class="btn btn-warning" (click)="modifica(item)" tooltip="Modifica" placement="top">
