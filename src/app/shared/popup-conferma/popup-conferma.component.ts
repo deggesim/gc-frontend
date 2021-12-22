@@ -7,15 +7,14 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   styleUrls: ['./popup-conferma.component.scss'],
 })
 export class PopupConfermaComponent {
-  @Input() titolo: string;
-  @Input() btnConferma: string;
-  @Input() btnAnnulla: string;
+  @Input() titolo!: string;
+  @Input() btnConferma!: string;
+  @Input() btnAnnulla!: string;
   @Output() conferma: EventEmitter<any> = new EventEmitter();
   @Output() annulla: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('modal', { static: true }) private modal: ModalDirective;
-
-  constructor() {}
+  @ViewChild('modal', { static: true })
+  private modal!: ModalDirective;
 
   apriModale() {
     this.modal.show();

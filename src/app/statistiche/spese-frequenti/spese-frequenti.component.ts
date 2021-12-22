@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
@@ -12,12 +12,12 @@ import { StatisticheService } from '../../services/statistiche.service';
 })
 export class SpeseFrequentiComponent implements OnInit {
   // opzioni torta
-  showLegend: boolean;
-  showLabels: boolean;
+  showLegend!: boolean;
+  showLabels!: boolean;
 
-  tortaTipiSpesa: Statistica[];
+  tortaTipiSpesa!: Statistica[];
 
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,8 +29,8 @@ export class SpeseFrequentiComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data) => {
-      this.tortaTipiSpesa = data.tortaTipiSpesa;
+    this.route.data.subscribe((data: Data) => {
+      this.tortaTipiSpesa = data['tortaTipiSpesa'];
     });
     this.showLabels = this.deviceService.isDesktop();
     this.showLegend = this.deviceService.isDesktop() || this.deviceService.isTablet();
@@ -41,7 +41,7 @@ export class SpeseFrequentiComponent implements OnInit {
       range: ['M', Validators.required],
     });
 
-    this.form.controls.range.valueChanges.subscribe((value: string) => {
+    this.form.get('range')?.valueChanges.subscribe((value: string) => {
       this.statisticheService.speseFrequenti(value).subscribe((data: Statistica[]) => {
         this.tortaTipiSpesa = data;
       });
@@ -65,5 +65,5 @@ export class SpeseFrequentiComponent implements OnInit {
     return '<b>' + arg.data.name + '</b>: ' + formattedValue;
   }
 
-  onSelectTorta(event) {}
 }
+

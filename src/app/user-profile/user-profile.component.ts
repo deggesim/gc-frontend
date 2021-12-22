@@ -9,20 +9,18 @@ import { SharedService } from '../shared/shared.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent {
   @Output() salva: EventEmitter<any> = new EventEmitter(true);
   @Output() annulla: EventEmitter<any> = new EventEmitter(true);
 
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(private fb: FormBuilder, private sharedService: SharedService) {
     this.createForm();
   }
 
-  ngOnInit() {}
-
   createForm() {
-    const utente: Utente = JSON.parse(localStorage.getItem('utente'));
+    const utente: Utente = JSON.parse(localStorage.getItem('utente') as string);
     this.form = this.fb.group({
       id: utente.id,
       email: [utente.email, Validators.required],

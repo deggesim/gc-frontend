@@ -7,11 +7,11 @@ import { isNil } from 'lodash-es';
   styleUrls: ['./nota.component.scss'],
 })
 export class NotaComponent implements OnInit {
-  @Input() type: string;
-  @Input() messages: string[];
+  @Input() type!: string;
+  @Input() messages!: string[];
 
-  classNota: string;
-  classIcona: string;
+  classNota!: string;
+  classIcona!: string;
 
   constructor() {}
 

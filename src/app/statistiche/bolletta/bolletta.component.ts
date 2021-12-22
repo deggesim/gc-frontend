@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
+import { ScaleType } from '@swimlane/ngx-charts';
 import { forEach, isEqual } from 'lodash-es';
 import * as moment from 'moment';
 import { Statistica } from '../../model/statistica';
@@ -13,6 +14,7 @@ import { StatisticheService } from '../../services/statistiche.service';
 })
 export class BollettaComponent implements OnInit {
   // opzioni barre
+  ScaleType = ScaleType;
   showXAxis = true;
   showYAxis = true;
   showXAxisLabel = true;
@@ -21,15 +23,15 @@ export class BollettaComponent implements OnInit {
 
   barreBolletta: Statistica[] = [];
 
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private statisticheService: StatisticheService) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data) => {
-      this.barreBolletta = data.barreBolletta;
+    this.route.data.subscribe((data: Data) => {
+      this.barreBolletta = data['barreBolletta'];
       forEach(this.barreBolletta, (item: Statistica) => {
         let mese = item.name;
         mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
@@ -43,7 +45,7 @@ export class BollettaComponent implements OnInit {
       frequenza: ['M', Validators.required],
     });
 
-    this.form.controls.frequenza.valueChanges.subscribe((value: string) => {
+    this.form.get('frequenza')?.valueChanges.subscribe((value: string) => {
       this.statisticheService.bolletta(value).subscribe((data: Statistica[]) => {
         this.barreBolletta = data;
         if (this.mensile()) {
@@ -57,7 +59,7 @@ export class BollettaComponent implements OnInit {
     });
   }
 
-  xAxisTickFormatting(value) {
+  xAxisTickFormatting(value: number | bigint): string {
     const formatter = new Intl.NumberFormat('it-IT', {
       style: 'currency',
       currency: 'EUR',

@@ -12,9 +12,9 @@ import { SharedService } from '../shared/shared.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  andamento: Andamento;
-  mostraPopup: boolean;
-  titoloModale: string;
+  andamento: Andamento | undefined;
+  mostraPopup: boolean = false;
+  titoloModale: string = '';
 
   constructor(
     private route: Router,
@@ -80,23 +80,20 @@ export class HomeComponent {
   }
 
   nuova() {
-    this.andamento = {
-      giorno: new Date(),
-      descrizione: undefined,
-      tipoSpesa: undefined,
-    };
+    this.andamento = undefined;
     this.mostraPopup = true;
     this.titoloModale = 'Nuova voce di spesa';
   }
 
   async salva(andamento: Andamento) {
-    await this.andamentoService.inserisci(andamento).toPromise();
-    this.mostraPopup = false;
-    const title = 'Nuova voce di spesa';
-    const message = 'Nuova voce di spesa inserita correttamente';
-    this.sharedService.notifica(globals.toastType.success, title, message);
-    this.andamento = undefined;
-    this.route.navigate(['/lista']);
+    this.andamentoService.inserisci(andamento).subscribe(() => {
+      this.mostraPopup = false;
+      const title = 'Nuova voce di spesa';
+      const message = 'Nuova voce di spesa inserita correttamente';
+      this.sharedService.notifica(globals.toastType.success, title, message);
+      this.andamento = undefined;
+      this.route.navigate(['/lista']);
+    });
   }
 
   annulla(): void {

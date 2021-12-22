@@ -25,10 +25,33 @@ export class SharedService {
   }
 
   public notifica(type: string, title: string, message: string) {
-    this.toastr[type](message, title);
+    switch (type) {
+      case 'show':
+        this.toastr.show(message, title);
+        break;
+
+      case 'success':
+        this.toastr.success(message, title);
+        break;
+
+      case 'error':
+        this.toastr.error(message, title);
+        break;
+
+      case 'info':
+        this.toastr.info(message, title);
+        break;
+
+      case 'warning':
+        this.toastr.warning(message, title);
+        break;
+
+      default:
+        break;
+    }
   }
 
-  notifyError(response: HttpErrorResponse) {
+  notifyError(response: HttpErrorResponse): string {
     let titolo = '';
     let descrizione = '';
     console.error(response);
@@ -38,11 +61,16 @@ export class SharedService {
       case 0:
       case 401:
       case 403:
+        titolo = 'Utente non loggato';
+        descrizione = response.error || response.message || "L'utente non è loggato o la sessione è scaduta";
+        break;
+      case 403:
         titolo = 'Utente non autorizzato';
-        descrizione = response.error || response.message;
-        if (isNil(descrizione)) {
-          descrizione = "L'utente non è autorizzato ad eseguire l'operazione richiesta";
-        }
+        descrizione = response.error || response.message || "L'utente non è autorizzato ad eseguire l'operazione richiesta";
+        break;
+      case 400:
+        titolo = 'Errore nella richiesta';
+        descrizione = response.error || response.message || 'I dati inseriti sono errati';
         break;
       case 422:
         titolo = 'Errori nella validazione';
@@ -62,6 +90,7 @@ export class SharedService {
     }
 
     this.notifica(globals.toastType.error, titolo, descrizione);
+    return descrizione;
   }
 
   notifyErrorDownload() {
