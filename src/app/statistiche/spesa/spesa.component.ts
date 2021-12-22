@@ -8,7 +8,7 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-  selector: 'app-spesa',
+  selector: 'gc-spesa',
   templateUrl: './spesa.component.html',
   styleUrls: ['./spesa.component.scss'],
 })

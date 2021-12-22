@@ -6,7 +6,7 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-  selector: 'app-spese-frequenti',
+  selector: 'gc-spese-frequenti',
   templateUrl: './spese-frequenti.component.html',
   styleUrls: ['./spese-frequenti.component.scss'],
 })

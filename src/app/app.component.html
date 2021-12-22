@@ -1,4 +1,4 @@
-<app-header (openLogin)="openLogin()" (logout)="logout()" (profile)="profile()"></app-header>
+<gc-header (openLogin)="openLogin()" (logout)="logout()" (profile)="profile()"></gc-header>
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="modal-body">
-        <app-login (login)="login($event)" (annulla)="annulla()"></app-login>
+        <gc-login (login)="login($event)" (annulla)="annulla()"></gc-login>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
       </div>
 
       <div class="modal-body">
-        <app-user-profile (salva)="salva($event)" (annulla)="annulla()"></app-user-profile>
+        <gc-user-profile (salva)="salva($event)" (annulla)="annulla()"></gc-user-profile>
       </div>
     </div>
   </div>

@@ -5,7 +5,7 @@ import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 
 @Component({
-  selector: 'app-user-profile',
+  selector: 'gc-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })

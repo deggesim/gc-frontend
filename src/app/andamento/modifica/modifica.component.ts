@@ -8,7 +8,7 @@ import { TipoSpesaService } from '../../services/tipo-spesa.service';
 import { SharedService } from '../../shared/shared.service';
 
 @Component({
-  selector: 'app-modifica',
+  selector: 'gc-modifica',
   templateUrl: './modifica.component.html',
   styleUrls: ['./modifica.component.scss'],
 })

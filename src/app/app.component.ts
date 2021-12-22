@@ -7,7 +7,7 @@ import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'gc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

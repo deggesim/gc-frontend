@@ -8,7 +8,7 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-  selector: 'app-bolletta',
+  selector: 'gc-bolletta',
   templateUrl: './bolletta.component.html',
   styleUrls: ['./bolletta.component.scss'],
 })
