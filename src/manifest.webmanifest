@@ -1,7 +1,7 @@
 {
-  "name": "gc-frontend",
-  "short_name": "gc-frontend",
-  "theme_color": "##212529",
+  "name": "Gestione casa",
+  "short_name": "gc",
+  "theme_color": "#212529",
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "./",
