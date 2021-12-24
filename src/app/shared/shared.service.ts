@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { isNil } from 'lodash-es';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { itLocale } from 'ngx-bootstrap/locale';
@@ -55,37 +54,33 @@ export class SharedService {
     let titolo = '';
     let descrizione = '';
     console.error(response);
+    const error = typeof response.error === 'string' ? response.error : '';
+    const message = typeof response.message === 'string' ? response.message : '';
 
     switch (response.status) {
-      case -1:
-      case 0:
       case 401:
-      case 403:
         titolo = 'Utente non loggato';
-        descrizione = response.error || response.message || "L'utente non è loggato o la sessione è scaduta";
+        descrizione = error || message || "L'utente non è loggato o la sessione è scaduta";
         break;
       case 403:
         titolo = 'Utente non autorizzato';
-        descrizione = response.error || response.message || "L'utente non è autorizzato ad eseguire l'operazione richiesta";
+        descrizione = error || message || "L'utente non è autorizzato ad eseguire l'operazione richiesta";
         break;
       case 400:
         titolo = 'Errore nella richiesta';
-        descrizione = response.error || response.message || 'I dati inseriti sono errati';
+        descrizione = error || message || 'I dati inseriti sono errati';
         break;
       case 422:
         titolo = 'Errori nella validazione';
-        descrizione = response.error || response.message;
+        descrizione = error || message;
         break;
       case 500:
         titolo = 'Errore server';
-        descrizione = response.error || response.message;
-        if (isNil(descrizione)) {
-          descrizione = 'Si è verificato un errore imprevisto';
-        }
+        descrizione = error || message || 'Si è verificato un errore imprevisto';
         break;
       default:
         titolo = 'Problema generico';
-        descrizione = 'Si è verificato un errore imprevisto';
+        descrizione = error || message || 'Si è verificato un errore imprevisto';
         break;
     }
 
