@@ -22,7 +22,7 @@
   "dataGroups": [
     {
       "name": "andamento",
-      "urls": ["https://gestione-casa-server.herokuapp.com/andamento", "https://gestione-casa-server.herokuapp.com/tipo-spesa"],
+      "urls": ["http://localhost:5000/andamento", "http://localhost:5000/tipo-spesa"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 10,
@@ -32,7 +32,7 @@
     },
     {
       "name": "statistiche",
-      "urls": ["https://gestione-casa-server.herokuapp.com/statistiche"],
+      "urls": ["http://localhost:5000/statistiche"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 10,

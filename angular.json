@@ -72,7 +72,8 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "ngswConfigPath": "ngsw-config.dev.json"
             }
           },
           "defaultConfiguration": "production"
