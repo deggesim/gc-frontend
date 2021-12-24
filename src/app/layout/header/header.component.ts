@@ -10,7 +10,7 @@ interface IBreadcrumb {
 }
 
 @Component({
-  selector: 'app-header',
+  selector: 'gc-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })

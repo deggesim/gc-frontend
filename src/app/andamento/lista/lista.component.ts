@@ -8,7 +8,7 @@ import { PopupConfermaComponent } from '../../shared/popup-conferma/popup-confer
 import { SharedService } from '../../shared/shared.service';
 
 @Component({
-  selector: 'app-lista',
+  selector: 'gc-lista',
   templateUrl: './lista.component.html',
   styleUrls: ['./lista.component.scss'],
 })

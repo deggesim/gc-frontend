@@ -7,7 +7,7 @@ import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 
 @Component({
-  selector: 'app-home',
+  selector: 'gc-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

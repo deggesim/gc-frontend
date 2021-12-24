@@ -121,14 +121,14 @@
 </div>
 
 <!-- popup elimina -->
-<app-popup-conferma
+<gc-popup-conferma
   #popupConfermaElimina
   titolo="Elimina voce di spesa"
   btnConferma="Elimina"
   btnAnnulla="Annulla"
   (conferma)="confermaElimina($event)"
   (annulla)="popupConfermaElimina.chiudiModale()"
-></app-popup-conferma>
+></gc-popup-conferma>
 
 <!-- popup inserimento/modifica voce di menu -->
 <div
@@ -148,7 +148,7 @@
       </div>
 
       <div class="modal-body">
-        <app-modifica [andamento]="andamentoSelected" (salva)="salva($event)" (annulla)="annulla()"></app-modifica>
+        <gc-modifica [andamento]="andamentoSelected" (salva)="salva($event)" (annulla)="annulla()"></gc-modifica>
       </div>
     </div>
   </div>

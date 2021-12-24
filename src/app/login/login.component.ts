@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utente } from '../model/utente';
 
 @Component({
-  selector: 'app-login',
+  selector: 'gc-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })

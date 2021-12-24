@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { isNil } from 'lodash-es';
 
 @Component({
-  selector: 'app-nota',
+  selector: 'gc-nota',
   templateUrl: './nota.component.html',
   styleUrls: ['./nota.component.scss'],
 })
