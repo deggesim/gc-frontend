@@ -39,28 +39,22 @@ export class AppComponent implements AfterViewChecked {
     this.mostraPopupUserProfile = true;
   }
 
-  public async login(utente: Utente) {
-    try {
-      this.mostraPopupLogin = false;
-      await this.authService.login(utente).toPromise();
+  public login(utente: Utente) {
+    this.mostraPopupLogin = false;
+    this.authService.login(utente).subscribe(() => {
       const title = 'Login';
       const message = 'Login effettuato correttamente';
       this.sharedService.notifica(globals.toastType.success, title, message);
-    } catch (error) {
-      console.error(error);
-    }
+    });
   }
 
-  public async logout() {
-    try {
-      await this.authService.logout();
+  public logout() {
+    this.authService.logout().subscribe(() => {
       const title = 'Logout';
       const message = 'Logout effettuato correttamente';
       this.sharedService.notifica(globals.toastType.warning, title, message);
       this.router.navigate(['home']);
-    } catch (error) {
-      console.error(error);
-    }
+    });
   }
 
   public annulla() {
@@ -68,15 +62,12 @@ export class AppComponent implements AfterViewChecked {
     this.mostraPopupUserProfile = false;
   }
 
-  public async salva(utente: Utente) {
-    try {
-      this.mostraPopupUserProfile = false;
-      await this.authService.salva(utente).toPromise();
+  public salva(utente: Utente) {
+    this.mostraPopupUserProfile = false;
+    this.authService.salva(utente).subscribe(() => {
       const title = 'Modifica utente';
       const message = 'Utente modificato correttamente';
       this.sharedService.notifica(globals.toastType.success, title, message);
-    } catch (error) {
-      console.error(error);
-    }
+    });
   }
 }

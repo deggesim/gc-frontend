@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
 import { Utente } from '../model/utente';
 import { environment } from './../../environments/environment';
@@ -19,13 +20,13 @@ export class AuthService {
     );
   }
 
-  public logout() {
+  public logout(): Observable<Utente> {
     localStorage.removeItem('token');
     localStorage.removeItem('expires_at');
     return this.http.post<Utente>(`${this.endpoint}/utente/logout`, {});
   }
 
-  public salva(utente: Utente) {
+  public salva(utente: Utente): Observable<{ utente: Utente; token: string }> {
     return this.http.patch<{ utente: Utente; token: string }>(`${this.endpoint}/utente/me`, utente).pipe(
       tap((res: { utente: Utente; token: string }) => localStorage.setItem('utente', JSON.stringify(utente))),
       shareReplay()

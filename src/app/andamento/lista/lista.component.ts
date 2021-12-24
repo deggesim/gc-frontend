@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { isEmpty, isNil } from 'lodash-es';
+import { switchMapTo, tap } from 'rxjs';
 import { Andamento } from '../../model/andamento';
 import { AndamentoService } from '../../services/andamento.service';
 import * as globals from '../../shared/globals';
@@ -106,29 +107,23 @@ export class ListaComponent implements OnInit {
     this.titoloModale = 'Clona voce di spesa';
   }
 
-  async salva(andamento: Andamento) {
-    try {
-      if (isNil(andamento.id)) {
-        await this.andamentoService.inserisci(andamento).toPromise();
-        this.mostraPopupModifica = false;
-        const title = 'Nuova voce di spesa';
-        const message = 'Nuova voce di spesa inserita correttamente';
-        this.sharedService.notifica(globals.toastType.success, title, message);
-      } else {
-        await this.andamentoService.modifica(andamento).toPromise();
-        this.mostraPopupModifica = false;
-        const title = 'Modifica voce di spesa';
-        const message = 'Voce di spesa modificata correttamente';
-        this.sharedService.notifica(globals.toastType.success, title, message);
-      }
-      this.andamentoSelected = undefined;
-      this.andamentoService.lista().subscribe((lista: Andamento[]) => {
+  salva(andamento: Andamento) {
+    const obs$ = isNil(andamento.id) ? this.andamentoService.inserisci(andamento) : this.andamentoService.modifica(andamento);
+    obs$
+      .pipe(
+        tap(() => {
+          this.mostraPopupModifica = false;
+          isNil(andamento.id)
+            ? this.sharedService.notifica(globals.toastType.success, 'Nuova voce di spesa', 'Nuova voce di spesa inserita correttamente')
+            : this.sharedService.notifica(globals.toastType.success, 'Modifica voce di spesa', 'Voce di spesa modificata correttamente');
+        }),
+        switchMapTo(this.andamentoService.lista())
+      )
+      .subscribe((lista: Andamento[]) => {
+        this.andamentoSelected = undefined;
         this.lista = lista;
         this.applicaFiltro(this.filter);
       });
-    } catch (error) {
-      console.error(error);
-    }
   }
 
   annulla(): void {
@@ -140,24 +135,26 @@ export class ListaComponent implements OnInit {
     this.popupConfermaElimina.apriModale();
   }
 
-  async confermaElimina(andamento: Andamento) {
-    try {
-      if (this.andamentoSelected && this.andamentoSelected.id) {
-        this.andamentoService.elimina(this.andamentoSelected.id).subscribe(() => {
+  confermaElimina() {
+    if (this.andamentoSelected && this.andamentoSelected.id) {
+      this.andamentoService
+        .elimina(this.andamentoSelected.id)
+        .pipe(
+          tap(() => {
+            this.sharedService.notifica(
+              globals.toastType.success,
+              'Voce di spesa eliminata',
+              'La voce di spesa è stata eliminata correttamente'
+            );
+          }),
+          switchMapTo(this.andamentoService.lista())
+        )
+        .subscribe((lista: Andamento[]) => {
           this.popupConfermaElimina.chiudiModale();
-          const title = 'Voce di spesa eliminata';
-          const message = 'La voce di spesa è stata eliminata correttamente';
-          this.sharedService.notifica(globals.toastType.success, title, message);
           this.andamentoSelected = undefined;
-  
-          this.andamentoService.lista().subscribe((lista: Andamento[]) => {
-            this.lista = lista;
-            this.applicaFiltro(this.filter);
-          });
-        })
-      }
-    } catch (error) {
-      console.error(error);
+          this.lista = lista;
+          this.applicaFiltro(this.filter);
+        });
     }
   }
 
