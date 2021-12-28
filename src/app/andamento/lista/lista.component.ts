@@ -142,7 +142,7 @@ export class ListaComponent implements OnInit {
         .pipe(
           tap(() => {
             this.sharedService.notifica(
-              globals.toastType.success,
+              globals.toastType.warning,
               'Voce di spesa eliminata',
               'La voce di spesa è stata eliminata correttamente'
             );
