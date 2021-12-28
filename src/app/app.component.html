@@ -56,3 +56,13 @@
     </div>
   </div>
 </div>
+
+<!-- popup aggiorna app -->
+<gc-popup-conferma
+  #popupAggiorna
+  titolo="Aggiornamento app disponibile"
+  btnConferma="Aggiorna"
+  btnAnnulla="Annulla"
+  (conferma)="aggiornaApp()"
+  (annulla)="popupAggiorna.chiudiModale()"
+></gc-popup-conferma>

@@ -22,7 +22,6 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { ToastrModule } from 'ngx-toastr';
-import { environment } from '../environments/environment';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { ModificaComponent } from './andamento/modifica/modifica.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +32,7 @@ import { GlobalInterceptor } from './http-interceptors/global-interceptor.servic
 import { HeaderComponent } from './layout/header/header.component';
 import { LoginComponent } from './login/login.component';
 import { AndamentoService } from './services/andamento.service';
+import { AppUpdateService } from './services/app-update.service';
 import { AuthService } from './services/auth.service';
 import { BollettaMensileResolver } from './services/resolvers/bolletta-mensile-resolver';
 import { CarburanteMensileResolver } from './services/resolvers/carburante-mensile-resolver';
@@ -130,6 +130,7 @@ export const customCurrencyMaskConfig = {
     SpinnerService,
     SharedService,
     AuthService,
+    AppUpdateService,
   ],
   bootstrap: [AppComponent],
 })

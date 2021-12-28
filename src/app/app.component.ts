@@ -1,8 +1,10 @@
-import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Utente } from './model/utente';
+import { AppUpdateService } from './services/app-update.service';
 import { AuthService } from './services/auth.service';
 import * as globals from './shared/globals';
+import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
 
@@ -11,20 +13,32 @@ import { SpinnerService } from './shared/spinner.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent implements AfterViewChecked, OnInit {
   // Sets initial value to true to show loading spinner on first load
   loading = true;
 
   mostraPopupLogin: boolean = false;
   mostraPopupUserProfile: boolean = false;
 
+  @ViewChild('popupAggiorna', { static: true })
+  public popupAggiorna!: PopupConfermaComponent;
+
   constructor(
     private cdRef: ChangeDetectorRef,
+    private router: Router,
     public spinnerService: SpinnerService,
     private sharedService: SharedService,
     private authService: AuthService,
-    private router: Router
+    private appUpdateService: AppUpdateService
   ) {}
+
+  ngOnInit(): void {
+    this.appUpdateService.updateAvaliable$.subscribe((updateAvailable: boolean) => {
+      if (updateAvailable) {
+        this.popupAggiorna.apriModale();
+      }
+    });
+  }
 
   ngAfterViewChecked(): void {
     this.loading = this.spinnerService.isLoading();
@@ -69,5 +83,10 @@ export class AppComponent implements AfterViewChecked {
       const message = 'Utente modificato correttamente';
       this.sharedService.notifica(globals.toastType.success, title, message);
     });
+  }
+
+  public aggiornaApp() {
+    this.popupAggiorna.chiudiModale();
+    this.appUpdateService.doAppUpdate();
   }
 }
