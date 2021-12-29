@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SwPush } from '@angular/service-worker';
+import { environment } from 'src/environments/environment';
 import { Andamento } from '../model/andamento';
 import { AndamentoService } from '../services/andamento.service';
 import { AuthService } from '../services/auth.service';
+import { SubscriptionService } from '../services/subscription.service';
 import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 
@@ -15,12 +18,15 @@ export class HomeComponent {
   andamento: Andamento | undefined;
   mostraPopup: boolean = false;
   titoloModale: string = '';
+  readonly VAPID_PUBLIC_KEY = environment.vapidPublikKey;
 
   constructor(
     private route: Router,
     private sharedService: SharedService,
     private andamentoService: AndamentoService,
-    private authService: AuthService
+    private authService: AuthService,
+    private subscriptionService: SubscriptionService,
+    private swPush: SwPush
   ) {}
 
   public isLoggedIn() {
@@ -98,5 +104,18 @@ export class HomeComponent {
 
   annulla(): void {
     this.mostraPopup = false;
+  }
+
+  subscribeToNotifications() {
+    this.swPush
+      .requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY,
+      })
+      .then((sub: PushSubscription) =>
+        this.subscriptionService.subscribe(sub).subscribe((subscription: PushSubscription) => {
+          console.log(subscription);
+        })
+      )
+      .catch((err) => console.error('Could not subscribe to notifications', err));
   }
 }
