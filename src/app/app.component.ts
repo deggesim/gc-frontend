@@ -1,8 +1,12 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { SwPush } from '@angular/service-worker';
+import { take } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Utente } from './model/utente';
 import { AppUpdateService } from './services/app-update.service';
 import { AuthService } from './services/auth.service';
+import { SubscriptionService } from './services/subscription.service';
 import * as globals from './shared/globals';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
@@ -19,6 +23,7 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   mostraPopupLogin: boolean = false;
   mostraPopupUserProfile: boolean = false;
+  readonly VAPID_PUBLIC_KEY = environment.vapidPublikKey;
 
   @ViewChild('popupAggiorna', { static: true })
   public popupAggiorna!: PopupConfermaComponent;
@@ -26,6 +31,8 @@ export class AppComponent implements AfterViewChecked, OnInit {
   constructor(
     private cdRef: ChangeDetectorRef,
     private router: Router,
+    private swPush: SwPush,
+    private subscriptionService: SubscriptionService,
     public spinnerService: SpinnerService,
     private sharedService: SharedService,
     private authService: AuthService,
@@ -33,6 +40,12 @@ export class AppComponent implements AfterViewChecked, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.swPush.subscription.pipe(take(1)).subscribe((pushSubscription) => {
+      if (!pushSubscription && this.authService.isLoggedIn()) {
+        this.subscribeToNotifications();
+      }
+    });
+
     this.appUpdateService.updateAvaliable$.subscribe((updateAvailable: boolean) => {
       if (updateAvailable) {
         this.popupAggiorna.apriModale();
@@ -43,6 +56,19 @@ export class AppComponent implements AfterViewChecked, OnInit {
   ngAfterViewChecked(): void {
     this.loading = this.spinnerService.isLoading();
     this.cdRef.detectChanges();
+  }
+
+  subscribeToNotifications() {
+    this.swPush
+      .requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY,
+      })
+      .then((sub: PushSubscription) =>
+        this.subscriptionService.subscribe(sub).subscribe((subscription: PushSubscription) => {
+          console.log(subscription);
+        })
+      )
+      .catch((err) => console.error('Could not subscribe to notifications', err));
   }
 
   public openLogin() {
@@ -59,6 +85,7 @@ export class AppComponent implements AfterViewChecked, OnInit {
       const title = 'Login';
       const message = 'Login effettuato correttamente';
       this.sharedService.notifica(globals.toastType.success, title, message);
+      this.subscribeToNotifications();
     });
   }
 
