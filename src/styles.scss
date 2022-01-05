@@ -1,159 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/minty/variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/minty/bootswatch';
 
-@import 'styles/colors';
 @import 'styles/loading';
 
 // padding per la navbar bootstrap fixed top
 body {
-  padding-top: 70px;
+  padding-top: 4.5rem;
 }
 
-//customizzazione modal
-.modal-header {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  background-color: $color_blu_10;
+// bootstrap
+.navbar {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.modal-content {
-  border-radius: 0.5rem;
+// ng-select
+.ng-select.ng-invalid.ng-touched .ng-select-container {
+  border-color: $danger;
 }
-
-.dropdown-item {
-  &.active,
-  &:active {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: #6c757d;
-  }
-  &:hover,
-  &:focus {
-    color: #16181b;
-    text-decoration: none;
-    background-color: #f8f9fa;
-  }
-  &.active,
-  &:active {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: #6c757d;
-  }
+.ng-select.ng-invalid.ng-touched .ng-arrow-wrapper .ng-arrow {
+  border-color: $danger transparent transparent;
 }
-
-a {
-  color: #212529;
+.ng-select.ng-invalid.ng-touched .ng-select-container .ng-placeholder {
+  color: $danger;
 }
-
-// customizzazione bootstrap
-.page-link {
-  color: #212529;
-  &:hover {
-    color: #212529;
-  }
-  &:focus {
-    box-shadow: 0 0 0 0.2rem rgba(145, 145, 145, 0.25);
-  }
-}
-
-.page-item.active .page-link {
-  color: #ffffff;
-  background-color: #212529;
-  border-color: #212529;
+.ng-select-invalid-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: $danger;
+  display: block !important;
 }
 
 // altre classi
-.blocco {
-  border: 1px solid $colore_domanda_sezione;
-  border-radius: 4px;
-  background-color: $color_grigio_chiaro;
-  margin: 1rem;
-  padding: 1rem;
+.breadcrumb {
+  padding: 0.25rem 1rem;
 }
 
 .fieldset {
-  background: $color_grigio_chiaro;
+  background: transparentize($primary, 0.7);
   margin: 1rem;
   border-radius: 0.5rem;
   padding-top: 0.35em;
   padding-right: 0.625em;
   padding-bottom: 0;
   padding-left: 0.625em;
-  border: 1px solid #cecece;
-}
-
-.legend {
-  border: 1px solid #cecece;
-  border-radius: 0.5rem;
-  background-color: white;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  width: inherit;
-  margin-bottom: auto;
-  font-size: 15px;
-}
-
-.ttable {
-  padding: 1rem;
-  @media (max-width: 599px) {
-    padding: 0.5rem;
+  border: 1px solid $table-border-color;
+  
+  .legend {
+    border: 1px solid $table-border-color;
+    border-radius: 0.5rem;
+    background-color: $white;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: inherit;
+    margin-bottom: auto;
+    font-size: 15px;
   }
-
-  .riga {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    &.line {
-      border-bottom: 1px solid $colore_ttable_riga_dispari;
-    }
-    &.colora:nth-child(even) {
-      background-color: $colore_ttable_riga_pari;
-    }
-  }
-
-  .colonna {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    margin-right: 1rem;
-    display: inline-block;
-    min-width: 30%;
-    padding-left: 1rem;
-    &.line {
-      border-left: 2px solid $colore_ttable_riga_dispari;
-    }
-  }
-
-  .alabel {
-    font-weight: 900;
-    margin-right: 10px;
-    min-width: 15rem;
-    display: inline-block;
-  }
-}
-
-.domanda-sezione {
-  padding: 1rem;
-
-  .domanda-testo {
-    margin-top: 0.2em;
-    font-size: 1.2em;
-    border-bottom: 1px solid $colore_domanda_sezione;
-    padding-bottom: 0.2rem;
-    margin-bottom: 0.2rem;
-  }
-
-  .benvenuto-testo {
-    border-bottom: 1px solid $colore_domanda_sezione;
-    padding-bottom: 0.5rem;
-    margin-bottom: 2rem;
-  }
-}
-
-.padding {
-  padding: 1rem;
-}
-
-.block {
-  width: 100%;
 }
 
 .radio-label {
@@ -161,38 +66,6 @@ a {
   padding-left: 1rem;
   vertical-align: top;
   display: inline;
-}
-
-.inline {
-  display: inline-flex;
-}
-
-// Custom table
-.customFieldset {
-  padding: 10px;
-  border-radius: 0.5rem;
-  border: 1px solid #cecece;
-}
-
-.customLegend {
-  width: inherit;
-  border-radius: 0.5rem;
-  border: 1px solid #cecece;
-  background-color: white;
-  margin-bottom: auto;
-  font-size: 15px;
-}
-
-caption {
-  font-weight: 700;
-  color: #286090;
-  padding-bottom: 0;
-  // border-bottom: 1px solid #E5E5E5;
-  width: 100%;
-}
-
-.spaceClass {
-  padding-bottom: 15px;
 }
 
 .manina {
@@ -219,17 +92,58 @@ caption {
   height: 60px;
   bottom: 40px;
   right: 40px;
-  background-color: #28a745;
-  color: #ffffff;
+  background-color: $success;
+  color: $white;
   border-radius: 50px;
   text-align: center;
-  box-shadow: 2px 2px 3px #999999;
+  box-shadow: 2px 2px 3px $gray-500;
   z-index: 1;
+
+  .float-icon {
+    margin-top: 22px;
+    font-size: x-large;
+    line-height: 1rem;
+  }
 }
 
-.my-float {
-  margin-top: 22px;
-  font-size: x-large;
-  line-height: 1rem;
+// customizzazione modal
+.modal-content {
+  border-radius: 0.5rem;
+
+  .modal-header {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    background-color: $primary !important;
+  }
+
+  .modal-title {
+    color: $white;
+    width: 100%;
+    text-align: center;
+  }
 }
 
+.gray {
+  color: $gray-600;
+}
+
+.dark-gray {
+  color: $gray-900;
+}
+
+// home page
+.fa-shopping-cart:hover {
+  text-shadow: -2px 2px 2px $gray-500;
+}
+
+.fa-car:hover {
+  text-shadow: -2px 2px 2px $gray-500;
+}
+
+.fa-shower:hover {
+  text-shadow: -2px 2px 2px $gray-500;
+}
+
+.fa-credit-card:hover {
+  text-shadow: -2px 2px 2px $gray-500;
+}

@@ -1,8 +1,8 @@
 <div class="float manina" (click)="nuova()">
-  <i class="fa fa-plus my-float" aria-hidden="true"></i>
+  <i class="fa fa-plus float-icon" aria-hidden="true"></i>
 </div>
 
-<form #form="ngForm" class="form-inline pb-1">
+<form #form="ngForm" class="row g-3 pb-3">
   <div class="input-group">
     <input
       type="text"
@@ -15,15 +15,13 @@
       (paste)="applicaFiltro($event.clipboardData?.getData('Text'))"
       placeholder="Filtro"
     />
-    <div class="input-group-append manina" (click)="pulisciFiltro()">
-      <div class="input-group-text">x</div>
-    </div>
+    <span class="input-group-text manina" (click)="pulisciFiltro()">x</span>
   </div>
 </form>
 
 <div class="table-responsive">
   <table class="table table-hover" aria-label="andamento">
-    <thead class="thead-dark">
+    <thead class="table-light">
       <tr>
         <th id="giorno">
           Giorno
@@ -59,7 +57,7 @@
             ></i>
           </div>
         </th>
-        <th id="costo" class="text-right pr-4">
+        <th id="costo" class="text-end pe-4">
           Costo
           <div>
             <i
@@ -85,7 +83,7 @@
       <tr *ngFor="let item of listaPaginata">
         <td>{{ item.giorno | date: 'dd/MM/yyyy' }}</td>
         <td>{{ item.descrizione }}</td>
-        <td class="text-right pr-4">{{ item.costo | currency }}</td>
+        <td class="text-end pe-4">{{ item.costo | currency }}</td>
         <td>{{ item.tipoSpesa.descrizione }}</td>
         <td class="text-nowrap">
           <button type="button" class="btn btn-warning" (click)="modifica(item)" tooltip="Modifica" placement="top">

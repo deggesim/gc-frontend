@@ -42,7 +42,6 @@ import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-res
 import { StatisticheService } from './services/statistiche.service';
 import { TipoSpesaService } from './services/tipo-spesa.service';
 import { ErrorPageComponent } from './shared/error-page.component';
-import { NotaComponent } from './shared/nota/nota.component';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
@@ -72,7 +71,6 @@ export const customCurrencyMaskConfig = {
     AppComponent,
     HeaderComponent,
     PopupConfermaComponent,
-    NotaComponent,
     ErrorPageComponent,
     HomeComponent,
     ListaComponent,

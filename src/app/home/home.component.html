@@ -1,11 +1,11 @@
 <div class="float manina" (click)="nuova()" *ngIf="isLoggedIn()">
-  <i class="fa fa-plus my-float" aria-hidden="true"></i>
+  <i class="fa fa-plus float-icon" aria-hidden="true"></i>
 </div>
 
 <!-- ICONE -->
 <div fxLayout="row wrap" *ngIf="isLoggedIn(); else notLogged">
   <div fxFlex="25" fxFlex.xs="50">
-    <div class="text-center box">
+    <div class="text-center box dark-gray">
       <div>
         <i class="fa fa-shopping-cart manina icona" aria-hidden="true" (click)="spesa()"></i>
       </div>
@@ -14,7 +14,7 @@
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
-    <div class="text-center box">
+    <div class="text-center box dark-gray">
       <div>
         <i class="fa fa-car manina icona" aria-hidden="true" (click)="carburante()"></i>
       </div>
@@ -23,7 +23,7 @@
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
-    <div class="text-center box">
+    <div class="text-center box dark-gray">
       <div>
         <i class="fa fa-shower manina icona" aria-hidden="true" (click)="pulizie()"></i>
       </div>
@@ -32,7 +32,7 @@
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
-    <div class="text-center box">
+    <div class="text-center box dark-gray">
       <div>
         <i class="fa fa-credit-card manina icona" aria-hidden="true" (click)="bolletta()"></i>
       </div>
@@ -44,7 +44,7 @@
 <ng-template #notLogged>
   <div fxLayout="row wrap">
     <div fxFlex="25" fxFlex.xs="50">
-      <div class="text-center box grey">
+      <div class="text-center box gray">
         <div>
           <i class="fa fa-shopping-cart icona" aria-hidden="true"></i>
         </div>
@@ -53,7 +53,7 @@
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
-      <div class="text-center box grey">
+      <div class="text-center box gray">
         <div>
           <i class="fa fa-car icona" aria-hidden="true"></i>
         </div>
@@ -62,7 +62,7 @@
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
-      <div class="text-center box grey">
+      <div class="text-center box gray">
         <div>
           <i class="fa fa-shower icona" aria-hidden="true"></i>
         </div>
@@ -71,7 +71,7 @@
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
-      <div class="text-center box grey">
+      <div class="text-center box gray">
         <div>
           <i class="fa fa-credit-card icona" aria-hidden="true"></i>
         </div>

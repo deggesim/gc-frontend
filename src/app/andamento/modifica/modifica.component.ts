@@ -59,6 +59,7 @@ export class ModificaComponent implements OnInit, OnChanges {
 
   clearGiorno() {
     this.form.get('giorno')?.reset();
+    this.form.get('giorno')?.updateValueAndValidity();
   }
 
   salvaAndamento(): void {

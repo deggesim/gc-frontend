@@ -2,7 +2,7 @@
   <div fxLayout="row wrap" fxLayoutAlign="space-between">
     <div fxFlex="49" fxFlex.xs="100">
       <div class="form-group">
-        <label for="email" class="control-label">Email</label>
+        <label for="email" class="form-label">Email</label>
         <input
           type="text"
           class="form-control"
@@ -22,7 +22,7 @@
 
     <div fxFlex="49" fxFlex.xs="100">
       <div class="form-group">
-        <label for="password" class="control-label">Password</label>
+        <label for="password" class="form-label">Password</label>
         <input
           type="password"
           class="form-control"
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <div class="text-center">
+  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-3">
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>&nbsp;
     <button type="button" class="btn btn-primary" (click)="annulla.emit()">Annulla</button>
   </div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top" aria-label="Barra di navigazione">
   <a class="navbar-brand" routerLink="/home">
     <i class="fa fa-money fa-2x" aria-hidden="true"></i>
   </a>
@@ -7,7 +7,7 @@
   </button>
 
   <div class="collapse navbar-collapse" [collapse]="isCollapsed">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav me-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/lista" (click)="isCollapsed = true">
           <i class="fa fa-list menu-padding" aria-hidden="true"></i>Lista
@@ -18,15 +18,24 @@
           <i class="fa fa-pie-chart menu-padding" aria-hidden="true"></i>Statistiche
         </a>
         <ul *dropdownMenu class="dropdown-menu">
-          <a class="dropdown-item" routerLink="/statistiche/spese-frequenti" routerLinkActive="active" (click)="isCollapsed = true"
-            >Spese frequenti</a
-          >
-          <a class="dropdown-item" routerLink="/statistiche/spesa" routerLinkActive="active" (click)="isCollapsed = true">Spesa</a>
-          <a class="dropdown-item" routerLink="/statistiche/carburante" routerLinkActive="active" (click)="isCollapsed = true"
-            >Carburante</a
-          >
-          <a class="dropdown-item" routerLink="/statistiche/bolletta" routerLinkActive="active" (click)="isCollapsed = true">Bollette</a>
-          <!-- <a class="dropdown-item" routerLink="/statistiche/custom" routerLinkActive="active" (click)="isCollapsed = true;">Statistiche custom</a> -->
+          <li>
+            <a class="dropdown-item" routerLink="/statistiche/spese-frequenti" routerLinkActive="active" (click)="isCollapsed = true">
+              Spese frequenti
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/statistiche/spesa" routerLinkActive="active" (click)="isCollapsed = true"> Spesa </a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/statistiche/carburante" routerLinkActive="active" (click)="isCollapsed = true">
+              Carburante
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/statistiche/bolletta" routerLinkActive="active" (click)="isCollapsed = true">
+              Bollette
+            </a>
+          </li>
         </ul>
       </li>
     </ul>
@@ -51,7 +60,7 @@
 </nav>
 
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+  <ol class="breadcrumb bg-dark">
     <li class="breadcrumb-item active" *ngFor="let b of breadcrumbs; let i = index">
       <span *ngIf="i != breadcrumbs.length - 1; else elseLink">
         <a [routerLink]="[b.url, b.params]" routerLinkActive="selezionato" [routerLinkActiveOptions]="{ exact: true }">{{ b.label }}</a>

@@ -3,14 +3,12 @@
 
   <div fxLayout="row wrap" fxLayoutAlign="space-between">
     <div fxFlex="49" fxFlex.xs="100">
-      <div class="form-group">
-        <label for="giorno" class="control-label">Giorno *</label>
+      <div class="mb-3">
+        <label for="giorno" class="form-label">Giorno *</label>
         <div class="input-group">
-          <div class="input-group-prepend manina">
-            <span class="input-group-text" id="calendar-icon" (click)="dpGiorno.toggle()">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-            </span>
-          </div>
+          <span class="input-group-text manina" id="calendar-icon" (click)="dpGiorno.toggle()">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </span>
           <input
             type="text"
             class="form-control"
@@ -21,11 +19,9 @@
             bsDatepicker
             formControlName="giorno"
           />
-          <div class="input-group-append manina" (click)="clearGiorno()">
-            <span class="input-group-text">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </span>
-          </div>
+          <span class="input-group-text manina" (click)="clearGiorno()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </span>
         </div>
         <div *ngIf="form.get('giorno')?.hasError('required') && form.get('giorno')?.dirty" class="invalid-feedback">
           Il campo giorno è obbligatorio
@@ -34,8 +30,8 @@
     </div>
 
     <div fxFlex="49" fxFlex.xs="100">
-      <div class="form-group" [ngClass]="{ 'is-invalid': form.get('giorno')?.invalid && form.get('giorno')?.dirty }">
-        <label for="tipoSpesa" class="control-label">Tipo spesa *</label>
+      <div class="mb-3" [ngClass]="{ 'is-invalid': form.get('giorno')?.invalid && form.get('giorno')?.dirty }">
+        <label for="tipoSpesa" class="form-label">Tipo spesa *</label>
         <ng-select
           id="tipoSpesa"
           name="tipoSpesa"
@@ -45,15 +41,15 @@
           clearAllText="Elimina"
           [ngClass]="{ 'ng-select-error': form.get('tipoSpesa')?.invalid && form.get('tipoSpesa')?.dirty }"
         ></ng-select>
-        <div *ngIf="form.get('tipoSpesa')?.hasError('required') && form.get('tipoSpesa')?.dirty" class="invalid-feedback">
+        <div *ngIf="form.get('tipoSpesa')?.hasError('required') && form.get('tipoSpesa')?.dirty" class="ng-select-invalid-feedback">
           Il campo tipo spesa è obbligatorio
         </div>
       </div>
     </div>
 
     <div fxFlex="49" fxFlex.xs="100">
-      <div class="form-group">
-        <label for="descrizione" class="control-label">Descrizione *</label>
+      <div class="mb-3">
+        <label for="descrizione" class="form-label">Descrizione *</label>
         <input
           type="text"
           class="form-control"
@@ -69,8 +65,8 @@
     </div>
 
     <div fxFlex="49" fxFlex.xs="100">
-      <div class="form-group">
-        <label for="costo" class="control-label">Costo *</label>
+      <div class="mb-3">
+        <label for="costo" class="form-label">Costo *</label>
         <input
           type="text"
           class="form-control"
@@ -90,7 +86,7 @@
     </div>
   </div>
 
-  <div class="text-center">
+  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-3">
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Salva</button>&nbsp;
     <button type="button" class="btn btn-primary" (click)="annulla.emit()">Annulla</button>
   </div>
