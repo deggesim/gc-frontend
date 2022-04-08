@@ -63,13 +63,15 @@ export class ModificaComponent implements OnInit, OnChanges {
   }
 
   salvaAndamento(): void {
-    const andamento: Andamento = {
-      id: this.form.value.id,
-      giorno: this.form.value.giorno,
-      descrizione: this.form.value.descrizione,
-      costo: this.form.value.costo,
-      tipoSpesa: this.form.value.tipoSpesa,
-    };
-    this.salva.emit(andamento);
+    if (this.form.valid) {
+      const andamento: Andamento = {
+        id: this.form.value.id,
+        giorno: this.form.value.giorno,
+        descrizione: this.form.value.descrizione,
+        costo: this.form.value.costo,
+        tipoSpesa: this.form.value.tipoSpesa,
+      };
+      this.salva.emit(andamento);
+    }
   }
 }

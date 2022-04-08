@@ -68,13 +68,16 @@
       <div class="mb-3">
         <label for="costo" class="form-label">Costo *</label>
         <input
+          #costo
           type="text"
           class="form-control"
           id="costo"
           name="costo"
           formControlName="costo"
           [ngClass]="{ 'is-invalid': form.get('costo')?.invalid && form.get('costo')?.dirty }"
+          (focus)="costo.select()"
           currencyMask
+          (keyup.enter)="salvaAndamento()"
         />
         <div *ngIf="form.get('costo')?.hasError('required') && form.get('costo')?.dirty" class="invalid-feedback">
           Il campo costo è obbligatorio
