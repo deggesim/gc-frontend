@@ -47,7 +47,7 @@
     "jwt-decode": "^3.1.2",
     "lodash-es": "^4.17.21",
     "moment": "^2.29.2",
-    "ngx-bootstrap": "^7.1.0",
+    "ngx-bootstrap": "^8.0.0",
     "ngx-currency": "^2.5.3",
     "ngx-device-detector": "^3.0.0",
     "ngx-toastr": "^14.2.3",
