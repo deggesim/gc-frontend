@@ -7,7 +7,7 @@
         <label for="giorno" class="form-label">Giorno *</label>
         <div class="input-group">
           <span class="input-group-text manina" id="calendar-icon" (click)="dpGiorno.toggle()">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <fa-icon icon="calendar"></fa-icon>
           </span>
           <input
             type="text"
@@ -20,7 +20,7 @@
             formControlName="giorno"
           />
           <span class="input-group-text manina" (click)="clearGiorno()">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <fa-icon icon="times"></fa-icon>
           </span>
         </div>
         <div *ngIf="form.get('giorno')?.hasError('required') && form.get('giorno')?.dirty" class="invalid-feedback">

@@ -19,7 +19,6 @@ export class GlobalInterceptor implements HttpInterceptor {
           localStorage.removeItem('token');
           localStorage.removeItem('expires_at');
           localStorage.removeItem('utente');
-          this.router.navigate(['home']);
         }
         return throwError(() => new Error(error));
       }),

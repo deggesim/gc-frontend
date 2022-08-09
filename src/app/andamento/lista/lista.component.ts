@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { isEmpty, isNil } from 'lodash-es';
 import { switchMapTo, tap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { Andamento } from '../../model/andamento';
 import { AndamentoService } from '../../services/andamento.service';
 import * as globals from '../../shared/globals';
@@ -42,7 +43,14 @@ export class ListaComponent implements OnInit {
   sortedByCostoAsc = false;
   sortedByCostoDesc = false;
 
-  constructor(private route: ActivatedRoute, private sharedService: SharedService, private andamentoService: AndamentoService) {}
+  isLoggedIn$ = this.authService.isLoggedIn();
+
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private sharedService: SharedService,
+    private andamentoService: AndamentoService
+  ) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: Data) => {

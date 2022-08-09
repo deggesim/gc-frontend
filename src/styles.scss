@@ -48,7 +48,7 @@ body {
   padding-bottom: 0;
   padding-left: 0.625em;
   border: 1px solid $table-border-color;
-  
+
   .legend {
     border: 1px solid $table-border-color;
     border-radius: 0.5rem;
@@ -86,24 +86,28 @@ body {
 }
 
 // flottante
-.float {
+@mixin float-mixin() {
   position: fixed;
   width: 60px;
   height: 60px;
   bottom: 40px;
   right: 40px;
-  background-color: $success;
   color: $white;
+  background-color: $success;
+  box-shadow: 2px 2px 3px $gray-700;
   border-radius: 50px;
   text-align: center;
-  box-shadow: 2px 2px 3px $gray-500;
   z-index: 1;
+}
 
-  .float-icon {
-    margin-top: 22px;
-    font-size: x-large;
-    line-height: 1rem;
-  }
+.float {
+  @include float-mixin();
+}
+
+.float-icon {
+  margin-top: 22px;
+  font-size: x-large;
+  line-height: 2.5em;
 }
 
 // customizzazione modal
@@ -146,4 +150,23 @@ body {
 
 .fa-credit-card:hover {
   text-shadow: -2px 2px 2px $gray-500;
+}
+
+// workaround https://github.com/valor-software/ngx-bootstrap/issues/6490
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0 #{'/* rtl:ignore */'};
+}
+
+.popover-arrow {
+  position: absolute;
+}
+
+.tooltip {
+  position: absolute;
+}
+
+.tooltip-arrow {
+  position: absolute;
 }

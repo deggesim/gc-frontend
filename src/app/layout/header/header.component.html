@@ -1,7 +1,6 @@
-
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top" aria-label="Barra di navigazione">
   <a class="navbar-brand" routerLink="/home">
-    <i class="fa fa-money fa-2x" aria-hidden="true"></i>
+    <fa-icon icon="house"></fa-icon>
   </a>
   <button class="navbar-toggler" type="button" aria-expanded="false" aria-controls="collapseExample" (click)="isCollapsed = !isCollapsed">
     <span class="navbar-toggler-icon"></span>
@@ -10,13 +9,11 @@
   <div class="collapse navbar-collapse" [collapse]="isCollapsed">
     <ul class="navbar-nav me-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/lista" (click)="isCollapsed = true">
-          <i class="fa fa-list menu-padding" aria-hidden="true"></i>Lista
-        </a>
+        <a class="nav-link" routerLink="/lista" (click)="isCollapsed = true"> <fa-icon icon="list" class="menu-padding"></fa-icon>Lista</a>
       </li>
       <li class="nav-item dropdown" dropdown>
         <a href class="nav-link dropdown-toggle" dropdownToggle (click)="(false)">
-          <i class="fa fa-pie-chart menu-padding" aria-hidden="true"></i>Statistiche
+          <fa-icon icon="pie-chart" class="menu-padding"></fa-icon>Statistiche
         </a>
         <ul *dropdownMenu class="dropdown-menu">
           <li>
@@ -40,19 +37,19 @@
         </ul>
       </li>
     </ul>
-    <ul class="navbar-nav" *ngIf="!isLoggedIn(); else userPage">
+    <ul class="navbar-nav" *ngIf="!(isLoggedIn$ | async); else userPage">
       <li class="nav-item">
-        <a class="nav-link manina" (click)="openLogin.emit()"> <i class="fa fa-sign-in menu-padding" aria-hidden="true"></i>Login </a>
+        <a class="nav-link manina" (click)="openLogin.emit()"> <fa-icon icon="sign-in" class="menu-padding"></fa-icon>Login </a>
       </li>
     </ul>
     <ng-template #userPage>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link manina" (click)="logout.emit()"> <i class="fa fa-sign-out menu-padding" aria-hidden="true"></i>Logout </a>
+          <a class="nav-link manina" (click)="logout.emit()"> <fa-icon icon="sign-out" class="menu-padding"></fa-icon>Logout </a>
         </li>
         <li class="nav-item">
           <a class="nav-link manina" (click)="profile.emit()">
-            <i class="fa fa-user-circle menu-padding" aria-hidden="true"></i>Profilo Utente
+            <fa-icon icon="user-circle" class="menu-padding"></fa-icon>Profilo Utente
           </a>
         </li>
       </ul>

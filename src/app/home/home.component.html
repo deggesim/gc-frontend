@@ -1,41 +1,33 @@
-<div class="float manina" (click)="nuova()" *ngIf="isLoggedIn()">
-  <i class="fa fa-plus float-icon" aria-hidden="true"></i>
+<div class="float manina" (click)="nuova()" *ngIf="isLoggedIn$ | async">
+  <fa-icon icon="plus" class="float-icon"></fa-icon>
 </div>
 
 <!-- ICONE -->
-<div fxLayout="row wrap" *ngIf="isLoggedIn(); else notLogged">
+<div fxLayout="row wrap" *ngIf="isLoggedIn$ | async; else notLogged">
   <div fxFlex="25" fxFlex.xs="50">
     <div class="text-center box dark-gray">
-      <div>
-        <i class="fa fa-shopping-cart manina icona" aria-hidden="true" (click)="spesa()"></i>
-      </div>
+      <fa-icon icon="shopping-cart" size="5x" class="manina" (click)="spesa()"></fa-icon>
       <div>Spesa</div>
     </div>
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
     <div class="text-center box dark-gray">
-      <div>
-        <i class="fa fa-car manina icona" aria-hidden="true" (click)="carburante()"></i>
-      </div>
+      <fa-icon icon="car" size="5x" class="manina" (click)="carburante()"></fa-icon>
       <div>Carburante</div>
     </div>
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
     <div class="text-center box dark-gray">
-      <div>
-        <i class="fa fa-shower manina icona" aria-hidden="true" (click)="pulizie()"></i>
-      </div>
+      <fa-icon icon="shower" size="5x" class="manina" (click)="pulizie()"></fa-icon>
       <div>Pulizie</div>
     </div>
   </div>
 
   <div fxFlex="25" fxFlex.xs="50">
     <div class="text-center box dark-gray">
-      <div>
-        <i class="fa fa-credit-card manina icona" aria-hidden="true" (click)="bolletta()"></i>
-      </div>
+      <fa-icon icon="credit-card" size="5x" class="manina" (click)="bolletta()"></fa-icon>
       <div>Bolletta</div>
     </div>
   </div>
@@ -45,36 +37,28 @@
   <div fxLayout="row wrap">
     <div fxFlex="25" fxFlex.xs="50">
       <div class="text-center box gray">
-        <div>
-          <i class="fa fa-shopping-cart icona" aria-hidden="true"></i>
-        </div>
+        <fa-icon icon="shopping-cart" size="5x"></fa-icon>
         <div>Spesa</div>
       </div>
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
       <div class="text-center box gray">
-        <div>
-          <i class="fa fa-car icona" aria-hidden="true"></i>
-        </div>
+        <fa-icon icon="car" size="5x"></fa-icon>
         <div>Carburante</div>
       </div>
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
       <div class="text-center box gray">
-        <div>
-          <i class="fa fa-shower icona" aria-hidden="true"></i>
-        </div>
+        <fa-icon icon="shower" size="5x"></fa-icon>
         <div>Pulizie</div>
       </div>
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
       <div class="text-center box gray">
-        <div>
-          <i class="fa fa-credit-card icona" aria-hidden="true"></i>
-        </div>
+        <fa-icon icon="credit-card" size="5x"></fa-icon>
         <div>Bolletta</div>
       </div>
     </div>

@@ -16,16 +16,14 @@ export class HomeComponent {
   mostraPopup: boolean = false;
   titoloModale: string = '';
 
+  isLoggedIn$ = this.authService.isLoggedIn();
+
   constructor(
     private route: Router,
     private sharedService: SharedService,
     private andamentoService: AndamentoService,
     private authService: AuthService
   ) {}
-
-  public isLoggedIn() {
-    return this.authService.isLoggedIn();
-  }
 
   spesa() {
     this.andamento = {
