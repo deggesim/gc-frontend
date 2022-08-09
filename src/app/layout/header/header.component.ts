@@ -15,9 +15,9 @@ interface IBreadcrumb {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Output() openLogin: EventEmitter<any> = new EventEmitter(true);
-  @Output() logout: EventEmitter<any> = new EventEmitter(true);
-  @Output() profile: EventEmitter<any> = new EventEmitter(true);
+  @Output() openLogin: EventEmitter<void> = new EventEmitter(true);
+  @Output() logout: EventEmitter<void> = new EventEmitter(true);
+  @Output() profile: EventEmitter<void> = new EventEmitter(true);
 
   isCollapsed = true;
   breadcrumbs: IBreadcrumb[] = [];

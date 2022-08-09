@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import * as moment from 'moment';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
@@ -132,8 +131,5 @@ export const customCurrencyMaskConfig = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-  constructor() {
-    moment.locale('it');
-  }
-}
+
+export class AppModule {}
