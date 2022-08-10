@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Utente } from '../model/utente';
 
 @Component({
@@ -8,28 +8,22 @@ import { Utente } from '../model/utente';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  @Output() login: EventEmitter<any> = new EventEmitter(true);
-  @Output() annulla: EventEmitter<any> = new EventEmitter(true);
+  @Output() login: EventEmitter<Utente> = new EventEmitter(true);
+  @Output() annulla: EventEmitter<void> = new EventEmitter(true);
 
-  form!: FormGroup;
+  form = this.fb.group({
+    email: [null as string | null, Validators.required],
+    password: [null as string | null, Validators.required],
+  });
 
-  constructor(private fb: FormBuilder) {
-    this.createForm();
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {}
 
-  createForm() {
-    this.form = this.fb.group({
-      email: [undefined, Validators.required],
-      password: [undefined, Validators.required],
-    });
-  }
-
   confirm(): void {
     const utente: Utente = {
-      email: this.form.value.email,
-      password: this.form.value.password,
+      email: this.form.value.email as string,
+      password: this.form.value.password as string,
     };
     this.login.emit(utente);
   }

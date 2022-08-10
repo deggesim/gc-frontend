@@ -16,6 +16,8 @@ export class HomeComponent {
   mostraPopup: boolean = false;
   titoloModale: string = '';
 
+  isLoggedIn$ = this.authService.isLoggedIn();
+
   constructor(
     private route: Router,
     private sharedService: SharedService,
@@ -23,14 +25,10 @@ export class HomeComponent {
     private authService: AuthService
   ) {}
 
-  public isLoggedIn() {
-    return this.authService.isLoggedIn();
-  }
-
   spesa() {
     this.andamento = {
       giorno: new Date(),
-      descrizione: 'Spesa Conad',
+      descrizione: 'Spesa',
       tipoSpesa: {
         id: 1,
         descrizione: 'Spesa',
@@ -56,7 +54,7 @@ export class HomeComponent {
   pulizie() {
     this.andamento = {
       giorno: new Date(),
-      descrizione: 'Mariangela pulizie',
+      descrizione: 'Michela pulizie',
       tipoSpesa: {
         id: 7,
         descrizione: 'Casa',

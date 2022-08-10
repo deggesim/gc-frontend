@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
-import * as moment from 'moment';
-import { Observable } from 'rxjs';
+import { isEmpty } from 'lodash-es';
+import { DateTime } from 'luxon';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
 import { Utente } from '../model/utente';
 import { environment } from './../../environments/environment';
@@ -10,6 +11,8 @@ import { environment } from './../../environments/environment';
 @Injectable()
 export class AuthService {
   private endpoint = environment.endpoint;
+
+  isLoginSubject = new BehaviorSubject<boolean>(this.tokenValid());
 
   constructor(private http: HttpClient) {}
 
@@ -21,9 +24,13 @@ export class AuthService {
   }
 
   public logout(): Observable<Utente> {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
-    return this.http.post<Utente>(`${this.endpoint}/utente/logout`, {});
+    return this.http.post<Utente>(`${this.endpoint}/utente/logout`, {}).pipe(
+      tap(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('expires_at');
+        this.isLoginSubject.next(false);
+      })
+    );
   }
 
   public salva(utente: Utente): Observable<{ utente: Utente; token: string }> {
@@ -34,27 +41,28 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    return this.isLoginSubject.asObservable();
   }
 
-  public isLoggedOut() {
-    return !this.isLoggedIn();
+  private tokenValid() {
+    return !isEmpty(localStorage.getItem('token')) && DateTime.now() < this.getExpiration();
   }
 
-  private getExpiration() {
+  private getExpiration(): DateTime {
     const expiration = localStorage.getItem('expires_at') as string;
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
+    return DateTime.fromMillis(+expiration);
   }
 
   private setSession(authResult: { utente: Utente; token: string }) {
     const utente = authResult.utente;
     const token = authResult.token;
     const exp = jwt_decode<JwtPayload>(token)['exp'];
-    const expiresAt = moment().add(exp);
+    const expiresAt = DateTime.now().plus({ milliseconds: exp });
 
     localStorage.setItem('token', token);
     localStorage.setItem('utente', JSON.stringify(utente));
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+
+    this.isLoginSubject.next(true);
   }
 }

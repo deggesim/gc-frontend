@@ -10,8 +10,8 @@ export class PopupConfermaComponent {
   @Input() titolo!: string;
   @Input() btnConferma!: string;
   @Input() btnAnnulla!: string;
-  @Output() conferma: EventEmitter<any> = new EventEmitter();
-  @Output() annulla: EventEmitter<any> = new EventEmitter();
+  @Output() conferma: EventEmitter<void> = new EventEmitter();
+  @Output() annulla: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('modal', { static: true })
   private modal!: ModalDirective;

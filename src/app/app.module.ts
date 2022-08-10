@@ -7,9 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import * as moment from 'moment';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
@@ -103,6 +104,7 @@ export const customCurrencyMaskConfig = {
     NgxChartsModule,
     ToastrModule.forRoot(),
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    FontAwesomeModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       // Register the ServiceWorker as soon as the app is stable
@@ -132,8 +134,9 @@ export const customCurrencyMaskConfig = {
   ],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {
-  constructor() {
-    moment.locale('it');
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
   }
 }

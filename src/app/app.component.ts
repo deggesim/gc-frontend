@@ -67,7 +67,6 @@ export class AppComponent implements AfterViewChecked, OnInit {
       const title = 'Logout';
       const message = 'Logout effettuato correttamente';
       this.sharedService.notifica(globals.toastType.warning, title, message);
-      this.router.navigate(['home']);
     });
   }
 
