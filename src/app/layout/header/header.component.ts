@@ -15,12 +15,14 @@ interface IBreadcrumb {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Output() openLogin: EventEmitter<any> = new EventEmitter(true);
-  @Output() logout: EventEmitter<any> = new EventEmitter(true);
-  @Output() profile: EventEmitter<any> = new EventEmitter(true);
+  @Output() openLogin: EventEmitter<void> = new EventEmitter(true);
+  @Output() logout: EventEmitter<void> = new EventEmitter(true);
+  @Output() profile: EventEmitter<void> = new EventEmitter(true);
 
   isCollapsed = true;
   breadcrumbs: IBreadcrumb[] = [];
+
+  isLoggedIn$ = this.authService.isLoggedIn();
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
 
@@ -32,12 +34,6 @@ export class HeaderComponent implements OnInit {
       this.breadcrumbs = this.getBreadcrumbs(root);
     });
   }
-
-  public isLoggedIn() {
-    return this.authService.isLoggedIn();
-  }
-
-  public profilePage() {}
 
   private getBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
     const ROUTE_DATA_BREADCRUMB = 'breadcrumb';

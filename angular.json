@@ -28,17 +28,14 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "styles": [
-              "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/hammerjs/hammer.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
             "allowedCommonJsDependencies": ["clone-deep"],
             "serviceWorker": true,
@@ -106,22 +103,18 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "styles": [
-              "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/hammerjs/hammer.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           }
         }
       }
     }
-  },
-  "defaultProject": "gc-frontend"
+  }
 }

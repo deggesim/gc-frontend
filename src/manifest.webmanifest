@@ -1,8 +1,8 @@
 {
   "name": "Gestione Casa",
   "short_name": "Gestione Casa",
-  "theme_color": "#343A40",
-  "background_color": "#007F46",
+  "theme_color": "#7FC1AD",
+  "background_color": "#7FC1AD",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

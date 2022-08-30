@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
 import { ScaleType } from '@swimlane/ngx-charts';
 import { forEach, isEqual } from 'lodash-es';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
@@ -23,38 +23,32 @@ export class BollettaComponent implements OnInit {
 
   barreBolletta: Statistica[] = [];
 
-  form!: FormGroup;
+  form = this.fb.group({
+    frequenza: ['M', Validators.required],
+  });
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private statisticheService: StatisticheService) {
-    this.createForm();
-  }
+  constructor(private route: ActivatedRoute, private fb: NonNullableFormBuilder, private statisticheService: StatisticheService) {}
 
   ngOnInit() {
-    this.route.data.subscribe((data: Data) => {
-      this.barreBolletta = data['barreBolletta'];
-      forEach(this.barreBolletta, (item: Statistica) => {
-        let mese = item.name;
-        mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
-        item.name = mese;
-      });
-    });
-  }
-
-  createForm() {
-    this.form = this.fb.group({
-      frequenza: ['M', Validators.required],
-    });
-
     this.form.get('frequenza')?.valueChanges.subscribe((value: string) => {
-      this.statisticheService.bolletta(value).subscribe((data: Statistica[]) => {
+      this.statisticheService.bolletta(value as string).subscribe((data: Statistica[]) => {
         this.barreBolletta = data;
         if (this.mensile()) {
           forEach(this.barreBolletta, (item: Statistica) => {
             let mese = item.name;
-            mese = moment(mese, 'YYYYMM').format('MMMM YYYY');
+            mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
             item.name = mese;
           });
         }
+      });
+    });
+
+    this.route.data.subscribe((data: Data) => {
+      this.barreBolletta = data['barreBolletta'];
+      forEach(this.barreBolletta, (item: Statistica) => {
+        let mese = item.name;
+        mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+        item.name = mese;
       });
     });
   }
