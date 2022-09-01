@@ -1,5 +1,4 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { SwPush } from '@angular/service-worker';
 import { take } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -30,7 +29,6 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
-    private router: Router,
     private swPush: SwPush,
     private subscriptionService: SubscriptionService,
     public spinnerService: SpinnerService,

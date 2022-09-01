@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,14 @@ export class AppUpdateService {
   updateAvaliable$: Observable<boolean> = this.updateAvailable.asObservable();
 
   constructor(private readonly updates: SwUpdate) {
-    this.updates.versionUpdates.subscribe(() => {
-      this.updateAvailable.next(true);
+    this.updates.versionUpdates.subscribe((event) => {
+      switch (event.type) {
+        case 'VERSION_READY':
+          this.updates.activateUpdate().then(() => {
+            this.updateAvailable.next(true);
+          });
+          break;
+      }
     });
   }
 
