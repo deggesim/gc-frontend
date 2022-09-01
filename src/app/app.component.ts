@@ -1,5 +1,4 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { Utente } from './model/utente';
 import { AppUpdateService } from './services/app-update.service';
 import { AuthService } from './services/auth.service';
@@ -25,7 +24,6 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
-    private router: Router,
     public spinnerService: SpinnerService,
     private sharedService: SharedService,
     private authService: AuthService,
