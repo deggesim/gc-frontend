@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  endpoint: 'https://gestione-casa-server.herokuapp.com',
+  endpoint: 'https://gc-server.up.railway.app',
 };
