@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DateTime } from 'luxon';
 import { Andamento } from '../model/andamento';
 import { AndamentoService } from '../services/andamento.service';
 import { AuthService } from '../services/auth.service';
@@ -27,7 +28,7 @@ export class HomeComponent {
 
   spesa() {
     this.andamento = {
-      giorno: new Date(),
+      giorno: DateTime.now().toISO(),
       descrizione: 'Spesa',
       tipoSpesa: {
         id: 1,
@@ -40,7 +41,7 @@ export class HomeComponent {
 
   carburante() {
     this.andamento = {
-      giorno: new Date(),
+      giorno: DateTime.now().toISO(),
       descrizione: 'Gasolio Fiesta',
       tipoSpesa: {
         id: 2,
@@ -53,7 +54,7 @@ export class HomeComponent {
 
   pulizie() {
     this.andamento = {
-      giorno: new Date(),
+      giorno: DateTime.now().toISO(),
       descrizione: 'Michela pulizie',
       tipoSpesa: {
         id: 7,
@@ -66,7 +67,7 @@ export class HomeComponent {
 
   bolletta() {
     this.andamento = {
-      giorno: new Date(),
+      giorno: DateTime.now().toISO(),
       descrizione: '',
       tipoSpesa: {
         id: 3,

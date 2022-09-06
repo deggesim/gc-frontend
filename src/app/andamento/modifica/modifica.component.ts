@@ -38,7 +38,7 @@ export class ModificaComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const andamento: Andamento = changes['andamento'].currentValue;
     if (!isNil(andamento)) {
-      const day: Date = DateTime.fromJSDate(andamento.giorno).startOf('day').toJSDate();
+      const day: Date = DateTime.fromISO(andamento.giorno).toJSDate();
       this.form.patchValue({
         id: andamento.id,
         giorno: day,
@@ -47,7 +47,7 @@ export class ModificaComponent implements OnInit, OnChanges {
         tipoSpesa: andamento.tipoSpesa,
       });
     } else {
-      this.form.get('giorno')?.setValue(DateTime.now().startOf('day').toJSDate());
+      this.form.get('giorno')?.setValue(DateTime.now().toJSDate());
     }
   }
 
@@ -60,7 +60,7 @@ export class ModificaComponent implements OnInit, OnChanges {
     if (this.form.valid) {
       const andamento: Andamento = {
         id: this.form.value.id,
-        giorno: this.form.value.giorno as Date,
+        giorno: DateTime.fromJSDate(this.form.value.giorno as Date).toISODate(),
         descrizione: this.form.value.descrizione as string,
         costo: this.form.value.costo as number,
         tipoSpesa: this.form.value.tipoSpesa as TipoSpesa,

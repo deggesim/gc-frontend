@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { isEmpty, isNil } from 'lodash-es';
+import { DateTime } from 'luxon';
 import { switchMapTo, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Andamento } from '../../model/andamento';
@@ -89,7 +90,7 @@ export class ListaComponent implements OnInit {
   modifica(item: Andamento): void {
     this.andamentoSelected = {
       id: item.id,
-      giorno: new Date(item.giorno),
+      giorno: item.giorno,
       descrizione: item.descrizione,
       costo: item.costo,
       tipoSpesa: {
@@ -103,7 +104,7 @@ export class ListaComponent implements OnInit {
 
   clona(item: Andamento): void {
     this.andamentoSelected = {
-      giorno: new Date(),
+      giorno: DateTime.now().toISO(),
       descrizione: item.descrizione,
       costo: item.costo,
       tipoSpesa: {
