@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
 import { isEmpty } from 'lodash-es';
 import { DateTime } from 'luxon';
@@ -14,7 +15,7 @@ export class AuthService {
 
   isLoginSubject = new BehaviorSubject<boolean>(this.tokenValid());
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   public login(utente: Utente) {
     return this.http.post<{ utente: Utente; token: string }>(`${this.endpoint}/utente/login`, utente).pipe(
@@ -28,7 +29,9 @@ export class AuthService {
       tap(() => {
         localStorage.removeItem('token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('utente');
         this.isLoginSubject.next(false);
+        this.router.navigate(['home']);
       })
     );
   }
@@ -38,6 +41,10 @@ export class AuthService {
       tap((res: { utente: Utente; token: string }) => localStorage.setItem('utente', JSON.stringify(utente))),
       shareReplay()
     );
+  }
+
+  public getLoginSubject() {
+    return this.isLoginSubject;
   }
 
   public isLoggedIn() {

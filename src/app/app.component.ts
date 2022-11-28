@@ -15,10 +15,7 @@ import { SpinnerService } from './shared/spinner.service';
 export class AppComponent implements AfterViewChecked, OnInit {
   // Sets initial value to true to show loading spinner on first load
   loading = true;
-
-  mostraPopupLogin: boolean = false;
   mostraPopupUserProfile: boolean = false;
-
   @ViewChild('popupAggiorna', { static: true })
   public popupAggiorna!: PopupConfermaComponent;
 
@@ -43,21 +40,8 @@ export class AppComponent implements AfterViewChecked, OnInit {
     this.cdRef.detectChanges();
   }
 
-  public openLogin() {
-    this.mostraPopupLogin = true;
-  }
-
   public profile() {
     this.mostraPopupUserProfile = true;
-  }
-
-  public login(utente: Utente) {
-    this.mostraPopupLogin = false;
-    this.authService.login(utente).subscribe(() => {
-      const title = 'Login';
-      const message = 'Login effettuato correttamente';
-      this.sharedService.notifica(globals.toastType.success, title, message);
-    });
   }
 
   public logout() {
@@ -69,7 +53,6 @@ export class AppComponent implements AfterViewChecked, OnInit {
   }
 
   public annulla() {
-    this.mostraPopupLogin = false;
     this.mostraPopupUserProfile = false;
   }
 

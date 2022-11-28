@@ -1,64 +1,36 @@
-<div class="float manina" (click)="nuova()" *ngIf="isLoggedIn$ | async">
-  <fa-icon icon="plus" class="float-icon"></fa-icon>
-</div>
-
-<!-- ICONE -->
-<div fxLayout="row wrap" *ngIf="isLoggedIn$ | async; else notLogged">
-  <div fxFlex="25" fxFlex.xs="50">
-    <div class="text-center box dark-gray">
-      <fa-icon icon="shopping-cart" size="5x" class="manina" (click)="spesa()"></fa-icon>
-      <div>Spesa</div>
-    </div>
-  </div>
-
-  <div fxFlex="25" fxFlex.xs="50">
-    <div class="text-center box dark-gray">
-      <fa-icon icon="car" size="5x" class="manina" (click)="carburante()"></fa-icon>
-      <div>Carburante</div>
-    </div>
-  </div>
-
-  <div fxFlex="25" fxFlex.xs="50">
-    <div class="text-center box dark-gray">
-      <fa-icon icon="shower" size="5x" class="manina" (click)="pulizie()"></fa-icon>
-      <div>Pulizie</div>
-    </div>
-  </div>
-
-  <div fxFlex="25" fxFlex.xs="50">
-    <div class="text-center box dark-gray">
-      <fa-icon icon="credit-card" size="5x" class="manina" (click)="bolletta()"></fa-icon>
-      <div>Bolletta</div>
-    </div>
-  </div>
-</div>
+<gc-login (login)="login($event)" *ngIf="!(isLoggedIn$ | async); else notLogged"></gc-login>
 
 <ng-template #notLogged>
-  <div fxLayout="row wrap">
+  <div class="float manina" (click)="nuova()" *ngIf="isLoggedIn$ | async">
+    <fa-icon icon="plus" class="float-icon"></fa-icon>
+  </div>
+
+  <!-- ICONE -->
+  <div fxLayout="row wrap" *ngIf="isLoggedIn$ | async; else notLogged">
     <div fxFlex="25" fxFlex.xs="50">
-      <div class="text-center box gray">
-        <fa-icon icon="shopping-cart" size="5x"></fa-icon>
+      <div class="text-center box dark-gray">
+        <fa-icon icon="shopping-cart" size="5x" class="manina" (click)="spesa()"></fa-icon>
         <div>Spesa</div>
       </div>
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
-      <div class="text-center box gray">
-        <fa-icon icon="car" size="5x"></fa-icon>
+      <div class="text-center box dark-gray">
+        <fa-icon icon="car" size="5x" class="manina" (click)="carburante()"></fa-icon>
         <div>Carburante</div>
       </div>
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
-      <div class="text-center box gray">
-        <fa-icon icon="shower" size="5x"></fa-icon>
+      <div class="text-center box dark-gray">
+        <fa-icon icon="shower" size="5x" class="manina" (click)="pulizie()"></fa-icon>
         <div>Pulizie</div>
       </div>
     </div>
 
     <div fxFlex="25" fxFlex.xs="50">
-      <div class="text-center box gray">
-        <fa-icon icon="credit-card" size="5x"></fa-icon>
+      <div class="text-center box dark-gray">
+        <fa-icon icon="credit-card" size="5x" class="manina" (click)="bolletta()"></fa-icon>
         <div>Bolletta</div>
       </div>
     </div>

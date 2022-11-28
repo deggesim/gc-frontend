@@ -45,8 +45,6 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@ng-select/ng-select": "^9.0.2",
-    "@ngx-translate/core": "^14.0.0",
-    "@ngx-translate/http-loader": "^7.0.0",
     "@swimlane/ngx-charts": "^20.1.0",
     "bootstrap": "^5.2.0",
     "bootswatch": "^5.2.0",

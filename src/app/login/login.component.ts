@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Utente } from '../model/utente';
 
@@ -7,7 +7,7 @@ import { Utente } from '../model/utente';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   @Output() login: EventEmitter<Utente> = new EventEmitter(true);
   @Output() annulla: EventEmitter<void> = new EventEmitter(true);
 
@@ -17,8 +17,6 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {}
 
   confirm(): void {
     const utente: Utente = {

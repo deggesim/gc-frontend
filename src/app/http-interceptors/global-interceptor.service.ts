@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
 import { SharedService } from './../shared/shared.service';
 import { SpinnerService } from './../shared/spinner.service';
 
 @Injectable()
 export class GlobalInterceptor implements HttpInterceptor {
-  constructor(private sharedService: SharedService, private spinnerService: SpinnerService, private router: Router) {}
+  constructor(private sharedService: SharedService, private spinnerService: SpinnerService, private router: Router, private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinnerService.start();
@@ -19,6 +20,8 @@ export class GlobalInterceptor implements HttpInterceptor {
           localStorage.removeItem('token');
           localStorage.removeItem('expires_at');
           localStorage.removeItem('utente');
+          this.authService.getLoginSubject().next(false);
+          this.router.navigate(['home']);
         }
         return throwError(() => new Error(error));
       }),

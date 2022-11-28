@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DateTime } from 'luxon';
 import { Andamento } from '../model/andamento';
+import { Utente } from '../model/utente';
 import { AndamentoService } from '../services/andamento.service';
 import { AuthService } from '../services/auth.service';
 import * as globals from '../shared/globals';
@@ -25,6 +26,14 @@ export class HomeComponent {
     private andamentoService: AndamentoService,
     private authService: AuthService
   ) {}
+
+  public login(utente: Utente) {
+    this.authService.login(utente).subscribe(() => {
+      const title = 'Login';
+      const message = 'Login effettuato correttamente';
+      this.sharedService.notifica(globals.toastType.success, title, message);
+    });
+  }
 
   spesa() {
     this.andamento = {
