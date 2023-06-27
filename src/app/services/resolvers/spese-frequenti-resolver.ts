@@ -9,6 +9,7 @@ export class SpeseFrequentiResolver implements Resolve<Statistica[]> {
   constructor(private statisticaService: StatisticheService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Statistica[] | Observable<Statistica[]> | Promise<Statistica[]> {
-    return this.statisticaService.speseFrequenti('M');
+    const period = route.data['period'] ? route.data['period'] : 'M';
+    return this.statisticaService.speseFrequenti(period);
   }
 }

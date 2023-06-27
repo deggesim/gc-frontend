@@ -10,7 +10,6 @@ import { StatisticheService } from '../../services/statistiche.service';
 @Component({
   selector: 'gc-carburante',
   templateUrl: './carburante.component.html',
-  styleUrls: ['./carburante.component.scss'],
 })
 export class CarburanteComponent implements OnInit {
   // opzioni barre

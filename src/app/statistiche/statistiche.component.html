@@ -1,0 +1,67 @@
+<ng-container *ngIf="showMainPage">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <div fxFlex="33" fxFlex.lt-md="100">
+      <h4 class="text-nowrap overflow-hidden">Media bolletta mensile</h4>
+      <div class="table-responsive">
+        <table class="table table-hover" aria-label="Media bolletta mensile">
+          <thead class="table-light">
+            <tr>
+              <th id="giorno">Anno</th>
+              <th id="descrizione">Spesa</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of mediaBollettaMensile">
+              <td>{{ item.name }}</td>
+              <td>{{ format(item.value) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div fxFlex="33" fxFlex.lt-md="100">
+      <h4 class="text-nowrap overflow-hidden">Media spesa mensile</h4>
+      <div class="table-responsive">
+        <table class="table table-hover" aria-label="Media spesa mensile">
+          <thead class="table-light">
+            <tr>
+              <th id="giorno">Anno</th>
+              <th id="descrizione">Spesa</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of mediaSpesaMensile">
+              <td>{{ item.name }}</td>
+              <td>{{ format(item.value) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div fxFlex="33" fxFlex.lt-md="100">
+      <h4 class="text-nowrap overflow-hidden">Media carburante mensile</h4>
+      <div class="table-responsive">
+        <table class="table table-hover" aria-label="Media carburante mensile">
+          <thead class="table-light">
+            <tr>
+              <th id="giorno">Anno</th>
+              <th id="descrizione">Spesa</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of mediaCarburanteMensile">
+              <td>{{ item.name }}</td>
+              <td>{{ format(item.value) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<router-outlet></router-outlet>

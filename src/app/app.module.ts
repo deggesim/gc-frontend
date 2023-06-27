@@ -35,10 +35,10 @@ import { LoginComponent } from './login/login.component';
 import { AndamentoService } from './services/andamento.service';
 import { AppUpdateService } from './services/app-update.service';
 import { AuthService } from './services/auth.service';
-import { BollettaMensileResolver } from './services/resolvers/bolletta-mensile-resolver';
-import { CarburanteMensileResolver } from './services/resolvers/carburante-mensile-resolver';
+import { BollettaResolver } from './services/resolvers/bolletta-resolver';
+import { CarburanteResolver } from './services/resolvers/carburante-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
-import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver';
+import { SpesaResolver } from './services/resolvers/spesa-resolver';
 import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
 import { StatisticheService } from './services/statistiche.service';
 import { TipoSpesaService } from './services/tipo-spesa.service';
@@ -51,6 +51,7 @@ import { CarburanteComponent } from './statistiche/carburante/carburante.compone
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { StatisticheComponent } from './statistiche/statistiche.component';
 
 registerLocaleData(localeIt);
 
@@ -82,6 +83,7 @@ export const customCurrencyMaskConfig = {
     BollettaComponent,
     LoginComponent,
     UserProfileComponent,
+    StatisticheComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,9 +122,9 @@ export const customCurrencyMaskConfig = {
     // resolver
     ListaAndamentoResolver,
     SpeseFrequentiResolver,
-    SpesaMensileResolver,
-    CarburanteMensileResolver,
-    BollettaMensileResolver,
+    SpesaResolver,
+    CarburanteResolver,
+    BollettaResolver,
     // altri servizi
     AndamentoService,
     TipoSpesaService,
@@ -134,7 +136,6 @@ export const customCurrencyMaskConfig = {
   ],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);
