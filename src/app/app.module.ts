@@ -35,10 +35,11 @@ import { LoginComponent } from './login/login.component';
 import { AndamentoService } from './services/andamento.service';
 import { AppUpdateService } from './services/app-update.service';
 import { AuthService } from './services/auth.service';
-import { BollettaMensileResolver } from './services/resolvers/bolletta-mensile-resolver';
-import { CarburanteMensileResolver } from './services/resolvers/carburante-mensile-resolver';
+import { BollettaResolver } from './services/resolvers/bolletta-resolver';
+import { CarburanteResolver } from './services/resolvers/carburante-resolver';
+import { CasaResolver } from './services/resolvers/casa-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
-import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver';
+import { SpesaResolver } from './services/resolvers/spesa-resolver';
 import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
 import { StatisticheService } from './services/statistiche.service';
 import { TipoSpesaService } from './services/tipo-spesa.service';
@@ -48,8 +49,10 @@ import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
 import { BollettaComponent } from './statistiche/bolletta/bolletta.component';
 import { CarburanteComponent } from './statistiche/carburante/carburante.component';
+import { CasaComponent } from './statistiche/casa/casa.component';
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
+import { StatisticheComponent } from './statistiche/statistiche.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 registerLocaleData(localeIt);
@@ -80,8 +83,10 @@ export const customCurrencyMaskConfig = {
     SpesaComponent,
     CarburanteComponent,
     BollettaComponent,
+    CasaComponent,
     LoginComponent,
     UserProfileComponent,
+    StatisticheComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,9 +125,10 @@ export const customCurrencyMaskConfig = {
     // resolver
     ListaAndamentoResolver,
     SpeseFrequentiResolver,
-    SpesaMensileResolver,
-    CarburanteMensileResolver,
-    BollettaMensileResolver,
+    SpesaResolver,
+    CarburanteResolver,
+    BollettaResolver,
+    CasaResolver,
     // altri servizi
     AndamentoService,
     TipoSpesaService,
@@ -134,7 +140,6 @@ export const customCurrencyMaskConfig = {
   ],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);

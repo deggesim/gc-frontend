@@ -25,4 +25,8 @@ export class StatisticheService {
   bolletta(frequenza: string): Observable<Statistica[]> {
     return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/bolletta/${frequenza}`);
   }
+
+  casa(frequenza: string): Observable<Statistica[]> {
+    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/casa/${frequenza}`);
+  }
 }

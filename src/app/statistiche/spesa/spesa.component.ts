@@ -10,7 +10,6 @@ import { StatisticheService } from '../../services/statistiche.service';
 @Component({
   selector: 'gc-spesa',
   templateUrl: './spesa.component.html',
-  styleUrls: ['./spesa.component.scss'],
 })
 export class SpesaComponent implements OnInit {
   // opzioni barre

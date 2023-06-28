@@ -3,16 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
-import { BollettaMensileResolver } from './services/resolvers/bolletta-mensile-resolver';
-import { CarburanteMensileResolver } from './services/resolvers/carburante-mensile-resolver';
+import { BollettaResolver } from './services/resolvers/bolletta-resolver';
+import { CarburanteResolver } from './services/resolvers/carburante-resolver';
+import { CasaResolver } from './services/resolvers/casa-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
-import { SpesaMensileResolver } from './services/resolvers/spesa-mensile-resolver';
+import { SpesaResolver } from './services/resolvers/spesa-resolver';
 import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
 import { ErrorPageComponent } from './shared/error-page.component';
 import { BollettaComponent } from './statistiche/bolletta/bolletta.component';
 import { CarburanteComponent } from './statistiche/carburante/carburante.component';
+import { CasaComponent } from './statistiche/casa/casa.component';
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
+import { StatisticheComponent } from './statistiche/statistiche.component';
 
 const appRoutes: Routes = [
   {
@@ -31,35 +34,49 @@ const appRoutes: Routes = [
   },
   {
     path: 'statistiche',
-    data: { breadcrumb: 'Statistiche' },
+    component: StatisticheComponent,
+    resolve: {
+      bolletteAnnuali: BollettaResolver,
+      speseAnnuali: SpesaResolver,
+      carburanteAnnuale: CarburanteResolver,
+      casaAnnuale: CasaResolver,
+    },
+    data: { breadcrumb: 'Spese medie', period: 'Y' },
     canActivate: [AuthGuard],
     children: [
       {
         path: 'spese-frequenti',
         component: SpeseFrequentiComponent,
         resolve: { tortaTipiSpesa: SpeseFrequentiResolver },
-        data: { breadcrumb: 'Lista' },
+        data: { breadcrumb: 'Lista', period: 'M' },
         canActivate: [AuthGuard],
       },
       {
         path: 'spesa',
         component: SpesaComponent,
-        resolve: { barreSpesa: SpesaMensileResolver },
-        data: { breadcrumb: 'Spesa' },
+        resolve: { barreSpesa: SpesaResolver },
+        data: { breadcrumb: 'Spesa', period: 'M' },
         canActivate: [AuthGuard],
       },
       {
         path: 'carburante',
         component: CarburanteComponent,
-        resolve: { barreCarburante: CarburanteMensileResolver },
-        data: { breadcrumb: 'Carburante' },
+        resolve: { barreCarburante: CarburanteResolver },
+        data: { breadcrumb: 'Carburante', period: 'M' },
         canActivate: [AuthGuard],
       },
       {
         path: 'bolletta',
         component: BollettaComponent,
-        resolve: { barreBolletta: BollettaMensileResolver },
-        data: { breadcrumb: 'Bollette' },
+        resolve: { barreBolletta: BollettaResolver },
+        data: { breadcrumb: 'Bollette', period: 'M', showMainPage: false },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'casa',
+        component: CasaComponent,
+        resolve: { barreCasa: CasaResolver },
+        data: { breadcrumb: 'Casa', period: 'M', showMainPage: false },
         canActivate: [AuthGuard],
       },
     ],

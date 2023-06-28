@@ -13,7 +13,6 @@ import { SharedService } from '../../shared/shared.service';
 @Component({
   selector: 'gc-lista',
   templateUrl: './lista.component.html',
-  styleUrls: ['./lista.component.scss'],
 })
 export class ListaComponent implements OnInit {
   lista: Andamento[] = [];

@@ -8,10 +8,10 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-  selector: 'gc-carburante',
-  templateUrl: './carburante.component.html',
+  selector: 'gc-casa',
+  templateUrl: './casa.component.html',
 })
-export class CarburanteComponent implements OnInit {
+export class CasaComponent implements OnInit {
   // opzioni barre
   ScaleType = ScaleType;
   showXAxis = true;
@@ -20,7 +20,7 @@ export class CarburanteComponent implements OnInit {
   showYAxisLabel = true;
   showLegend = true;
 
-  barreCarburante: Statistica[] = [];
+  barreCasa: Statistica[] = [];
 
   form = this.fb.group({
     frequenza: ['M', Validators.required],
@@ -30,29 +30,29 @@ export class CarburanteComponent implements OnInit {
 
   ngOnInit() {
     this.form.get('frequenza')?.valueChanges.subscribe((value: string) => {
-      this.statisticheService.carburante(value).subscribe((data: Statistica[]) => {
-        this.barreCarburante = data;
+      this.statisticheService.casa(value).subscribe((data: Statistica[]) => {
+        this.barreCasa = data;
         if (this.mensile()) {
-          this.formatMese();
+          forEach(this.barreCasa, (item: Statistica) => {
+            let mese = item.name;
+            mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+            item.name = mese;
+          });
         }
       });
     });
 
     this.route.data.subscribe((data: Data) => {
-      this.barreCarburante = data['barreCarburante'];
-      this.formatMese();
+      this.barreCasa = data['barreCasa'];
+      forEach(this.barreCasa, (item: Statistica) => {
+        let mese = item.name;
+        mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+        item.name = mese;
+      });
     });
   }
 
-  private formatMese() {
-    forEach(this.barreCarburante, (item: Statistica) => {
-      let mese = item.name;
-      mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
-      item.name = mese;
-    });
-  }
-
-  xAxisTickFormatting(value: number | bigint) {
+  xAxisTickFormatting(value: number | bigint): string {
     const formatter = new Intl.NumberFormat('it-IT', {
       style: 'currency',
       currency: 'EUR',

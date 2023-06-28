@@ -10,7 +10,6 @@ import { SharedService } from '../../shared/shared.service';
 @Component({
   selector: 'gc-modifica',
   templateUrl: './modifica.component.html',
-  styleUrls: ['./modifica.component.scss'],
 })
 export class ModificaComponent implements OnInit, OnChanges {
   @Input() andamento: Andamento | undefined;
