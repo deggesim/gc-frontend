@@ -5,12 +5,14 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { BollettaResolver } from './services/resolvers/bolletta-resolver';
 import { CarburanteResolver } from './services/resolvers/carburante-resolver';
+import { CasaResolver } from './services/resolvers/casa-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
 import { SpesaResolver } from './services/resolvers/spesa-resolver';
 import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
 import { ErrorPageComponent } from './shared/error-page.component';
 import { BollettaComponent } from './statistiche/bolletta/bolletta.component';
 import { CarburanteComponent } from './statistiche/carburante/carburante.component';
+import { CasaComponent } from './statistiche/casa/casa.component';
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
@@ -37,8 +39,9 @@ const appRoutes: Routes = [
       bolletteAnnuali: BollettaResolver,
       speseAnnuali: SpesaResolver,
       carburanteAnnuale: CarburanteResolver,
+      casaAnnuale: CasaResolver,
     },
-    data: { breadcrumb: 'Statistiche', period: 'Y' },
+    data: { breadcrumb: 'Spese medie', period: 'Y' },
     canActivate: [AuthGuard],
     children: [
       {
@@ -67,6 +70,13 @@ const appRoutes: Routes = [
         component: BollettaComponent,
         resolve: { barreBolletta: BollettaResolver },
         data: { breadcrumb: 'Bollette', period: 'M', showMainPage: false },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'casa',
+        component: CasaComponent,
+        resolve: { barreCasa: CasaResolver },
+        data: { breadcrumb: 'Casa', period: 'M', showMainPage: false },
         canActivate: [AuthGuard],
       },
     ],

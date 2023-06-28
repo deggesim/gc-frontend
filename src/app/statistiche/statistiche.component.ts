@@ -21,6 +21,9 @@ export class StatisticheComponent implements OnInit {
   carburanteAnnuale: Statistica[] = [];
   mediaCarburanteMensile: Statistica[] = [];
 
+  casaAnnuale: Statistica[] = [];
+  mediaCasaMensile: Statistica[] = [];
+
   format(value: number | bigint): string {
     const formatter = new Intl.NumberFormat('it-IT', {
       style: 'currency',
@@ -45,13 +48,10 @@ export class StatisticheComponent implements OnInit {
     }
 
     this.route.data.subscribe((data: Data) => {
-      console.log(data);
-
-      console.log('this.showMainPage', this.showMainPage);
-
       this.bolletteAnnuali = data['bolletteAnnuali'];
       this.speseAnnuali = data['speseAnnuali'];
       this.carburanteAnnuale = data['carburanteAnnuale'];
+      this.casaAnnuale = data['casaAnnuale'];
 
       const currentYear = new Date().getFullYear();
       const currentMonth = new Date().getMonth();
@@ -89,6 +89,18 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaCarburanteMensile.push(media);
+        }
+      );
+
+      forEach(
+        this.casaAnnuale.filter((item) => +item.name > currentYear - 10),
+        (item: Statistica) => {
+          let monthDivider = 12;
+          if (+item.name === currentYear) {
+            monthDivider = currentMonth + 1;
+          }
+          const media = { name: item.name, value: item.value / monthDivider };
+          this.mediaCasaMensile.push(media);
         }
       );
     });
