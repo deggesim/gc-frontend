@@ -21,6 +21,18 @@
           </a>
           <ul *dropdownMenu class="dropdown-menu">
             <li>
+              <a
+                class="dropdown-item"
+                routerLink="/statistiche"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLinkActive="active"
+                (click)="isCollapsed = true"
+              >
+                Spese medie
+              </a>
+            </li>
+            <li class="divider dropdown-divider"></li>
+            <li>
               <a class="dropdown-item" routerLink="/statistiche/spese-frequenti" routerLinkActive="active" (click)="isCollapsed = true">
                 Spese frequenti
               </a>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data, Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRoute, Data, NavigationEnd, Router } from '@angular/router';
 import { forEach } from 'lodash-es';
-import { DateTime } from 'luxon';
 import { Statistica } from '../model/statistica';
 
 @Component({
@@ -34,16 +33,12 @@ export class StatisticheComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.router.events.subscribe((event) => {
-    //   console.log(event);
-    //   if (event instanceof RoutesRecognized) {
-    //     const routeData = event.state.root.firstChild?.data;
-
-    //     if (routeData) {
-    //       this.showMainPage = routeData['showMainPage'] === false ? false : true;
-    //     }
-    //   }
-    // });
+    this.router.events.subscribe((event) => {
+      console.log(event);
+      if (event instanceof NavigationEnd) {
+        this.showMainPage = event.url.endsWith('statistiche');
+      }
+    });
 
     if (this.route.children.length != 0) {
       this.showMainPage = false;
