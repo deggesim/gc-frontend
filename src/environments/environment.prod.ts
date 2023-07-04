@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  endpoint: 'https://gc-server.up.railway.app',
+  endpoint: 'https://https://gc-server.vercel.app',
 };
