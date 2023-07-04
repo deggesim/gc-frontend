@@ -22,7 +22,7 @@
   "dataGroups": [
     {
       "name": "andamento",
-      "urls": ["https://gestione-casa-server.herokuapp.com/andamento", "https://gestione-casa-server.herokuapp.com/tipo-spesa"],
+      "urls": ["https://gc-server.vercel.app/andamento", "https://gc-server.vercel.app/tipo-spesa"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 10,
@@ -32,7 +32,7 @@
     },
     {
       "name": "statistiche",
-      "urls": ["https://gestione-casa-server.herokuapp.com/statistiche"],
+      "urls": ["https://gc-server.vercel.app/statistiche"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 10,
