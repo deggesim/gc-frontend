@@ -10,7 +10,6 @@ import { SpinnerService } from './shared/spinner.service';
 @Component({
   selector: 'gc-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements AfterViewChecked, OnInit {
   // Sets initial value to true to show loading spinner on first load

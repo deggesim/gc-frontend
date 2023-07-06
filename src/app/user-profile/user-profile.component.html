@@ -1,63 +1,55 @@
 <form [formGroup]="form" (ngSubmit)="confirm()" class="needs-validation" novalidate>
-  <div fxLayout="row wrap" fxLayoutAlign="space-between">
-    <div fxFlex="100">
-      <div class="form-group">
-        <label for="email" class="form-label">Email</label>
-        <input
-          type="text"
-          class="form-control"
-          id="email"
-          name="email"
-          formControlName="email"
-          autocomplete="username"
-          [ngClass]="{
-            'is-invalid': form.get('email')?.invalid && form.get('email')?.dirty
-          }"
-        />
-        <div *ngIf="form.get('email')?.hasError('required') && form.get('email')?.dirty" class="invalid-feedback">
-          Il campo email è obbligatorio
-        </div>
-      </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input
+      type="text"
+      class="form-control"
+      id="email"
+      name="email"
+      formControlName="email"
+      autocomplete="username"
+      [ngClass]="{
+        'is-invalid': form.get('email')?.invalid && form.get('email')?.dirty
+      }"
+    />
+    <div *ngIf="form.get('email')?.hasError('required') && form.get('email')?.dirty" class="invalid-feedback">
+      Il campo email è obbligatorio
     </div>
+  </div>
 
-    <div fxFlex="100">
-      <div class="form-group">
-        <label for="newPassword" class="form-label">Nuova password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="newPassword"
-          name="newPassword"
-          formControlName="newPassword"
-          autocomplete="new-password"
-          [ngClass]="{
-            'is-invalid': form.get('newPassword')?.invalid && form.get('newPassword')?.dirty
-          }"
-        />
-        <div *ngIf="form.get('newPassword')?.hasError('required') && form.get('newPassword')?.dirty" class="invalid-feedback">
-          Il campo Nuova password è obbligatorio
-        </div>
-      </div>
+  <div class="mb-3">
+    <label for="newPassword" class="form-label">Nuova password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="newPassword"
+      name="newPassword"
+      formControlName="newPassword"
+      autocomplete="new-password"
+      [ngClass]="{
+        'is-invalid': form.get('newPassword')?.invalid && form.get('newPassword')?.dirty
+      }"
+    />
+    <div *ngIf="form.get('newPassword')?.hasError('required') && form.get('newPassword')?.dirty" class="invalid-feedback">
+      Il campo Nuova password è obbligatorio
     </div>
+  </div>
 
-    <div fxFlex="100">
-      <div class="form-group">
-        <label for="confirmPassword" class="form-label">Conferma password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="confirmPassword"
-          name="confirmPassword"
-          autocomplete="new-password"
-          formControlName="confirmPassword"
-          [ngClass]="{
-            'is-invalid': form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.dirty
-          }"
-        />
-        <div *ngIf="form.get('confirmPassword')?.hasError('required') && form.get('confirmPassword')?.dirty" class="invalid-feedback">
-          Il campo Conferma password è obbligatorio
-        </div>
-      </div>
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">Conferma password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="confirmPassword"
+      name="confirmPassword"
+      autocomplete="new-password"
+      formControlName="confirmPassword"
+      [ngClass]="{
+        'is-invalid': form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.dirty
+      }"
+    />
+    <div *ngIf="form.get('confirmPassword')?.hasError('required') && form.get('confirmPassword')?.dirty" class="invalid-feedback">
+      Il campo Conferma password è obbligatorio
     </div>
   </div>
 

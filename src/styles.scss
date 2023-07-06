@@ -170,3 +170,15 @@ body {
 .tooltip-arrow {
   position: absolute;
 }
+
+// bs-datepicker
+.theme-green .bs-datepicker-head {
+  background-color: $primary;
+}
+
+.theme-green .bs-datepicker-body table td span.selected,
+.theme-green .bs-datepicker-body table td.selected span,
+.theme-green .bs-datepicker-body table td span[class*='select-']:after,
+.theme-green .bs-datepicker-body table td[class*='select-'] span:after {
+  background-color: $primary;
+}

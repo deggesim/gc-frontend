@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="confirm()" class="needs-validation" novalidate>
-  <div fxLayout="row wrap" fxLayoutAlign="space-between">
-    <div fxFlex="49" fxFlex.xs="100">
-      <div class="form-group">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input
           type="text"
@@ -20,8 +20,8 @@
       </div>
     </div>
 
-    <div fxFlex="49" fxFlex.xs="100">
-      <div class="form-group">
+    <div class="col-sm-6">
+      <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input
           type="password"

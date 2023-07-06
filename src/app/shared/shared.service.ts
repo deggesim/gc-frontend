@@ -9,7 +9,7 @@ import * as globals from './globals';
 @Injectable()
 export class SharedService {
   private bsConfig: Partial<BsDatepickerConfig> = {
-    containerClass: 'theme-dark-blue',
+    containerClass: 'theme-green',
     showWeekNumbers: false,
     dateInputFormat: 'DD/MM/YYYY',
   };

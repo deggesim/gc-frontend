@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { isEmpty, isNil } from 'lodash-es';
 import { DateTime } from 'luxon';
-import { switchMapTo, tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Andamento } from '../../model/andamento';
 import { AndamentoService } from '../../services/andamento.service';
@@ -125,7 +125,7 @@ export class ListaComponent implements OnInit {
             ? this.sharedService.notifica(globals.toastType.success, 'Nuova voce di spesa', 'Nuova voce di spesa inserita correttamente')
             : this.sharedService.notifica(globals.toastType.success, 'Modifica voce di spesa', 'Voce di spesa modificata correttamente');
         }),
-        switchMapTo(this.andamentoService.lista())
+        switchMap(() => this.andamentoService.lista())
       )
       .subscribe((lista: Andamento[]) => {
         this.andamentoSelected = undefined;
@@ -155,7 +155,7 @@ export class ListaComponent implements OnInit {
               'La voce di spesa è stata eliminata correttamente'
             );
           }),
-          switchMapTo(this.andamentoService.lista())
+          switchMap(() => this.andamentoService.lista())
         )
         .subscribe((lista: Andamento[]) => {
           this.popupConfermaElimina.chiudiModale();

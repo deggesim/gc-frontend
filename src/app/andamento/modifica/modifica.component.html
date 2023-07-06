@@ -1,96 +1,98 @@
-<form [formGroup]="form" (ngSubmit)="salvaAndamento()" class="needs-validation" novalidate>
-  <input type="hidden" formControlName="id" />
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="salvaAndamento()" class="needs-validation" novalidate>
+    <input type="hidden" formControlName="id" />
 
-  <div fxLayout="row wrap" fxLayoutAlign="space-between">
-    <div fxFlex="49" fxFlex.xs="100">
-      <div class="mb-3">
-        <label for="giorno" class="form-label">Giorno *</label>
-        <div class="input-group">
-          <span class="input-group-text manina" id="calendar-icon" (click)="dpGiorno.toggle()">
-            <fa-icon icon="calendar"></fa-icon>
-          </span>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="mb-3">
+          <label for="giorno" class="form-label">Giorno *</label>
+          <div class="input-group">
+            <button class="btn btn-light btn-outline-primary" type="button" id="calendar-icon" (click)="dpGiorno.toggle()">
+              <fa-icon icon="calendar"></fa-icon>
+            </button>
+            <input
+              type="text"
+              class="form-control"
+              #dpGiorno="bsDatepicker"
+              [bsConfig]="sharedService.getBsConfig()"
+              readonly
+              [ngClass]="{ 'is-invalid': form.get('giorno')?.invalid && form.get('giorno')?.dirty }"
+              bsDatepicker
+              formControlName="giorno"
+            />
+            <button class="btn btn-light btn-outline-primary" type="button" id="calendar-icon" (click)="clearGiorno()">
+              <fa-icon icon="times"></fa-icon>
+            </button>
+          </div>
+          <div *ngIf="form.get('giorno')?.hasError('required') && form.get('giorno')?.dirty" class="invalid-feedback">
+            Il campo giorno è obbligatorio
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="mb-3" [ngClass]="{ 'is-invalid': form.get('giorno')?.invalid && form.get('giorno')?.dirty }">
+          <label for="tipoSpesa" class="form-label">Tipo spesa *</label>
+          <ng-select
+            id="tipoSpesa"
+            name="tipoSpesa"
+            [items]="listaTipoSpesa"
+            bindLabel="descrizione"
+            formControlName="tipoSpesa"
+            clearAllText="Elimina"
+            [ngClass]="{ 'ng-select-error': form.get('tipoSpesa')?.invalid && form.get('tipoSpesa')?.dirty }"
+          ></ng-select>
+          <div *ngIf="form.get('tipoSpesa')?.hasError('required') && form.get('tipoSpesa')?.dirty" class="ng-select-invalid-feedback">
+            Il campo tipo spesa è obbligatorio
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="mb-3">
+          <label for="descrizione" class="form-label">Descrizione *</label>
           <input
             type="text"
             class="form-control"
-            #dpGiorno="bsDatepicker"
-            [bsConfig]="sharedService.getBsConfig()"
-            readonly
-            [ngClass]="{ 'is-invalid': form.get('giorno')?.invalid && form.get('giorno')?.dirty }"
-            bsDatepicker
-            formControlName="giorno"
+            id="descrizione"
+            name="descrizione"
+            formControlName="descrizione"
+            [ngClass]="{ 'is-invalid': form.get('descrizione')?.invalid && form.get('descrizione')?.dirty }"
           />
-          <span class="input-group-text manina" (click)="clearGiorno()">
-            <fa-icon icon="times"></fa-icon>
-          </span>
+          <div *ngIf="form.get('descrizione')?.hasError('required') && form.get('descrizione')?.dirty" class="invalid-feedback">
+            Il campo descrizione è obbligatorio
+          </div>
         </div>
-        <div *ngIf="form.get('giorno')?.hasError('required') && form.get('giorno')?.dirty" class="invalid-feedback">
-          Il campo giorno è obbligatorio
+      </div>
+
+      <div class="col-sm-6">
+        <div class="mb-3">
+          <label for="costo" class="form-label">Costo *</label>
+          <input
+            #costo
+            type="text"
+            class="form-control"
+            id="costo"
+            name="costo"
+            formControlName="costo"
+            [ngClass]="{ 'is-invalid': form.get('costo')?.invalid && form.get('costo')?.dirty }"
+            (focus)="costo.select()"
+            currencyMask
+            (keyup.enter)="salvaAndamento()"
+          />
+          <div *ngIf="form.get('costo')?.hasError('required') && form.get('costo')?.dirty" class="invalid-feedback">
+            Il campo costo è obbligatorio
+          </div>
+          <div *ngIf="form.get('costo')?.hasError('min') && form.get('costo')?.dirty" class="invalid-feedback">
+            Il campo costo deve essere maggiore di zero
+          </div>
         </div>
       </div>
     </div>
 
-    <div fxFlex="49" fxFlex.xs="100">
-      <div class="mb-3" [ngClass]="{ 'is-invalid': form.get('giorno')?.invalid && form.get('giorno')?.dirty }">
-        <label for="tipoSpesa" class="form-label">Tipo spesa *</label>
-        <ng-select
-          id="tipoSpesa"
-          name="tipoSpesa"
-          [items]="listaTipoSpesa"
-          bindLabel="descrizione"
-          formControlName="tipoSpesa"
-          clearAllText="Elimina"
-          [ngClass]="{ 'ng-select-error': form.get('tipoSpesa')?.invalid && form.get('tipoSpesa')?.dirty }"
-        ></ng-select>
-        <div *ngIf="form.get('tipoSpesa')?.hasError('required') && form.get('tipoSpesa')?.dirty" class="ng-select-invalid-feedback">
-          Il campo tipo spesa è obbligatorio
-        </div>
-      </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-3 pb-3">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Salva</button>&nbsp;
+      <button type="button" class="btn btn-primary" (click)="annulla.emit()">Annulla</button>
     </div>
-
-    <div fxFlex="49" fxFlex.xs="100">
-      <div class="mb-3">
-        <label for="descrizione" class="form-label">Descrizione *</label>
-        <input
-          type="text"
-          class="form-control"
-          id="descrizione"
-          name="descrizione"
-          formControlName="descrizione"
-          [ngClass]="{ 'is-invalid': form.get('descrizione')?.invalid && form.get('descrizione')?.dirty }"
-        />
-        <div *ngIf="form.get('descrizione')?.hasError('required') && form.get('descrizione')?.dirty" class="invalid-feedback">
-          Il campo descrizione è obbligatorio
-        </div>
-      </div>
-    </div>
-
-    <div fxFlex="49" fxFlex.xs="100">
-      <div class="mb-3">
-        <label for="costo" class="form-label">Costo *</label>
-        <input
-          #costo
-          type="text"
-          class="form-control"
-          id="costo"
-          name="costo"
-          formControlName="costo"
-          [ngClass]="{ 'is-invalid': form.get('costo')?.invalid && form.get('costo')?.dirty }"
-          (focus)="costo.select()"
-          currencyMask
-          (keyup.enter)="salvaAndamento()"
-        />
-        <div *ngIf="form.get('costo')?.hasError('required') && form.get('costo')?.dirty" class="invalid-feedback">
-          Il campo costo è obbligatorio
-        </div>
-        <div *ngIf="form.get('costo')?.hasError('min') && form.get('costo')?.dirty" class="invalid-feedback">
-          Il campo costo deve essere maggiore di zero
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-3 pb-3">
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Salva</button>&nbsp;
-    <button type="button" class="btn btn-primary" (click)="annulla.emit()">Annulla</button>
-  </div>
-</form>
+  </form>
+</div>

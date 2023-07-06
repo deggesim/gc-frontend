@@ -6,29 +6,29 @@
   </div>
 
   <!-- ICONE -->
-  <div fxLayout="row wrap" *ngIf="isLoggedIn$ | async; else notLogged">
-    <div fxFlex="25" fxFlex.xs="50">
+  <div class="row" *ngIf="isLoggedIn$ | async; else notLogged">
+    <div class="col-sm-6">
       <div class="text-center box dark-gray">
         <fa-icon icon="shopping-cart" size="5x" class="manina" (click)="spesa()"></fa-icon>
         <div>Spesa</div>
       </div>
     </div>
 
-    <div fxFlex="25" fxFlex.xs="50">
+    <div class="col-sm-6">
       <div class="text-center box dark-gray">
         <fa-icon icon="car" size="5x" class="manina" (click)="carburante()"></fa-icon>
         <div>Carburante</div>
       </div>
     </div>
 
-    <div fxFlex="25" fxFlex.xs="50">
+    <div class="col-sm-6">
       <div class="text-center box dark-gray">
         <fa-icon icon="shower" size="5x" class="manina" (click)="pulizie()"></fa-icon>
         <div>Pulizie</div>
       </div>
     </div>
 
-    <div fxFlex="25" fxFlex.xs="50">
+    <div class="col-sm-6">
       <div class="text-center box dark-gray">
         <fa-icon icon="credit-card" size="5x" class="manina" (click)="bolletta()"></fa-icon>
         <div>Bolletta</div>
