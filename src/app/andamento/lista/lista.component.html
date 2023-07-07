@@ -122,22 +122,20 @@
   </table>
 </div>
 
-<div class="row" *ngIf="abilitaPaginazione()">
-  <div class="col-xs-12 col-12">
-    <pagination
-      [totalItems]="size"
-      [(ngModel)]="page"
-      [itemsPerPage]="pageSize"
-      (pageChanged)="pageChange($event)"
-      [maxSize]="maxSize"
-      [boundaryLinks]="boundaryLinks"
-      firstText="&lt;&lt;"
-      previousText="&lt;"
-      nextText="&gt;"
-      lastText="&gt;&gt;"
-    ></pagination>
-  </div>
-</div>
+<pagination
+  *ngIf="abilitaPaginazione()"
+  class="justify-content-center"
+  [totalItems]="size"
+  [(ngModel)]="page"
+  [itemsPerPage]="pageSize"
+  (pageChanged)="pageChange($event)"
+  [maxSize]="maxSize"
+  [boundaryLinks]="boundaryLinks"
+  firstText="&lt;&lt;"
+  previousText="&lt;"
+  nextText="&gt;"
+  lastText="&gt;&gt;"
+></pagination>
 
 <!-- popup elimina -->
 <gc-popup-conferma
