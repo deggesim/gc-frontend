@@ -17,7 +17,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "dev": "ng serve",
+    "start": "serve build -s -n -L -p $PORT",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -48,9 +49,6 @@
     "bootstrap": "^5.2.0",
     "bootswatch": "^5.2.0",
     "jwt-decode": "^3.1.2",
-    "koa": "^2.13.4",
-    "koa-send": "^5.0.1",
-    "koa-static": "^5.0.0",
     "lodash-es": "^4.17.21",
     "luxon": "^3.0.1",
     "ngx-bootstrap": "^9.0.0",
@@ -59,6 +57,7 @@
     "ngx-toastr": "^15.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~7.5.6",
+    "serve": "^14.2.0",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.7"
   },
