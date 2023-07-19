@@ -53,6 +53,7 @@ import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { StatisticheCompleteResolver } from './services/resolvers/statistiche-complete-resolver';
 
 registerLocaleData(localeIt);
 
@@ -127,6 +128,7 @@ export const customCurrencyMaskConfig = {
     CarburanteResolver,
     BollettaResolver,
     CasaResolver,
+    StatisticheCompleteResolver,
     // altri servizi
     AndamentoService,
     TipoSpesaService,
