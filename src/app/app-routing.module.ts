@@ -16,6 +16,7 @@ import { CasaComponent } from './statistiche/casa/casa.component';
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
+import { StatisticheCompleteResolver } from './services/resolvers/statistiche-complete-resolver';
 
 const appRoutes: Routes = [
   {
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
       {
         path: 'spese-frequenti',
         component: SpeseFrequentiComponent,
-        resolve: { tortaTipiSpesa: SpeseFrequentiResolver },
+        resolve: { tortaTipiSpesa: SpeseFrequentiResolver, speseTotali: StatisticheCompleteResolver },
         data: { breadcrumb: 'Lista', period: 'M' },
         canActivate: [AuthGuard],
       },
