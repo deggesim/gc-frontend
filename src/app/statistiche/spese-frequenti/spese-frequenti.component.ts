@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
+import { forEach } from 'lodash-es';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
-import { forEach } from 'lodash-es';
 
 @Component({
   selector: 'gc-spese-frequenti',
