@@ -1,4 +1,5 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Utente } from './model/utente';
 import { AppUpdateService } from './services/app-update.service';
 import { AuthService } from './services/auth.service';
@@ -6,7 +7,6 @@ import * as globals from './shared/globals';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'gc-root',

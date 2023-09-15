@@ -3,7 +3,6 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
 import { isEmpty, isNil } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { switchMap, tap } from 'rxjs';
-import { Utente } from 'src/app/model/utente';
 import { AuthService } from 'src/app/services/auth.service';
 import { Andamento } from '../../model/andamento';
 import { AndamentoService } from '../../services/andamento.service';
@@ -132,19 +131,6 @@ export class ListaComponent implements OnInit {
     this.mostraPopupModifica = true;
     this.titoloModale = 'Pulizie casa';
   }
-
-  //   bolletta() {
-  //     this.andamentoSelected = {
-  //       giorno: DateTime.now().toISO(),
-  //       descrizione: '',
-  //       tipoSpesa: {
-  //         id: 3,
-  //         descrizione: 'Bollette',
-  //       },
-  //     };
-  //     this.mostraPopupModifica = true;
-  //     this.titoloModale = 'Bolletta';
-  //   }
 
   modifica(item: Andamento): void {
     this.andamentoSelected = {

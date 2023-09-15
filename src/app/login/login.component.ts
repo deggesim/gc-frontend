@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Utente } from '../model/utente';
 import { AuthService } from '../services/auth.service';
 import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
-import { Router } from '@angular/router';
 @Component({
   selector: 'gc-login',
   templateUrl: './login.component.html',
