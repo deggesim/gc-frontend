@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="salvaAndamento()" class="needs-validation" novalidate>
+  <form [formGroup]="form" (ngSubmit)="salvaAndamento($event)" class="needs-validation" novalidate>
     <input type="hidden" formControlName="id" />
 
     <div class="row">
@@ -78,7 +78,7 @@
             [ngClass]="{ 'is-invalid': form.get('costo')?.invalid && form.get('costo')?.dirty }"
             (focus)="costo.select()"
             currencyMask
-            (keyup.enter)="salvaAndamento()"
+            (keyup.enter)="salvaAndamento($event)"
           />
           <div *ngIf="form.get('costo')?.hasError('required') && form.get('costo')?.dirty" class="invalid-feedback">
             Il campo costo è obbligatorio

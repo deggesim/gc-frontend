@@ -14,7 +14,6 @@ import { SharedService } from '../../shared/shared.service';
 @Component({
   selector: 'gc-lista',
   templateUrl: './lista.component.html',
-  styleUrls: ['./lista.component.scss'],
 })
 export class ListaComponent implements OnInit {
   lista: Andamento[] = [];
@@ -32,7 +31,7 @@ export class ListaComponent implements OnInit {
   // paginazione
   size!: number;
   page = 1;
-  pageSize = 20;
+  pageSize = 10;
   maxSize = 5;
   boundaryLinks = true;
   searchExecute = false;
@@ -46,8 +45,6 @@ export class ListaComponent implements OnInit {
   sortedByCostoDesc = false;
 
   isLoggedIn$ = this.authService.isLoggedIn();
-
-  enableFloatingButtons = false;
 
   constructor(
     private router: Router,
@@ -136,18 +133,18 @@ export class ListaComponent implements OnInit {
     this.titoloModale = 'Pulizie casa';
   }
 
-  bolletta() {
-    this.andamentoSelected = {
-      giorno: DateTime.now().toISO(),
-      descrizione: '',
-      tipoSpesa: {
-        id: 3,
-        descrizione: 'Bollette',
-      },
-    };
-    this.mostraPopupModifica = true;
-    this.titoloModale = 'Bolletta';
-  }
+  //   bolletta() {
+  //     this.andamentoSelected = {
+  //       giorno: DateTime.now().toISO(),
+  //       descrizione: '',
+  //       tipoSpesa: {
+  //         id: 3,
+  //         descrizione: 'Bollette',
+  //       },
+  //     };
+  //     this.mostraPopupModifica = true;
+  //     this.titoloModale = 'Bolletta';
+  //   }
 
   modifica(item: Andamento): void {
     this.andamentoSelected = {

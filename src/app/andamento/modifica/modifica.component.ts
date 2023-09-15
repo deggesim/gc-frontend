@@ -55,7 +55,9 @@ export class ModificaComponent implements OnInit, OnChanges {
     this.form.get('giorno')?.updateValueAndValidity();
   }
 
-  salvaAndamento(): void {
+  salvaAndamento(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
     if (this.form.valid) {
       const andamento: Andamento = {
         id: this.form.value.id,
