@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top" aria-label="Barra di navigazione">
-  <a class="navbar-brand" routerLink="/home">
+  <a class="navbar-brand" [routerLink]="(isLoggedIn$ | async) ? '/home' : null">
     <fa-icon icon="house"></fa-icon>
   </a>
 

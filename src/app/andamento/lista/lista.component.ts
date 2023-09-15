@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { isEmpty, isNil } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { switchMap, tap } from 'rxjs';
+import { Utente } from 'src/app/model/utente';
 import { AuthService } from 'src/app/services/auth.service';
 import { Andamento } from '../../model/andamento';
 import { AndamentoService } from '../../services/andamento.service';
@@ -13,6 +14,7 @@ import { SharedService } from '../../shared/shared.service';
 @Component({
   selector: 'gc-lista',
   templateUrl: './lista.component.html',
+  styleUrls: ['./lista.component.scss'],
 })
 export class ListaComponent implements OnInit {
   lista: Andamento[] = [];
@@ -45,7 +47,10 @@ export class ListaComponent implements OnInit {
 
   isLoggedIn$ = this.authService.isLoggedIn();
 
+  enableFloatingButtons = false;
+
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
     private sharedService: SharedService,
@@ -53,6 +58,12 @@ export class ListaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoggedIn$.subscribe((loggeIn: boolean) => {
+      if (!loggeIn) {
+        this.router.navigate(['/login']);
+      }
+    });
+
     this.route.data.subscribe((data: Data) => {
       this.lista = data['lista'];
       this.size = this.lista.length;
@@ -84,6 +95,58 @@ export class ListaComponent implements OnInit {
     this.andamentoSelected = undefined;
     this.mostraPopupModifica = true;
     this.titoloModale = 'Nuova voce di spesa';
+  }
+
+  spesa() {
+    this.andamentoSelected = {
+      giorno: DateTime.now().toISO(),
+      descrizione: 'Spesa',
+      tipoSpesa: {
+        id: 1,
+        descrizione: 'Spesa',
+      },
+    };
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Spesa';
+  }
+
+  carburante() {
+    this.andamentoSelected = {
+      giorno: DateTime.now().toISO(),
+      descrizione: 'Gasolio Fiesta',
+      tipoSpesa: {
+        id: 2,
+        descrizione: 'Carburante',
+      },
+    };
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Carburante';
+  }
+
+  pulizie() {
+    this.andamentoSelected = {
+      giorno: DateTime.now().toISO(),
+      descrizione: 'Michela pulizie',
+      tipoSpesa: {
+        id: 7,
+        descrizione: 'Casa',
+      },
+    };
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Pulizie casa';
+  }
+
+  bolletta() {
+    this.andamentoSelected = {
+      giorno: DateTime.now().toISO(),
+      descrizione: '',
+      tipoSpesa: {
+        id: 3,
+        descrizione: 'Bollette',
+      },
+    };
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Bolletta';
   }
 
   modifica(item: Andamento): void {

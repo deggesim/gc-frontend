@@ -6,6 +6,7 @@ import * as globals from './shared/globals';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gc-root',
@@ -20,6 +21,7 @@ export class AppComponent implements AfterViewChecked, OnInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
+    private router: Router,
     public spinnerService: SpinnerService,
     private sharedService: SharedService,
     private authService: AuthService,
@@ -48,6 +50,7 @@ export class AppComponent implements AfterViewChecked, OnInit {
       const title = 'Logout';
       const message = 'Logout effettuato correttamente';
       this.sharedService.notifica(globals.toastType.warning, title, message);
+      this.router.navigate(['/login']);
     });
   }
 

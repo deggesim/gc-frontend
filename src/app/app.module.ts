@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeIt from '@angular/common/locales/it';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +26,6 @@ import { ListaComponent } from './andamento/lista/lista.component';
 import { ModificaComponent } from './andamento/modifica/modifica.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor.service';
 import { GlobalInterceptor } from './http-interceptors/global-interceptor.service';
 import { HeaderComponent } from './layout/header/header.component';
@@ -40,6 +39,7 @@ import { CasaResolver } from './services/resolvers/casa-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
 import { SpesaResolver } from './services/resolvers/spesa-resolver';
 import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
+import { StatisticheCompleteResolver } from './services/resolvers/statistiche-complete-resolver';
 import { StatisticheService } from './services/statistiche.service';
 import { TipoSpesaService } from './services/tipo-spesa.service';
 import { ErrorPageComponent } from './shared/error-page.component';
@@ -53,7 +53,6 @@ import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { StatisticheCompleteResolver } from './services/resolvers/statistiche-complete-resolver';
 
 registerLocaleData(localeIt);
 
@@ -76,7 +75,6 @@ export const customCurrencyMaskConfig = {
     HeaderComponent,
     PopupConfermaComponent,
     ErrorPageComponent,
-    HomeComponent,
     ListaComponent,
     ModificaComponent,
     SpeseFrequentiComponent,
