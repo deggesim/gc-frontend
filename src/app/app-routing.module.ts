@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { AuthGuard } from './guards/auth.guard';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { BollettaResolver } from './services/resolvers/bolletta-resolver';
 import { CarburanteResolver } from './services/resolvers/carburante-resolver';
 import { CasaResolver } from './services/resolvers/casa-resolver';
 import { ListaAndamentoResolver } from './services/resolvers/lista-andamento-resolver';
 import { SpesaResolver } from './services/resolvers/spesa-resolver';
 import { SpeseFrequentiResolver } from './services/resolvers/spese-frequenti-resolver';
+import { StatisticheCompleteResolver } from './services/resolvers/statistiche-complete-resolver';
 import { ErrorPageComponent } from './shared/error-page.component';
 import { BollettaComponent } from './statistiche/bolletta/bolletta.component';
 import { CarburanteComponent } from './statistiche/carburante/carburante.component';
@@ -16,22 +17,18 @@ import { CasaComponent } from './statistiche/casa/casa.component';
 import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
-import { StatisticheCompleteResolver } from './services/resolvers/statistiche-complete-resolver';
 
 const appRoutes: Routes = [
   {
     path: 'home',
-    component: HomeComponent,
+    component: ListaComponent,
+    resolve: { lista: ListaAndamentoResolver },
     data: { breadcrumb: 'Home' },
   },
   {
-    path: 'lista',
-    component: ListaComponent,
-    resolve: { lista: ListaAndamentoResolver },
-    data: {
-      breadcrumb: 'Lista',
-    },
-    canActivate: [AuthGuard],
+    path: 'login',
+    component: LoginComponent,
+    data: { breadcrumb: 'Login' },
   },
   {
     path: 'statistiche',

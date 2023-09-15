@@ -1,21 +1,37 @@
-<div class="float manina" (click)="nuova()">
-  <fa-icon icon="plus" class="float-icon"></fa-icon>
-</div>
-
 <form #form="ngForm">
-  <div class="input-group mb-3">
-    <input
-      type="text"
-      class="form-control"
-      id="filtro"
-      name="filtro"
-      #filtro="ngModel"
-      [(ngModel)]="filter"
-      (keyup)="applicaFiltro(filtro.value)"
-      (paste)="applicaFiltro($event.clipboardData?.getData('Text'))"
-      placeholder="Filtro"
-    />
-    <button class="btn btn-light btn-outline-primary" type="button" (click)="pulisciFiltro()">x</button>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="filtro"
+          name="filtro"
+          #filtro="ngModel"
+          [(ngModel)]="filter"
+          (keyup)="applicaFiltro(filtro.value)"
+          (paste)="applicaFiltro($event.clipboardData?.getData('Text'))"
+          placeholder="Filtro"
+        />
+        <button class="btn btn-light btn-outline-primary" type="button" (click)="pulisciFiltro()">x</button>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+        <button type="button" class="btn btn-primary" (click)="nuova()" tooltip="Nuova voce di spesa">
+          <fa-icon icon="plus"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="spesa()" tooltip="Spesa">
+          <fa-icon icon="shopping-cart"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="carburante()" tooltip="Carburante">
+          <fa-icon icon="car"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="pulizie()" tooltip="Pulizie">
+          <fa-icon icon="shower"></fa-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </form>
 

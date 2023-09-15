@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { isEmpty, isNil } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { switchMap, tap } from 'rxjs';
@@ -30,7 +30,7 @@ export class ListaComponent implements OnInit {
   // paginazione
   size!: number;
   page = 1;
-  pageSize = 20;
+  pageSize = 10;
   maxSize = 5;
   boundaryLinks = true;
   searchExecute = false;
@@ -46,6 +46,7 @@ export class ListaComponent implements OnInit {
   isLoggedIn$ = this.authService.isLoggedIn();
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
     private sharedService: SharedService,
@@ -53,6 +54,12 @@ export class ListaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoggedIn$.subscribe((loggeIn: boolean) => {
+      if (!loggeIn) {
+        this.router.navigate(['/login']);
+      }
+    });
+
     this.route.data.subscribe((data: Data) => {
       this.lista = data['lista'];
       this.size = this.lista.length;
@@ -84,6 +91,45 @@ export class ListaComponent implements OnInit {
     this.andamentoSelected = undefined;
     this.mostraPopupModifica = true;
     this.titoloModale = 'Nuova voce di spesa';
+  }
+
+  spesa() {
+    this.andamentoSelected = {
+      giorno: DateTime.now().toISO(),
+      descrizione: 'Spesa',
+      tipoSpesa: {
+        id: 1,
+        descrizione: 'Spesa',
+      },
+    };
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Spesa';
+  }
+
+  carburante() {
+    this.andamentoSelected = {
+      giorno: DateTime.now().toISO(),
+      descrizione: 'Gasolio Fiesta',
+      tipoSpesa: {
+        id: 2,
+        descrizione: 'Carburante',
+      },
+    };
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Carburante';
+  }
+
+  pulizie() {
+    this.andamentoSelected = {
+      giorno: DateTime.now().toISO(),
+      descrizione: 'Michela pulizie',
+      tipoSpesa: {
+        id: 7,
+        descrizione: 'Casa',
+      },
+    };
+    this.mostraPopupModifica = true;
+    this.titoloModale = 'Pulizie casa';
   }
 
   modifica(item: Andamento): void {

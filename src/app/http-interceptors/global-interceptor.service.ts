@@ -9,7 +9,12 @@ import { SpinnerService } from './../shared/spinner.service';
 
 @Injectable()
 export class GlobalInterceptor implements HttpInterceptor {
-  constructor(private sharedService: SharedService, private spinnerService: SpinnerService, private router: Router, private authService: AuthService) {}
+  constructor(
+    private sharedService: SharedService,
+    private spinnerService: SpinnerService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinnerService.start();
@@ -21,7 +26,7 @@ export class GlobalInterceptor implements HttpInterceptor {
           localStorage.removeItem('expires_at');
           localStorage.removeItem('utente');
           this.authService.getLoginSubject().next(false);
-          this.router.navigate(['home']);
+          this.router.navigate(['login']);
         }
         return throwError(() => new Error(error));
       }),
