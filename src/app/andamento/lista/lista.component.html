@@ -1,37 +1,31 @@
 <form #form="ngForm">
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="filtro"
-          name="filtro"
-          #filtro="ngModel"
-          [(ngModel)]="filter"
-          (keyup)="applicaFiltro(filtro.value)"
-          (paste)="applicaFiltro($event.clipboardData?.getData('Text'))"
-          placeholder="Filtro"
-        />
-        <button class="btn btn-light btn-outline-primary" type="button" (click)="pulisciFiltro()">x</button>
-      </div>
+  <div class="d-grid gap-2 pb-3 d-flex flex-wrap flex-sm-nowrap justify-content-center">
+    <div class="input-group order-4 order-sm-0">
+      <input
+        type="text"
+        class="form-control"
+        id="filtro"
+        name="filtro"
+        #filtro="ngModel"
+        [(ngModel)]="filter"
+        (keyup)="applicaFiltro(filtro.value)"
+        (paste)="applicaFiltro($event.clipboardData?.getData('Text'))"
+        placeholder="Filtro"
+      />
+      <button class="btn btn-light btn-outline-primary" type="button" (click)="pulisciFiltro()">x</button>
     </div>
-    <div class="col-sm-6">
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
-        <button type="button" class="btn btn-primary" (click)="nuova()" tooltip="Nuova voce di spesa">
-          <fa-icon icon="plus"></fa-icon>
-        </button>
-        <button type="button" class="btn btn-primary" (click)="spesa()" tooltip="Spesa">
-          <fa-icon icon="shopping-cart"></fa-icon>
-        </button>
-        <button type="button" class="btn btn-primary" (click)="carburante()" tooltip="Carburante">
-          <fa-icon icon="car"></fa-icon>
-        </button>
-        <button type="button" class="btn btn-primary" (click)="pulizie()" tooltip="Pulizie">
-          <fa-icon icon="shower"></fa-icon>
-        </button>
-      </div>
-    </div>
+    <button type="button" class="btn btn-primary order-0 order-sm-1" (click)="nuova()" tooltip="Nuova voce di spesa">
+      <fa-icon icon="plus"></fa-icon>
+    </button>
+    <button type="button" class="btn btn-primary order-1 order-sm-2" (click)="spesa()" tooltip="Spesa">
+      <fa-icon icon="shopping-cart"></fa-icon>
+    </button>
+    <button type="button" class="btn btn-primary order-2 order-sm-3" (click)="carburante()" tooltip="Carburante">
+      <fa-icon icon="car"></fa-icon>
+    </button>
+    <button type="button" class="btn btn-primary order-3 order-sm-4" (click)="pulizie()" tooltip="Pulizie">
+      <fa-icon icon="shower"></fa-icon>
+    </button>
   </div>
 </form>
 
