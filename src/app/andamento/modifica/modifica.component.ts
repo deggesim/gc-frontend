@@ -61,7 +61,7 @@ export class ModificaComponent implements OnInit, OnChanges {
     if (this.form.valid) {
       const andamento: Andamento = {
         id: this.form.value.id,
-        giorno: DateTime.fromJSDate(this.form.value.giorno as Date).toISODate(),
+        giorno: DateTime.fromJSDate(this.form.value.giorno as Date).toISODate() as string,
         descrizione: this.form.value.descrizione as string,
         costo: this.form.value.costo as number,
         tipoSpesa: this.form.value.tipoSpesa as TipoSpesa,

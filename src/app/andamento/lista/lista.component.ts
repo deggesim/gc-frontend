@@ -95,7 +95,7 @@ export class ListaComponent implements OnInit {
 
   spesa() {
     this.andamentoSelected = {
-      giorno: DateTime.now().toISO(),
+      giorno: DateTime.now().toISO() as string,
       descrizione: 'Spesa',
       tipoSpesa: {
         id: 1,
@@ -108,7 +108,7 @@ export class ListaComponent implements OnInit {
 
   carburante() {
     this.andamentoSelected = {
-      giorno: DateTime.now().toISO(),
+      giorno: DateTime.now().toISO() as string,
       descrizione: 'Gasolio Fiesta',
       tipoSpesa: {
         id: 2,
@@ -121,7 +121,7 @@ export class ListaComponent implements OnInit {
 
   pulizie() {
     this.andamentoSelected = {
-      giorno: DateTime.now().toISO(),
+      giorno: DateTime.now().toISO() as string,
       descrizione: 'Michela pulizie',
       tipoSpesa: {
         id: 7,
@@ -149,7 +149,7 @@ export class ListaComponent implements OnInit {
 
   clona(item: Andamento): void {
     this.andamentoSelected = {
-      giorno: DateTime.now().toISO(),
+      giorno: DateTime.now().toISO() as string,
       descrizione: item.descrizione,
       costo: item.costo,
       tipoSpesa: {
