@@ -36,8 +36,6 @@ export class SpesaComponent implements OnInit {
           forEach(this.barreSpesa, (item: Statistica) => {
             let mese = item.name;
             const dateTime = DateTime.fromFormat(mese, 'yyyyMM');
-            console.log('dateTime', dateTime);
-
             mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
             item.name = mese;
           });

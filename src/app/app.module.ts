@@ -20,7 +20,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective, NgxCurrencyInputMode, provideEnvironmentNgxCurrency } from 'ngx-currency';
 import { ToastrModule } from 'ngx-toastr';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { ModificaComponent } from './andamento/modifica/modifica.component';
@@ -66,7 +66,7 @@ export const customCurrencyMaskConfig = {
   suffix: '',
   thousands: '.',
   nullable: false,
-  inputMode: CurrencyMaskInputMode.FINANCIAL,
+  inputMode: NgxCurrencyInputMode.Financial,
 };
 
 @NgModule({
@@ -103,9 +103,9 @@ export const customCurrencyMaskConfig = {
     AccordionModule.forRoot(),
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
+    NgxCurrencyDirective,
     NgxChartsModule,
     ToastrModule.forRoot(),
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     FontAwesomeModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -119,6 +119,18 @@ export const customCurrencyMaskConfig = {
     { provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'it' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
+    provideEnvironmentNgxCurrency({
+      align: 'right',
+      allowNegative: false,
+      allowZero: false,
+      decimal: ',',
+      precision: 2,
+      prefix: '€ ',
+      suffix: '',
+      thousands: '.',
+      nullable: false,
+      inputMode: NgxCurrencyInputMode.Financial,
+    }),
     // resolver
     ListaAndamentoResolver,
     SpeseFrequentiResolver,
