@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import jwt_decode, { JwtPayload } from 'jwt-decode';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { isEmpty } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -63,7 +63,7 @@ export class AuthService {
   private setSession(authResult: { utente: Utente; token: string }) {
     const utente = authResult.utente;
     const token = authResult.token;
-    const exp = jwt_decode<JwtPayload>(token)['exp'];
+    const exp = jwtDecode<JwtPayload>(token)['exp'];
     const expiresAt = DateTime.now().plus({ milliseconds: exp });
 
     localStorage.setItem('token', token);
