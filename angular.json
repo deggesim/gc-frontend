@@ -33,10 +33,6 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
             "allowedCommonJsDependencies": ["clone-deep"],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -107,10 +103,6 @@
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
-            ],
-            "scripts": [
-              "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           }
         }
