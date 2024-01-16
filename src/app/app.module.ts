@@ -56,19 +56,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 registerLocaleData(localeIt);
 
-export const customCurrencyMaskConfig = {
-  align: 'right',
-  allowNegative: false,
-  allowZero: false,
-  decimal: ',',
-  precision: 2,
-  prefix: '€ ',
-  suffix: '',
-  thousands: '.',
-  nullable: false,
-  inputMode: NgxCurrencyInputMode.Financial,
-};
-
 @NgModule({
   declarations: [
     AppComponent,
