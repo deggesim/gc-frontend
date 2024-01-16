@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../statistiche.service';
 
 @Injectable()
-export class SpesaResolver implements Resolve<Statistica[]> {
+export class SpesaResolver  {
   constructor(private statisticaService: StatisticheService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Statistica[] | Observable<Statistica[]> | Promise<Statistica[]> {

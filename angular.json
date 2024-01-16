@@ -33,10 +33,6 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
             "allowedCommonJsDependencies": ["clone-deep"],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -79,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "gc-frontend:build:production"
+              "buildTarget": "gc-frontend:build:production"
             },
             "development": {
-              "browserTarget": "gc-frontend:build:development"
+              "buildTarget": "gc-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "gc-frontend:build"
+            "buildTarget": "gc-frontend:build"
           }
         },
         "test": {
@@ -107,10 +103,6 @@
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
-            ],
-            "scripts": [
-              "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           }
         }
