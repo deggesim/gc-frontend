@@ -11,7 +11,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   selector: 'gc-popup-conferma',
   templateUrl: './popup-conferma.component.html',
   styleUrls: ['./popup-conferma.component.scss'],
-  standalone: false,
+  imports: [ModalDirective],
 })
 export class PopupConfermaComponent {
   @Input() titolo!: string;

@@ -1,5 +1,11 @@
+import { NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Utente } from '../model/utente';
 import { AuthService } from '../services/auth.service';
@@ -8,7 +14,7 @@ import { SharedService } from '../shared/shared.service';
 @Component({
   selector: 'gc-login',
   templateUrl: './login.component.html',
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf],
 })
 export class LoginComponent {
   form = this.fb.group({

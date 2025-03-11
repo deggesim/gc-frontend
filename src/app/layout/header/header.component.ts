@@ -1,3 +1,4 @@
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   ActivatedRoute,
@@ -5,7 +6,16 @@ import {
   Params,
   PRIMARY_OUTLET,
   Router,
+  RouterLink,
+  RouterLinkActive,
 } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { CollapseDirective } from 'ngx-bootstrap/collapse';
+import {
+  BsDropdownDirective,
+  BsDropdownMenuDirective,
+  BsDropdownToggleDirective,
+} from 'ngx-bootstrap/dropdown';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 
@@ -19,7 +29,18 @@ interface IBreadcrumb {
   selector: 'gc-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  standalone: false,
+  imports: [
+    RouterLink,
+    FaIconComponent,
+    NgIf,
+    CollapseDirective,
+    BsDropdownDirective,
+    BsDropdownToggleDirective,
+    BsDropdownMenuDirective,
+    RouterLinkActive,
+    NgFor,
+    AsyncPipe,
+  ],
 })
 export class HeaderComponent implements OnInit {
   @Output() logout: EventEmitter<void> = new EventEmitter(true);

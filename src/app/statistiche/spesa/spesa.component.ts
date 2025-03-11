@@ -1,7 +1,13 @@
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
-import { ScaleType } from '@swimlane/ngx-charts';
+import { BarChartModule, ScaleType } from '@swimlane/ngx-charts';
 import { forEach, isEqual } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { Statistica } from '../../model/statistica';
@@ -10,7 +16,7 @@ import { StatisticheService } from '../../services/statistiche.service';
 @Component({
   selector: 'gc-spesa',
   templateUrl: './spesa.component.html',
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule, NgClass, BarChartModule],
 })
 export class SpesaComponent implements OnInit {
   // opzioni barre

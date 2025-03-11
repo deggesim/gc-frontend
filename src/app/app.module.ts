@@ -68,22 +68,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 registerLocaleData(localeIt);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    PopupConfermaComponent,
-    ErrorPageComponent,
-    ListaComponent,
-    ModificaComponent,
-    SpeseFrequentiComponent,
-    SpesaComponent,
-    CarburanteComponent,
-    BollettaComponent,
-    CasaComponent,
-    LoginComponent,
-    UserProfileComponent,
-    StatisticheComponent,
-  ],
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
@@ -111,6 +96,19 @@ registerLocaleData(localeIt);
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    HeaderComponent,
+    PopupConfermaComponent,
+    ErrorPageComponent,
+    ListaComponent,
+    ModificaComponent,
+    SpeseFrequentiComponent,
+    SpesaComponent,
+    CarburanteComponent,
+    BollettaComponent,
+    CasaComponent,
+    LoginComponent,
+    UserProfileComponent,
+    StatisticheComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

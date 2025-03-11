@@ -1,5 +1,11 @@
+import { NgClass, NgIf } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Utente } from '../model/utente';
 import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
@@ -8,7 +14,7 @@ import { SharedService } from '../shared/shared.service';
   selector: 'gc-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf],
 })
 export class UserProfileComponent {
   @Output() salva: EventEmitter<Utente> = new EventEmitter(true);

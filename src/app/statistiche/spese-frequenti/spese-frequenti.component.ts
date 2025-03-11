@@ -1,6 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
+import { PieChartModule } from '@swimlane/ngx-charts';
 import { forEach } from 'lodash-es';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Statistica } from '../../model/statistica';
@@ -9,7 +16,7 @@ import { StatisticheService } from '../../services/statistiche.service';
 @Component({
   selector: 'gc-spese-frequenti',
   templateUrl: './spese-frequenti.component.html',
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule, PieChartModule, NgFor],
 })
 export class SpeseFrequentiComponent implements OnInit {
   // opzioni torta

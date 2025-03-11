@@ -1,3 +1,4 @@
+import { NgClass, NgIf } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -7,9 +8,21 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { isNil } from 'lodash-es';
 import { DateTime } from 'luxon';
+import {
+  BsDatepickerDirective,
+  BsDatepickerInputDirective,
+} from 'ngx-bootstrap/datepicker';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { Andamento } from '../../model/andamento';
 import { TipoSpesa } from '../../model/tipo-spesa';
 import { TipoSpesaService } from '../../services/tipo-spesa.service';
@@ -18,7 +31,17 @@ import { SharedService } from '../../shared/shared.service';
 @Component({
   selector: 'gc-modifica',
   templateUrl: './modifica.component.html',
-  standalone: false,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    FaIconComponent,
+    BsDatepickerInputDirective,
+    BsDatepickerDirective,
+    NgClass,
+    NgIf,
+    NgSelectComponent,
+    NgxCurrencyDirective,
+  ],
 })
 export class ModificaComponent implements OnInit, OnChanges {
   @Input() andamento: Andamento | undefined;
