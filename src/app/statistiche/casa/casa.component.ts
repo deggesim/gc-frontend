@@ -8,8 +8,9 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-  selector: 'gc-casa',
-  templateUrl: './casa.component.html',
+    selector: 'gc-casa',
+    templateUrl: './casa.component.html',
+    standalone: false
 })
 export class CasaComponent implements OnInit {
   // opzioni barre

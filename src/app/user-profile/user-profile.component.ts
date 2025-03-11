@@ -5,9 +5,10 @@ import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 
 @Component({
-  selector: 'gc-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
+    selector: 'gc-user-profile',
+    templateUrl: './user-profile.component.html',
+    styleUrls: ['./user-profile.component.scss'],
+    standalone: false
 })
 export class UserProfileComponent {
   @Output() salva: EventEmitter<Utente> = new EventEmitter(true);

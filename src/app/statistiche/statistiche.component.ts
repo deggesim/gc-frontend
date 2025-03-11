@@ -4,8 +4,9 @@ import { forEach } from 'lodash-es';
 import { Statistica } from '../model/statistica';
 
 @Component({
-  selector: 'gc-statistiche',
-  templateUrl: './statistiche.component.html',
+    selector: 'gc-statistiche',
+    templateUrl: './statistiche.component.html',
+    standalone: false
 })
 export class StatisticheComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}

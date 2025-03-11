@@ -8,8 +8,9 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-  selector: 'gc-bolletta',
-  templateUrl: './bolletta.component.html',
+    selector: 'gc-bolletta',
+    templateUrl: './bolletta.component.html',
+    standalone: false
 })
 export class BollettaComponent implements OnInit {
   // opzioni barre

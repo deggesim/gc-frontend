@@ -8,8 +8,9 @@ import { TipoSpesaService } from '../../services/tipo-spesa.service';
 import { SharedService } from '../../shared/shared.service';
 
 @Component({
-  selector: 'gc-modifica',
-  templateUrl: './modifica.component.html',
+    selector: 'gc-modifica',
+    templateUrl: './modifica.component.html',
+    standalone: false
 })
 export class ModificaComponent implements OnInit, OnChanges {
   @Input() andamento: Andamento | undefined;

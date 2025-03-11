@@ -10,9 +10,10 @@ interface IBreadcrumb {
 }
 
 @Component({
-  selector: 'gc-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: 'gc-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   @Output() logout: EventEmitter<void> = new EventEmitter(true);

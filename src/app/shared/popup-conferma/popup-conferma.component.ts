@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'gc-popup-conferma',
-  templateUrl: './popup-conferma.component.html',
-  styleUrls: ['./popup-conferma.component.scss'],
+    selector: 'gc-popup-conferma',
+    templateUrl: './popup-conferma.component.html',
+    styleUrls: ['./popup-conferma.component.scss'],
+    standalone: false
 })
 export class PopupConfermaComponent {
   @Input() titolo!: string;

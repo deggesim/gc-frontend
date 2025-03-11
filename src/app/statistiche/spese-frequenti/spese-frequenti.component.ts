@@ -7,8 +7,9 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-  selector: 'gc-spese-frequenti',
-  templateUrl: './spese-frequenti.component.html',
+    selector: 'gc-spese-frequenti',
+    templateUrl: './spese-frequenti.component.html',
+    standalone: false
 })
 export class SpeseFrequentiComponent implements OnInit {
   // opzioni torta

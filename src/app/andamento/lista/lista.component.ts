@@ -11,8 +11,9 @@ import { PopupConfermaComponent } from '../../shared/popup-conferma/popup-confer
 import { SharedService } from '../../shared/shared.service';
 
 @Component({
-  selector: 'gc-lista',
-  templateUrl: './lista.component.html',
+    selector: 'gc-lista',
+    templateUrl: './lista.component.html',
+    standalone: false
 })
 export class ListaComponent implements OnInit {
   lista: Andamento[] = [];

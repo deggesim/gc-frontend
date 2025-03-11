@@ -6,8 +6,9 @@ import { AuthService } from '../services/auth.service';
 import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 @Component({
-  selector: 'gc-login',
-  templateUrl: './login.component.html',
+    selector: 'gc-login',
+    templateUrl: './login.component.html',
+    standalone: false
 })
 export class LoginComponent {
   form = this.fb.group({
