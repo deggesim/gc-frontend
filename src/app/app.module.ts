@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import localeIt from '@angular/common/locales/it';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -56,87 +56,81 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 registerLocaleData(localeIt);
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    PopupConfermaComponent,
-    ErrorPageComponent,
-    ListaComponent,
-    ModificaComponent,
-    SpeseFrequentiComponent,
-    SpesaComponent,
-    CarburanteComponent,
-    BollettaComponent,
-    CasaComponent,
-    LoginComponent,
-    UserProfileComponent,
-    StatisticheComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgSelectModule,
-    CollapseModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    PaginationModule.forRoot(),
-    TooltipModule.forRoot(),
-    ModalModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    ButtonsModule.forRoot(),
-    AccordionModule.forRoot(),
-    PopoverModule.forRoot(),
-    AlertModule.forRoot(),
-    NgxCurrencyDirective,
-    NgxChartsModule,
-    ToastrModule.forRoot(),
-    FontAwesomeModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      // Register the ServiceWorker as soon as the app is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'it' },
-    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
-    provideEnvironmentNgxCurrency({
-      align: 'right',
-      allowNegative: false,
-      allowZero: false,
-      decimal: ',',
-      precision: 2,
-      prefix: '€ ',
-      suffix: '',
-      thousands: '.',
-      nullable: false,
-      inputMode: NgxCurrencyInputMode.Financial,
-    }),
-    // resolver
-    ListaAndamentoResolver,
-    SpeseFrequentiResolver,
-    SpesaResolver,
-    CarburanteResolver,
-    BollettaResolver,
-    CasaResolver,
-    StatisticheCompleteResolver,
-    // altri servizi
-    AndamentoService,
-    TipoSpesaService,
-    StatisticheService,
-    SpinnerService,
-    SharedService,
-    AuthService,
-    AppUpdateService,
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        PopupConfermaComponent,
+        ErrorPageComponent,
+        ListaComponent,
+        ModificaComponent,
+        SpeseFrequentiComponent,
+        SpesaComponent,
+        CarburanteComponent,
+        BollettaComponent,
+        CasaComponent,
+        LoginComponent,
+        UserProfileComponent,
+        StatisticheComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        CollapseModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        PaginationModule.forRoot(),
+        TooltipModule.forRoot(),
+        ModalModule.forRoot(),
+        BsDatepickerModule.forRoot(),
+        ButtonsModule.forRoot(),
+        AccordionModule.forRoot(),
+        PopoverModule.forRoot(),
+        AlertModule.forRoot(),
+        NgxCurrencyDirective,
+        NgxChartsModule,
+        ToastrModule.forRoot(),
+        FontAwesomeModule,
+        AppRoutingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            // Register the ServiceWorker as soon as the app is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000',
+        })], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true },
+        { provide: LOCALE_ID, useValue: 'it' },
+        { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
+        provideEnvironmentNgxCurrency({
+            align: 'right',
+            allowNegative: false,
+            allowZero: false,
+            decimal: ',',
+            precision: 2,
+            prefix: '€ ',
+            suffix: '',
+            thousands: '.',
+            nullable: false,
+            inputMode: NgxCurrencyInputMode.Financial,
+        }),
+        // resolver
+        ListaAndamentoResolver,
+        SpeseFrequentiResolver,
+        SpesaResolver,
+        CarburanteResolver,
+        BollettaResolver,
+        CasaResolver,
+        StatisticheCompleteResolver,
+        // altri servizi
+        AndamentoService,
+        TipoSpesaService,
+        StatisticheService,
+        SpinnerService,
+        SharedService,
+        AuthService,
+        AppUpdateService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);
