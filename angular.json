@@ -21,8 +21,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/gc-frontend",
-              "browser": ""
+              "base": "dist/gc-frontend"
             },
             "index": "src/index.html",
             "polyfills": ["src/polyfills.ts"],

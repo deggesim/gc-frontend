@@ -4,7 +4,7 @@ const send = require('koa-send');
 
 const app = new Koa();
 
-app.use(serve('dist/gc-frontend'));
+app.use(serve('dist/gc-frontend/browser'));
 
 // always send index.html to handle PathLocationStrategy routing
 // https://link.medium.com/vHIZGVzA96
