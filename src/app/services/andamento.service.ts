@@ -23,10 +23,15 @@ export class AndamentoService {
   }
 
   modifica(item: Andamento): Observable<Andamento> {
-    return this.http.put<Andamento>(`${this.endpoint}/andamento/${item.id}`, item);
+    return this.http.put<Andamento>(
+      `${this.endpoint}/andamento/${item.id}`,
+      item
+    );
   }
 
   elimina(id: number): Observable<string> {
-    return this.http.delete(`${this.endpoint}/andamento/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.endpoint}/andamento/${id}`, {
+      responseType: 'text',
+    });
   }
 }

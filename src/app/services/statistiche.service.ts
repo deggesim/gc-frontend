@@ -11,26 +11,38 @@ export class StatisticheService {
   constructor(private http: HttpClient) {}
 
   speseFrequenti(range: string): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/spese-frequenti/${range}`);
+    return this.http.get<Statistica[]>(
+      `${this.endpoint}/statistiche/spese-frequenti/${range}`
+    );
   }
 
   spesa(frequenza: string): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/spesa/${frequenza}`);
+    return this.http.get<Statistica[]>(
+      `${this.endpoint}/statistiche/spesa/${frequenza}`
+    );
   }
 
   carburante(frequenza: string): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/carburante/${frequenza}`);
+    return this.http.get<Statistica[]>(
+      `${this.endpoint}/statistiche/carburante/${frequenza}`
+    );
   }
 
   bolletta(frequenza: string): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/bolletta/${frequenza}`);
+    return this.http.get<Statistica[]>(
+      `${this.endpoint}/statistiche/bolletta/${frequenza}`
+    );
   }
 
   casa(frequenza: string): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/casa/${frequenza}`);
+    return this.http.get<Statistica[]>(
+      `${this.endpoint}/statistiche/casa/${frequenza}`
+    );
   }
 
   tutto(frequenza: string): Observable<Statistica[]> {
-    return this.http.get<Statistica[]>(`${this.endpoint}/statistiche/tutto/${frequenza}`);
+    return this.http.get<Statistica[]>(
+      `${this.endpoint}/statistiche/tutto/${frequenza}`
+    );
   }
 }

@@ -1,6 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
+import { PieChartModule } from '@swimlane/ngx-charts';
 import { forEach } from 'lodash-es';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Statistica } from '../../model/statistica';
@@ -9,6 +16,7 @@ import { StatisticheService } from '../../services/statistiche.service';
 @Component({
   selector: 'gc-spese-frequenti',
   templateUrl: './spese-frequenti.component.html',
+  imports: [FormsModule, ReactiveFormsModule, PieChartModule, NgFor],
 })
 export class SpeseFrequentiComponent implements OnInit {
   // opzioni torta
@@ -44,9 +52,11 @@ export class SpeseFrequentiComponent implements OnInit {
 
   ngOnInit() {
     this.form.get('range')?.valueChanges.subscribe((value: string) => {
-      this.statisticheService.speseFrequenti(value).subscribe((data: Statistica[]) => {
-        this.tortaTipiSpesa = data;
-      });
+      this.statisticheService
+        .speseFrequenti(value)
+        .subscribe((data: Statistica[]) => {
+          this.tortaTipiSpesa = data;
+        });
     });
 
     this.route.data.subscribe((data: Data) => {
@@ -55,7 +65,8 @@ export class SpeseFrequentiComponent implements OnInit {
     });
 
     this.showLabels = this.deviceService.isDesktop();
-    this.showLegend = this.deviceService.isDesktop() || this.deviceService.isTablet();
+    this.showLegend =
+      this.deviceService.isDesktop() || this.deviceService.isTablet();
 
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
@@ -74,9 +85,11 @@ export class SpeseFrequentiComponent implements OnInit {
   }
 
   refresh() {
-    this.statisticheService.speseFrequenti(this.form.controls.range.value).subscribe((data: Statistica[]) => {
-      this.tortaTipiSpesa = data;
-    });
+    this.statisticheService
+      .speseFrequenti(this.form.controls.range.value)
+      .subscribe((data: Statistica[]) => {
+        this.tortaTipiSpesa = data;
+      });
   }
 
   tooltipTorta(arg: any) {

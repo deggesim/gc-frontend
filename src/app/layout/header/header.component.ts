@@ -1,5 +1,21 @@
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Params,
+  PRIMARY_OUTLET,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { CollapseDirective } from 'ngx-bootstrap/collapse';
+import {
+  BsDropdownDirective,
+  BsDropdownMenuDirective,
+  BsDropdownToggleDirective,
+} from 'ngx-bootstrap/dropdown';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,6 +29,18 @@ interface IBreadcrumb {
   selector: 'gc-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  imports: [
+    RouterLink,
+    FaIconComponent,
+    NgIf,
+    CollapseDirective,
+    BsDropdownDirective,
+    BsDropdownToggleDirective,
+    BsDropdownMenuDirective,
+    RouterLinkActive,
+    NgFor,
+    AsyncPipe,
+  ],
 })
 export class HeaderComponent implements OnInit {
   @Output() logout: EventEmitter<void> = new EventEmitter(true);
@@ -23,18 +51,28 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn$ = this.authService.isLoggedIn();
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     // subscribe to the NavigationEnd event
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      // set breadcrumbs
-      const root: ActivatedRoute = this.activatedRoute.root;
-      this.breadcrumbs = this.getBreadcrumbs(root);
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        // set breadcrumbs
+        const root: ActivatedRoute = this.activatedRoute.root;
+        this.breadcrumbs = this.getBreadcrumbs(root);
+      });
   }
 
-  private getBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
+  private getBreadcrumbs(
+    route: ActivatedRoute,
+    url: string = '',
+    breadcrumbs: IBreadcrumb[] = []
+  ): IBreadcrumb[] {
     const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
 
     // get the child routes
@@ -58,7 +96,9 @@ export class HeaderComponent implements OnInit {
       }
 
       // get the route's URL segment
-      const routeURL: string = child.snapshot.url.map((segment) => segment.path).join('/');
+      const routeURL: string = child.snapshot.url
+        .map((segment) => segment.path)
+        .join('/');
 
       // append route URL to URL
       url += `/${routeURL}`;

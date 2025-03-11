@@ -1,5 +1,11 @@
+import { NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Utente } from '../model/utente';
 import { AuthService } from '../services/auth.service';
@@ -8,6 +14,7 @@ import { SharedService } from '../shared/shared.service';
 @Component({
   selector: 'gc-login',
   templateUrl: './login.component.html',
+  imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf],
 })
 export class LoginComponent {
   form = this.fb.group({
@@ -15,7 +22,12 @@ export class LoginComponent {
     password: [null as string | null, Validators.required],
   });
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private sharedService: SharedService) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private sharedService: SharedService
+  ) {}
 
   public login() {
     const utente: Utente = {

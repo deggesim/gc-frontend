@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { ListaComponent } from './andamento/lista/lista.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
@@ -18,7 +17,7 @@ import { SpesaComponent } from './statistiche/spesa/spesa.component';
 import { SpeseFrequentiComponent } from './statistiche/spese-frequenti/spese-frequenti.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
 
-const appRoutes: Routes = [
+export const APP_ROUTES: Routes = [
   {
     path: 'home',
     component: ListaComponent,
@@ -45,7 +44,10 @@ const appRoutes: Routes = [
       {
         path: 'spese-frequenti',
         component: SpeseFrequentiComponent,
-        resolve: { tortaTipiSpesa: SpeseFrequentiResolver, speseTotali: StatisticheCompleteResolver },
+        resolve: {
+          tortaTipiSpesa: SpeseFrequentiResolver,
+          speseTotali: StatisticheCompleteResolver,
+        },
         data: { breadcrumb: 'Lista', period: 'M' },
         canActivate: [AuthGuard],
       },
@@ -83,10 +85,3 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: ErrorPageComponent },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(appRoutes, {})],
-  exports: [RouterModule],
-  providers: [],
-})
-export class AppRoutingModule {}

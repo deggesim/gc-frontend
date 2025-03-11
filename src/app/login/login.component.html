@@ -1,4 +1,9 @@
-<form [formGroup]="form" (ngSubmit)="login()" class="needs-validation" novalidate>
+<form
+  [formGroup]="form"
+  (ngSubmit)="login()"
+  class="needs-validation"
+  novalidate
+>
   <div class="row">
     <div class="col-sm-6">
       <div class="mb-3">
@@ -11,10 +16,16 @@
           formControlName="email"
           autocomplete="username"
           [ngClass]="{
-            'is-invalid': form.get('email')?.invalid && form.get('email')?.dirty
+            'is-invalid':
+              form.get('email')?.invalid && form.get('email')?.dirty,
           }"
         />
-        <div *ngIf="form.get('email')?.hasError('required') && form.get('email')?.dirty" class="invalid-feedback">
+        <div
+          *ngIf="
+            form.get('email')?.hasError('required') && form.get('email')?.dirty
+          "
+          class="invalid-feedback"
+        >
           Il campo email è obbligatorio
         </div>
       </div>
@@ -31,10 +42,17 @@
           formControlName="password"
           autocomplete="current-password"
           [ngClass]="{
-            'is-invalid': form.get('password')?.invalid && form.get('password')?.dirty
+            'is-invalid':
+              form.get('password')?.invalid && form.get('password')?.dirty,
           }"
         />
-        <div *ngIf="form.get('password')?.hasError('required') && form.get('password')?.dirty" class="invalid-feedback">
+        <div
+          *ngIf="
+            form.get('password')?.hasError('required') &&
+            form.get('password')?.dirty
+          "
+          class="invalid-feedback"
+        >
           Il campo password è obbligatorio
         </div>
       </div>
@@ -42,6 +60,8 @@
   </div>
 
   <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-3 pb-3">
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>&nbsp;
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      Login</button
+    >&nbsp;
   </div>
 </form>

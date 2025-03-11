@@ -1,7 +1,20 @@
+import {
+  AsyncPipe,
+  CurrencyPipe,
+  DatePipe,
+  NgClass,
+  NgFor,
+  NgIf,
+} from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { isEmpty, isNil } from 'lodash-es';
 import { DateTime } from 'luxon';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { PaginationComponent } from 'ngx-bootstrap/pagination';
+import { TooltipDirective } from 'ngx-bootstrap/tooltip';
 import { switchMap, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Andamento } from '../../model/andamento';
@@ -9,10 +22,26 @@ import { AndamentoService } from '../../services/andamento.service';
 import * as globals from '../../shared/globals';
 import { PopupConfermaComponent } from '../../shared/popup-conferma/popup-conferma.component';
 import { SharedService } from '../../shared/shared.service';
+import { ModificaComponent } from '../modifica/modifica.component';
 
 @Component({
   selector: 'gc-lista',
   templateUrl: './lista.component.html',
+  imports: [
+    FormsModule,
+    TooltipDirective,
+    FaIconComponent,
+    NgClass,
+    NgFor,
+    NgIf,
+    PaginationComponent,
+    PopupConfermaComponent,
+    ModalDirective,
+    ModificaComponent,
+    AsyncPipe,
+    CurrencyPipe,
+    DatePipe,
+  ],
 })
 export class ListaComponent implements OnInit {
   lista: Andamento[] = [];
@@ -70,8 +99,13 @@ export class ListaComponent implements OnInit {
   applicaFiltro(filtro: string | undefined) {
     if (filtro != null && filtro.length > 2) {
       this.listaFiltrata = this.lista.filter((andamento: Andamento) => {
-        const descrizioneFound = andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
-        const tipoSpesaFound = andamento.tipoSpesa.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
+        const descrizioneFound =
+          andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >=
+          0;
+        const tipoSpesaFound =
+          andamento.tipoSpesa.descrizione
+            .toLowerCase()
+            .indexOf(filtro.toLowerCase()) >= 0;
         return descrizioneFound || tipoSpesaFound;
       });
     } else {
@@ -162,14 +196,24 @@ export class ListaComponent implements OnInit {
   }
 
   salva(andamento: Andamento) {
-    const obs$ = isNil(andamento.id) ? this.andamentoService.inserisci(andamento) : this.andamentoService.modifica(andamento);
+    const obs$ = isNil(andamento.id)
+      ? this.andamentoService.inserisci(andamento)
+      : this.andamentoService.modifica(andamento);
     obs$
       .pipe(
         tap(() => {
           this.mostraPopupModifica = false;
           isNil(andamento.id)
-            ? this.sharedService.notifica(globals.toastType.success, 'Nuova voce di spesa', 'Nuova voce di spesa inserita correttamente')
-            : this.sharedService.notifica(globals.toastType.success, 'Modifica voce di spesa', 'Voce di spesa modificata correttamente');
+            ? this.sharedService.notifica(
+                globals.toastType.success,
+                'Nuova voce di spesa',
+                'Nuova voce di spesa inserita correttamente'
+              )
+            : this.sharedService.notifica(
+                globals.toastType.success,
+                'Modifica voce di spesa',
+                'Voce di spesa modificata correttamente'
+              );
         }),
         switchMap(() => this.andamentoService.lista())
       )

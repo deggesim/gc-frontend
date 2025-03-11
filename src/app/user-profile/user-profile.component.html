@@ -1,4 +1,9 @@
-<form [formGroup]="form" (ngSubmit)="confirm()" class="needs-validation" novalidate>
+<form
+  [formGroup]="form"
+  (ngSubmit)="confirm()"
+  class="needs-validation"
+  novalidate
+>
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
     <input
@@ -9,10 +14,15 @@
       formControlName="email"
       autocomplete="username"
       [ngClass]="{
-        'is-invalid': form.get('email')?.invalid && form.get('email')?.dirty
+        'is-invalid': form.get('email')?.invalid && form.get('email')?.dirty,
       }"
     />
-    <div *ngIf="form.get('email')?.hasError('required') && form.get('email')?.dirty" class="invalid-feedback">
+    <div
+      *ngIf="
+        form.get('email')?.hasError('required') && form.get('email')?.dirty
+      "
+      class="invalid-feedback"
+    >
       Il campo email è obbligatorio
     </div>
   </div>
@@ -27,10 +37,17 @@
       formControlName="newPassword"
       autocomplete="new-password"
       [ngClass]="{
-        'is-invalid': form.get('newPassword')?.invalid && form.get('newPassword')?.dirty
+        'is-invalid':
+          form.get('newPassword')?.invalid && form.get('newPassword')?.dirty,
       }"
     />
-    <div *ngIf="form.get('newPassword')?.hasError('required') && form.get('newPassword')?.dirty" class="invalid-feedback">
+    <div
+      *ngIf="
+        form.get('newPassword')?.hasError('required') &&
+        form.get('newPassword')?.dirty
+      "
+      class="invalid-feedback"
+    >
       Il campo Nuova password è obbligatorio
     </div>
   </div>
@@ -45,16 +62,28 @@
       autocomplete="new-password"
       formControlName="confirmPassword"
       [ngClass]="{
-        'is-invalid': form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.dirty
+        'is-invalid':
+          form.get('confirmPassword')?.invalid &&
+          form.get('confirmPassword')?.dirty,
       }"
     />
-    <div *ngIf="form.get('confirmPassword')?.hasError('required') && form.get('confirmPassword')?.dirty" class="invalid-feedback">
+    <div
+      *ngIf="
+        form.get('confirmPassword')?.hasError('required') &&
+        form.get('confirmPassword')?.dirty
+      "
+      class="invalid-feedback"
+    >
       Il campo Conferma password è obbligatorio
     </div>
   </div>
 
   <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-3 pb-3">
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Salva</button>&nbsp;
-    <button type="button" class="btn btn-primary" (click)="annulla.emit()">Annulla</button>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      Salva</button
+    >&nbsp;
+    <button type="button" class="btn btn-primary" (click)="annulla.emit()">
+      Annulla
+    </button>
   </div>
 </form>

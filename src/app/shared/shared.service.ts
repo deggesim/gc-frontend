@@ -14,7 +14,10 @@ export class SharedService {
     dateInputFormat: 'DD/MM/YYYY',
   };
 
-  constructor(private localeService: BsLocaleService, private toastr: ToastrService) {
+  constructor(
+    private localeService: BsLocaleService,
+    private toastr: ToastrService
+  ) {
     defineLocale('it', itLocale);
     this.localeService.use('it');
   }
@@ -55,16 +58,21 @@ export class SharedService {
     let descrizione = '';
     console.error(response);
     const error = typeof response.error === 'string' ? response.error : '';
-    const message = typeof response.message === 'string' ? response.message : '';
+    const message =
+      typeof response.message === 'string' ? response.message : '';
 
     switch (response.status) {
       case 401:
         titolo = 'Utente non loggato';
-        descrizione = error || message || "L'utente non è loggato o la sessione è scaduta";
+        descrizione =
+          error || message || "L'utente non è loggato o la sessione è scaduta";
         break;
       case 403:
         titolo = 'Utente non autorizzato';
-        descrizione = error || message || "L'utente non è autorizzato ad eseguire l'operazione richiesta";
+        descrizione =
+          error ||
+          message ||
+          "L'utente non è autorizzato ad eseguire l'operazione richiesta";
         break;
       case 400:
         titolo = 'Errore nella richiesta';
@@ -76,11 +84,13 @@ export class SharedService {
         break;
       case 500:
         titolo = 'Errore server';
-        descrizione = error || message || 'Si è verificato un errore imprevisto';
+        descrizione =
+          error || message || 'Si è verificato un errore imprevisto';
         break;
       default:
         titolo = 'Problema generico';
-        descrizione = error || message || 'Si è verificato un errore imprevisto';
+        descrizione =
+          error || message || 'Si è verificato un errore imprevisto';
         break;
     }
 
@@ -90,7 +100,8 @@ export class SharedService {
 
   notifyErrorDownload() {
     const titolo = 'Errore server';
-    const descrizione = 'Si è verificato un problema nel download del documento';
+    const descrizione =
+      'Si è verificato un problema nel download del documento';
     this.notifica(globals.toastType.error, titolo, descrizione);
   }
 }

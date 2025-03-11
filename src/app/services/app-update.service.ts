@@ -6,7 +6,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AppUpdateService {
-  private updateAvailable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private updateAvailable: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
 
   updateAvaliable$: Observable<boolean> = this.updateAvailable.asObservable();
 

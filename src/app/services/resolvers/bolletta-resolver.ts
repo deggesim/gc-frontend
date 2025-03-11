@@ -5,10 +5,13 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../statistiche.service';
 
 @Injectable()
-export class BollettaResolver  {
+export class BollettaResolver {
   constructor(private statisticaService: StatisticheService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Statistica[] | Observable<Statistica[]> | Promise<Statistica[]> {
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Statistica[] | Observable<Statistica[]> | Promise<Statistica[]> {
     const period = route.data['period'] ? route.data['period'] : 'M';
     return this.statisticaService.bolletta(period);
   }
