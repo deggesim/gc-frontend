@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   AfterViewChecked,
   ChangeDetectorRef,
@@ -5,7 +6,14 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import {
+  FaIconComponent,
+  FaIconLibrary,
+} from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { HeaderComponent } from './layout/header/header.component';
 import { Utente } from './model/utente';
 import { AppUpdateService } from './services/app-update.service';
 import { AuthService } from './services/auth.service';
@@ -13,11 +21,21 @@ import * as globals from './shared/globals';
 import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.component';
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @Component({
   selector: 'gc-root',
   templateUrl: './app.component.html',
-  standalone: false,
+  imports: [
+    HeaderComponent,
+    RouterOutlet,
+    NgIf,
+    FaIconComponent,
+    ModalDirective,
+    UserProfileComponent,
+    PopupConfermaComponent,
+    RouterOutlet,
+  ],
 })
 export class AppComponent implements AfterViewChecked, OnInit {
   // Sets initial value to true to show loading spinner on first load
@@ -32,8 +50,11 @@ export class AppComponent implements AfterViewChecked, OnInit {
     public spinnerService: SpinnerService,
     private sharedService: SharedService,
     private authService: AuthService,
-    private appUpdateService: AppUpdateService
-  ) {}
+    private appUpdateService: AppUpdateService,
+    private library: FaIconLibrary
+  ) {
+    library.addIconPacks(fas);
+  }
 
   ngOnInit(): void {
     this.appUpdateService.updateAvaliable$.subscribe(
