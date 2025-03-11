@@ -1,8 +1,10 @@
+import { registerLocaleData } from '@angular/common';
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import it from '@angular/common/locales/it';
 import {
   DEFAULT_CURRENCY_CODE,
   enableProdMode,
@@ -12,6 +14,12 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import {
+  PreloadAllModules,
+  provideRouter,
+  withDebugTracing,
+  withPreloading,
+} from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -33,6 +41,7 @@ import {
 } from 'ngx-currency';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app/app.component';
+import { APP_ROUTES } from './app/app.routes';
 import { AuthInterceptor } from './app/http-interceptors/auth-interceptor.service';
 import { GlobalInterceptor } from './app/http-interceptors/global-interceptor.service';
 import { AndamentoService } from './app/services/andamento.service';
@@ -50,17 +59,12 @@ import { TipoSpesaService } from './app/services/tipo-spesa.service';
 import { SharedService } from './app/shared/shared.service';
 import { SpinnerService } from './app/shared/spinner.service';
 import { environment } from './environments/environment';
-import { APP_ROUTES } from './app/app.routes';
-import {
-  PreloadAllModules,
-  provideRouter,
-  withDebugTracing,
-  withPreloading,
-} from '@angular/router';
 
 if (environment.production) {
   enableProdMode();
 }
+
+registerLocaleData(it, 'it-IT');
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -89,14 +93,10 @@ bootstrapApplication(AppComponent, {
         registrationStrategy: 'registerWhenStable:30000',
       })
     ),
-    provideRouter(
-      APP_ROUTES,
-      withPreloading(PreloadAllModules),
-      withDebugTracing()
-    ),
+    provideRouter(APP_ROUTES, withPreloading(PreloadAllModules)),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'it' },
+    { provide: LOCALE_ID, useValue: 'it-IT' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     provideEnvironmentNgxCurrency({
       align: 'right',
