@@ -9,9 +9,9 @@ import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
 
 @Component({
-    selector: 'gc-root',
-    templateUrl: './app.component.html',
-    standalone: false
+  selector: 'gc-root',
+  templateUrl: './app.component.html',
+  standalone: false,
 })
 export class AppComponent implements AfterViewChecked, OnInit {
   // Sets initial value to true to show loading spinner on first load
@@ -26,7 +26,7 @@ export class AppComponent implements AfterViewChecked, OnInit {
     public spinnerService: SpinnerService,
     private sharedService: SharedService,
     private authService: AuthService,
-    private appUpdateService: AppUpdateService
+    private appUpdateService: AppUpdateService,
   ) {}
 
   ngOnInit(): void {

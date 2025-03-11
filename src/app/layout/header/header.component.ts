@@ -10,10 +10,10 @@ interface IBreadcrumb {
 }
 
 @Component({
-    selector: 'gc-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
-    standalone: false
+  selector: 'gc-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  standalone: false,
 })
 export class HeaderComponent implements OnInit {
   @Output() logout: EventEmitter<void> = new EventEmitter(true);
@@ -24,7 +24,11 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn$ = this.authService.isLoggedIn();
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit() {
     // subscribe to the NavigationEnd event

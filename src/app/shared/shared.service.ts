@@ -14,7 +14,10 @@ export class SharedService {
     dateInputFormat: 'DD/MM/YYYY',
   };
 
-  constructor(private localeService: BsLocaleService, private toastr: ToastrService) {
+  constructor(
+    private localeService: BsLocaleService,
+    private toastr: ToastrService,
+  ) {
     defineLocale('it', itLocale);
     this.localeService.use('it');
   }

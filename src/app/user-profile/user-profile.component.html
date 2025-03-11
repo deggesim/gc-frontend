@@ -9,7 +9,7 @@
       formControlName="email"
       autocomplete="username"
       [ngClass]="{
-        'is-invalid': form.get('email')?.invalid && form.get('email')?.dirty
+        'is-invalid': form.get('email')?.invalid && form.get('email')?.dirty,
       }"
     />
     <div *ngIf="form.get('email')?.hasError('required') && form.get('email')?.dirty" class="invalid-feedback">
@@ -27,7 +27,7 @@
       formControlName="newPassword"
       autocomplete="new-password"
       [ngClass]="{
-        'is-invalid': form.get('newPassword')?.invalid && form.get('newPassword')?.dirty
+        'is-invalid': form.get('newPassword')?.invalid && form.get('newPassword')?.dirty,
       }"
     />
     <div *ngIf="form.get('newPassword')?.hasError('required') && form.get('newPassword')?.dirty" class="invalid-feedback">
@@ -45,7 +45,7 @@
       autocomplete="new-password"
       formControlName="confirmPassword"
       [ngClass]="{
-        'is-invalid': form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.dirty
+        'is-invalid': form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.dirty,
       }"
     />
     <div *ngIf="form.get('confirmPassword')?.hasError('required') && form.get('confirmPassword')?.dirty" class="invalid-feedback">

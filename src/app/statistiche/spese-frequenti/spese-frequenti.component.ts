@@ -7,9 +7,9 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-    selector: 'gc-spese-frequenti',
-    templateUrl: './spese-frequenti.component.html',
-    standalone: false
+  selector: 'gc-spese-frequenti',
+  templateUrl: './spese-frequenti.component.html',
+  standalone: false,
 })
 export class SpeseFrequentiComponent implements OnInit {
   // opzioni torta
@@ -26,7 +26,7 @@ export class SpeseFrequentiComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
     private deviceService: DeviceDetectorService,
-    private statisticheService: StatisticheService
+    private statisticheService: StatisticheService,
   ) {}
 
   speseTotali: Statistica[] = [];
@@ -70,7 +70,7 @@ export class SpeseFrequentiComponent implements OnInit {
         }
         const media = { name: item.name, value: item.value / monthDivider };
         this.mediaMensile.push(media);
-      }
+      },
     );
   }
 

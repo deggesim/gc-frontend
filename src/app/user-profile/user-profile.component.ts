@@ -5,10 +5,10 @@ import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 
 @Component({
-    selector: 'gc-user-profile',
-    templateUrl: './user-profile.component.html',
-    styleUrls: ['./user-profile.component.scss'],
-    standalone: false
+  selector: 'gc-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.scss'],
+  standalone: false,
 })
 export class UserProfileComponent {
   @Output() salva: EventEmitter<Utente> = new EventEmitter(true);
@@ -21,7 +21,10 @@ export class UserProfileComponent {
     confirmPassword: ['', Validators.required],
   });
 
-  constructor(private fb: NonNullableFormBuilder, private sharedService: SharedService) {}
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private sharedService: SharedService,
+  ) {}
 
   confirm(): void {
     if (this.form.value.newPassword === this.form.value.confirmPassword) {

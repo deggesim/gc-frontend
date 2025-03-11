@@ -8,9 +8,9 @@ import { TipoSpesaService } from '../../services/tipo-spesa.service';
 import { SharedService } from '../../shared/shared.service';
 
 @Component({
-    selector: 'gc-modifica',
-    templateUrl: './modifica.component.html',
-    standalone: false
+  selector: 'gc-modifica',
+  templateUrl: './modifica.component.html',
+  standalone: false,
 })
 export class ModificaComponent implements OnInit, OnChanges {
   @Input() andamento: Andamento | undefined;
@@ -27,7 +27,11 @@ export class ModificaComponent implements OnInit, OnChanges {
     tipoSpesa: [null as TipoSpesa | null, Validators.required],
   });
 
-  constructor(private fb: FormBuilder, public sharedService: SharedService, private tipoSpesaService: TipoSpesaService) {}
+  constructor(
+    private fb: FormBuilder,
+    public sharedService: SharedService,
+    private tipoSpesaService: TipoSpesaService,
+  ) {}
 
   ngOnInit() {
     this.tipoSpesaService.lista().subscribe((lista: TipoSpesa[]) => {

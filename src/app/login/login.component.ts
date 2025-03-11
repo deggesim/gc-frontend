@@ -6,9 +6,9 @@ import { AuthService } from '../services/auth.service';
 import * as globals from '../shared/globals';
 import { SharedService } from '../shared/shared.service';
 @Component({
-    selector: 'gc-login',
-    templateUrl: './login.component.html',
-    standalone: false
+  selector: 'gc-login',
+  templateUrl: './login.component.html',
+  standalone: false,
 })
 export class LoginComponent {
   form = this.fb.group({
@@ -16,7 +16,12 @@ export class LoginComponent {
     password: [null as string | null, Validators.required],
   });
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private sharedService: SharedService) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private sharedService: SharedService,
+  ) {}
 
   public login() {
     const utente: Utente = {

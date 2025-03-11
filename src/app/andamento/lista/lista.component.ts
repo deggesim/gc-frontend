@@ -11,9 +11,9 @@ import { PopupConfermaComponent } from '../../shared/popup-conferma/popup-confer
 import { SharedService } from '../../shared/shared.service';
 
 @Component({
-    selector: 'gc-lista',
-    templateUrl: './lista.component.html',
-    standalone: false
+  selector: 'gc-lista',
+  templateUrl: './lista.component.html',
+  standalone: false,
 })
 export class ListaComponent implements OnInit {
   lista: Andamento[] = [];
@@ -51,7 +51,7 @@ export class ListaComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private sharedService: SharedService,
-    private andamentoService: AndamentoService
+    private andamentoService: AndamentoService,
   ) {}
 
   ngOnInit() {
@@ -172,7 +172,7 @@ export class ListaComponent implements OnInit {
             ? this.sharedService.notifica(globals.toastType.success, 'Nuova voce di spesa', 'Nuova voce di spesa inserita correttamente')
             : this.sharedService.notifica(globals.toastType.success, 'Modifica voce di spesa', 'Voce di spesa modificata correttamente');
         }),
-        switchMap(() => this.andamentoService.lista())
+        switchMap(() => this.andamentoService.lista()),
       )
       .subscribe((lista: Andamento[]) => {
         this.andamentoSelected = undefined;
@@ -199,10 +199,10 @@ export class ListaComponent implements OnInit {
             this.sharedService.notifica(
               globals.toastType.warning,
               'Voce di spesa eliminata',
-              'La voce di spesa è stata eliminata correttamente'
+              'La voce di spesa è stata eliminata correttamente',
             );
           }),
-          switchMap(() => this.andamentoService.lista())
+          switchMap(() => this.andamentoService.lista()),
         )
         .subscribe((lista: Andamento[]) => {
           this.popupConfermaElimina.chiudiModale();

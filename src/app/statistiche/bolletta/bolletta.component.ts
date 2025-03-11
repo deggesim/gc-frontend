@@ -8,9 +8,9 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
-    selector: 'gc-bolletta',
-    templateUrl: './bolletta.component.html',
-    standalone: false
+  selector: 'gc-bolletta',
+  templateUrl: './bolletta.component.html',
+  standalone: false,
 })
 export class BollettaComponent implements OnInit {
   // opzioni barre
@@ -27,7 +27,11 @@ export class BollettaComponent implements OnInit {
     frequenza: ['M', Validators.required],
   });
 
-  constructor(private route: ActivatedRoute, private fb: NonNullableFormBuilder, private statisticheService: StatisticheService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private fb: NonNullableFormBuilder,
+    private statisticheService: StatisticheService,
+  ) {}
 
   ngOnInit() {
     this.form.get('frequenza')?.valueChanges.subscribe((value: string) => {

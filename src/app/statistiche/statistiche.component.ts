@@ -4,12 +4,15 @@ import { forEach } from 'lodash-es';
 import { Statistica } from '../model/statistica';
 
 @Component({
-    selector: 'gc-statistiche',
-    templateUrl: './statistiche.component.html',
-    standalone: false
+  selector: 'gc-statistiche',
+  templateUrl: './statistiche.component.html',
+  standalone: false,
 })
 export class StatisticheComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
 
   showMainPage = true;
 
@@ -65,7 +68,7 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaBollettaMensile.push(media);
-        }
+        },
       );
 
       forEach(
@@ -77,7 +80,7 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaSpesaMensile.push(media);
-        }
+        },
       );
 
       forEach(
@@ -89,7 +92,7 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaCarburanteMensile.push(media);
-        }
+        },
       );
 
       forEach(
@@ -101,7 +104,7 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaCasaMensile.push(media);
-        }
+        },
       );
     });
   }

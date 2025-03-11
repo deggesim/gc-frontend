@@ -13,7 +13,7 @@ export class GlobalInterceptor implements HttpInterceptor {
     private sharedService: SharedService,
     private spinnerService: SpinnerService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -30,7 +30,7 @@ export class GlobalInterceptor implements HttpInterceptor {
         }
         return throwError(() => new Error(error));
       }),
-      finalize(() => this.spinnerService.end())
+      finalize(() => this.spinnerService.end()),
     );
   }
 }

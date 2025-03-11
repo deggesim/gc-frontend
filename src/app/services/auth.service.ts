@@ -15,12 +15,15 @@ export class AuthService {
 
   isLoginSubject = new BehaviorSubject<boolean>(this.tokenValid());
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   public login(utente: Utente) {
     return this.http.post<{ utente: Utente; token: string }>(`${this.endpoint}/utente/login`, utente).pipe(
       tap((res: { utente: Utente; token: string }) => this.setSession(res)),
-      shareReplay()
+      shareReplay(),
     );
   }
 
@@ -32,14 +35,14 @@ export class AuthService {
         localStorage.removeItem('utente');
         this.isLoginSubject.next(false);
         this.router.navigate(['home']);
-      })
+      }),
     );
   }
 
   public salva(utente: Utente): Observable<{ utente: Utente; token: string }> {
     return this.http.patch<{ utente: Utente; token: string }>(`${this.endpoint}/utente/me`, utente).pipe(
       tap((res: { utente: Utente; token: string }) => localStorage.setItem('utente', JSON.stringify(utente))),
-      shareReplay()
+      shareReplay(),
     );
   }
 

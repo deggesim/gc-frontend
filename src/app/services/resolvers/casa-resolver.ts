@@ -5,7 +5,7 @@ import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../statistiche.service';
 
 @Injectable()
-export class CasaResolver  {
+export class CasaResolver {
   constructor(private statisticaService: StatisticheService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Statistica[] | Observable<Statistica[]> | Promise<Statistica[]> {
