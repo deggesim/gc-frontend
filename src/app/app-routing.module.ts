@@ -45,7 +45,10 @@ const appRoutes: Routes = [
       {
         path: 'spese-frequenti',
         component: SpeseFrequentiComponent,
-        resolve: { tortaTipiSpesa: SpeseFrequentiResolver, speseTotali: StatisticheCompleteResolver },
+        resolve: {
+          tortaTipiSpesa: SpeseFrequentiResolver,
+          speseTotali: StatisticheCompleteResolver,
+        },
         data: { breadcrumb: 'Lista', period: 'M' },
         canActivate: [AuthGuard],
       },

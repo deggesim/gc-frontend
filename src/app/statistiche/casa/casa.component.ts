@@ -30,7 +30,7 @@ export class CasaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
-    private statisticheService: StatisticheService,
+    private statisticheService: StatisticheService
   ) {}
 
   ngOnInit() {
@@ -40,7 +40,9 @@ export class CasaComponent implements OnInit {
         if (this.mensile()) {
           forEach(this.barreCasa, (item: Statistica) => {
             let mese = item.name;
-            mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+            mese = DateTime.fromFormat(mese, 'yyyyMM')
+              .setLocale('it-IT')
+              .toFormat('MMMM yyyy');
             item.name = mese;
           });
         }
@@ -51,7 +53,9 @@ export class CasaComponent implements OnInit {
       this.barreCasa = data['barreCasa'];
       forEach(this.barreCasa, (item: Statistica) => {
         let mese = item.name;
-        mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+        mese = DateTime.fromFormat(mese, 'yyyyMM')
+          .setLocale('it-IT')
+          .toFormat('MMMM yyyy');
         item.name = mese;
       });
     });

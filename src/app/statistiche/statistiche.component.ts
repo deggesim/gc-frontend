@@ -11,7 +11,7 @@ import { Statistica } from '../model/statistica';
 export class StatisticheComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   showMainPage = true;
@@ -68,7 +68,7 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaBollettaMensile.push(media);
-        },
+        }
       );
 
       forEach(
@@ -80,7 +80,7 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaSpesaMensile.push(media);
-        },
+        }
       );
 
       forEach(
@@ -92,7 +92,7 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaCarburanteMensile.push(media);
-        },
+        }
       );
 
       forEach(
@@ -104,7 +104,7 @@ export class StatisticheComponent implements OnInit {
           }
           const media = { name: item.name, value: item.value / monthDivider };
           this.mediaCasaMensile.push(media);
-        },
+        }
       );
     });
   }

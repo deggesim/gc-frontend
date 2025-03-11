@@ -1,4 +1,10 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
@@ -13,10 +19,13 @@ export class GlobalInterceptor implements HttpInterceptor {
     private sharedService: SharedService,
     private spinnerService: SpinnerService,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     this.spinnerService.start();
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
@@ -30,7 +39,7 @@ export class GlobalInterceptor implements HttpInterceptor {
         }
         return throwError(() => new Error(error));
       }),
-      finalize(() => this.spinnerService.end()),
+      finalize(() => this.spinnerService.end())
     );
   }
 }

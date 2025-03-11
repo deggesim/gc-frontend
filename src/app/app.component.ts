@@ -1,4 +1,10 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Utente } from './model/utente';
 import { AppUpdateService } from './services/app-update.service';
@@ -26,15 +32,17 @@ export class AppComponent implements AfterViewChecked, OnInit {
     public spinnerService: SpinnerService,
     private sharedService: SharedService,
     private authService: AuthService,
-    private appUpdateService: AppUpdateService,
+    private appUpdateService: AppUpdateService
   ) {}
 
   ngOnInit(): void {
-    this.appUpdateService.updateAvaliable$.subscribe((updateAvailable: boolean) => {
-      if (updateAvailable) {
-        this.popupAggiorna.apriModale();
+    this.appUpdateService.updateAvaliable$.subscribe(
+      (updateAvailable: boolean) => {
+        if (updateAvailable) {
+          this.popupAggiorna.apriModale();
+        }
       }
-    });
+    );
   }
 
   ngAfterViewChecked(): void {

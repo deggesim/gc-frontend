@@ -30,7 +30,7 @@ export class SpesaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
-    private statisticheService: StatisticheService,
+    private statisticheService: StatisticheService
   ) {}
 
   ngOnInit() {
@@ -41,7 +41,9 @@ export class SpesaComponent implements OnInit {
           forEach(this.barreSpesa, (item: Statistica) => {
             let mese = item.name;
             const dateTime = DateTime.fromFormat(mese, 'yyyyMM');
-            mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+            mese = DateTime.fromFormat(mese, 'yyyyMM')
+              .setLocale('it-IT')
+              .toFormat('MMMM yyyy');
             item.name = mese;
           });
         }
@@ -52,7 +54,9 @@ export class SpesaComponent implements OnInit {
       this.barreSpesa = data['barreSpesa'];
       forEach(this.barreSpesa, (item: Statistica) => {
         let mese = item.name;
-        mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+        mese = DateTime.fromFormat(mese, 'yyyyMM')
+          .setLocale('it-IT')
+          .toFormat('MMMM yyyy');
         item.name = mese;
       });
     });

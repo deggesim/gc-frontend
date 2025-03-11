@@ -23,7 +23,7 @@ export class UserProfileComponent {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private sharedService: SharedService,
+    private sharedService: SharedService
   ) {}
 
   confirm(): void {

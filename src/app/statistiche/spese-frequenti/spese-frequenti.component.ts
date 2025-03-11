@@ -26,7 +26,7 @@ export class SpeseFrequentiComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
     private deviceService: DeviceDetectorService,
-    private statisticheService: StatisticheService,
+    private statisticheService: StatisticheService
   ) {}
 
   speseTotali: Statistica[] = [];
@@ -45,9 +45,11 @@ export class SpeseFrequentiComponent implements OnInit {
 
   ngOnInit() {
     this.form.get('range')?.valueChanges.subscribe((value: string) => {
-      this.statisticheService.speseFrequenti(value).subscribe((data: Statistica[]) => {
-        this.tortaTipiSpesa = data;
-      });
+      this.statisticheService
+        .speseFrequenti(value)
+        .subscribe((data: Statistica[]) => {
+          this.tortaTipiSpesa = data;
+        });
     });
 
     this.route.data.subscribe((data: Data) => {
@@ -56,7 +58,8 @@ export class SpeseFrequentiComponent implements OnInit {
     });
 
     this.showLabels = this.deviceService.isDesktop();
-    this.showLegend = this.deviceService.isDesktop() || this.deviceService.isTablet();
+    this.showLegend =
+      this.deviceService.isDesktop() || this.deviceService.isTablet();
 
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
@@ -70,14 +73,16 @@ export class SpeseFrequentiComponent implements OnInit {
         }
         const media = { name: item.name, value: item.value / monthDivider };
         this.mediaMensile.push(media);
-      },
+      }
     );
   }
 
   refresh() {
-    this.statisticheService.speseFrequenti(this.form.controls.range.value).subscribe((data: Statistica[]) => {
-      this.tortaTipiSpesa = data;
-    });
+    this.statisticheService
+      .speseFrequenti(this.form.controls.range.value)
+      .subscribe((data: Statistica[]) => {
+        this.tortaTipiSpesa = data;
+      });
   }
 
   tooltipTorta(arg: any) {

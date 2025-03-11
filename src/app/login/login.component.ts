@@ -20,7 +20,7 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
-    private sharedService: SharedService,
+    private sharedService: SharedService
   ) {}
 
   public login() {

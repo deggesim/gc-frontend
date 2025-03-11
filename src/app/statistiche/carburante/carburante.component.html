@@ -3,18 +3,35 @@
     <legend class="legend">Frequenza</legend>
     <div class="pt-1 text-center">
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" id="mese" value="M" formControlName="frequenza" />
+        <input
+          type="radio"
+          class="form-check-input"
+          id="mese"
+          value="M"
+          formControlName="frequenza"
+        />
         <label class="form-check-label" for="mese">Mensile</label>
       </div>
       <div class="form-check form-check-inline">
-        <input type="radio" class="form-check-input" id="anno" value="Y" formControlName="frequenza" />
+        <input
+          type="radio"
+          class="form-check-input"
+          id="anno"
+          value="Y"
+          formControlName="frequenza"
+        />
         <label class="form-check-label" for="anno">Annuale</label>
       </div>
     </div>
   </fieldset>
 </form>
 
-<div [ngClass]="{ 'barre-orizzontali-mensile': mensile(), 'barre-orizzontali-annuale': annuale() }">
+<div
+  [ngClass]="{
+    'barre-orizzontali-mensile': mensile(),
+    'barre-orizzontali-annuale': annuale(),
+  }"
+>
   <ngx-charts-bar-horizontal
     [scheme]="'solar'"
     [schemeType]="ScaleType.Linear"

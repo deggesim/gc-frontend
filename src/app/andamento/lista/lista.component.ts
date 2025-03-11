@@ -51,7 +51,7 @@ export class ListaComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private sharedService: SharedService,
-    private andamentoService: AndamentoService,
+    private andamentoService: AndamentoService
   ) {}
 
   ngOnInit() {
@@ -71,8 +71,13 @@ export class ListaComponent implements OnInit {
   applicaFiltro(filtro: string | undefined) {
     if (filtro != null && filtro.length > 2) {
       this.listaFiltrata = this.lista.filter((andamento: Andamento) => {
-        const descrizioneFound = andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
-        const tipoSpesaFound = andamento.tipoSpesa.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >= 0;
+        const descrizioneFound =
+          andamento.descrizione.toLowerCase().indexOf(filtro.toLowerCase()) >=
+          0;
+        const tipoSpesaFound =
+          andamento.tipoSpesa.descrizione
+            .toLowerCase()
+            .indexOf(filtro.toLowerCase()) >= 0;
         return descrizioneFound || tipoSpesaFound;
       });
     } else {
@@ -163,16 +168,26 @@ export class ListaComponent implements OnInit {
   }
 
   salva(andamento: Andamento) {
-    const obs$ = isNil(andamento.id) ? this.andamentoService.inserisci(andamento) : this.andamentoService.modifica(andamento);
+    const obs$ = isNil(andamento.id)
+      ? this.andamentoService.inserisci(andamento)
+      : this.andamentoService.modifica(andamento);
     obs$
       .pipe(
         tap(() => {
           this.mostraPopupModifica = false;
           isNil(andamento.id)
-            ? this.sharedService.notifica(globals.toastType.success, 'Nuova voce di spesa', 'Nuova voce di spesa inserita correttamente')
-            : this.sharedService.notifica(globals.toastType.success, 'Modifica voce di spesa', 'Voce di spesa modificata correttamente');
+            ? this.sharedService.notifica(
+                globals.toastType.success,
+                'Nuova voce di spesa',
+                'Nuova voce di spesa inserita correttamente'
+              )
+            : this.sharedService.notifica(
+                globals.toastType.success,
+                'Modifica voce di spesa',
+                'Voce di spesa modificata correttamente'
+              );
         }),
-        switchMap(() => this.andamentoService.lista()),
+        switchMap(() => this.andamentoService.lista())
       )
       .subscribe((lista: Andamento[]) => {
         this.andamentoSelected = undefined;
@@ -199,10 +214,10 @@ export class ListaComponent implements OnInit {
             this.sharedService.notifica(
               globals.toastType.warning,
               'Voce di spesa eliminata',
-              'La voce di spesa è stata eliminata correttamente',
+              'La voce di spesa è stata eliminata correttamente'
             );
           }),
-          switchMap(() => this.andamentoService.lista()),
+          switchMap(() => this.andamentoService.lista())
         )
         .subscribe((lista: Andamento[]) => {
           this.popupConfermaElimina.chiudiModale();

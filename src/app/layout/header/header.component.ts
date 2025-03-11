@@ -1,5 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Params,
+  PRIMARY_OUTLET,
+  Router,
+} from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 
@@ -27,19 +33,25 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     // subscribe to the NavigationEnd event
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      // set breadcrumbs
-      const root: ActivatedRoute = this.activatedRoute.root;
-      this.breadcrumbs = this.getBreadcrumbs(root);
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        // set breadcrumbs
+        const root: ActivatedRoute = this.activatedRoute.root;
+        this.breadcrumbs = this.getBreadcrumbs(root);
+      });
   }
 
-  private getBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
+  private getBreadcrumbs(
+    route: ActivatedRoute,
+    url: string = '',
+    breadcrumbs: IBreadcrumb[] = []
+  ): IBreadcrumb[] {
     const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
 
     // get the child routes
@@ -63,7 +75,9 @@ export class HeaderComponent implements OnInit {
       }
 
       // get the route's URL segment
-      const routeURL: string = child.snapshot.url.map((segment) => segment.path).join('/');
+      const routeURL: string = child.snapshot.url
+        .map((segment) => segment.path)
+        .join('/');
 
       // append route URL to URL
       url += `/${routeURL}`;

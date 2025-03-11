@@ -30,17 +30,19 @@ export class CarburanteComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
-    private statisticheService: StatisticheService,
+    private statisticheService: StatisticheService
   ) {}
 
   ngOnInit() {
     this.form.get('frequenza')?.valueChanges.subscribe((value: string) => {
-      this.statisticheService.carburante(value).subscribe((data: Statistica[]) => {
-        this.barreCarburante = data;
-        if (this.mensile()) {
-          this.formatMese();
-        }
-      });
+      this.statisticheService
+        .carburante(value)
+        .subscribe((data: Statistica[]) => {
+          this.barreCarburante = data;
+          if (this.mensile()) {
+            this.formatMese();
+          }
+        });
     });
 
     this.route.data.subscribe((data: Data) => {
@@ -52,7 +54,9 @@ export class CarburanteComponent implements OnInit {
   private formatMese() {
     forEach(this.barreCarburante, (item: Statistica) => {
       let mese = item.name;
-      mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+      mese = DateTime.fromFormat(mese, 'yyyyMM')
+        .setLocale('it-IT')
+        .toFormat('MMMM yyyy');
       item.name = mese;
     });
   }

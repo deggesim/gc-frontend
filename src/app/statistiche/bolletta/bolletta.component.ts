@@ -30,28 +30,34 @@ export class BollettaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
-    private statisticheService: StatisticheService,
+    private statisticheService: StatisticheService
   ) {}
 
   ngOnInit() {
     this.form.get('frequenza')?.valueChanges.subscribe((value: string) => {
-      this.statisticheService.bolletta(value as string).subscribe((data: Statistica[]) => {
-        this.barreBolletta = data;
-        if (this.mensile()) {
-          forEach(this.barreBolletta, (item: Statistica) => {
-            let mese = item.name;
-            mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
-            item.name = mese;
-          });
-        }
-      });
+      this.statisticheService
+        .bolletta(value as string)
+        .subscribe((data: Statistica[]) => {
+          this.barreBolletta = data;
+          if (this.mensile()) {
+            forEach(this.barreBolletta, (item: Statistica) => {
+              let mese = item.name;
+              mese = DateTime.fromFormat(mese, 'yyyyMM')
+                .setLocale('it-IT')
+                .toFormat('MMMM yyyy');
+              item.name = mese;
+            });
+          }
+        });
     });
 
     this.route.data.subscribe((data: Data) => {
       this.barreBolletta = data['barreBolletta'];
       forEach(this.barreBolletta, (item: Statistica) => {
         let mese = item.name;
-        mese = DateTime.fromFormat(mese, 'yyyyMM').setLocale('it-IT').toFormat('MMMM yyyy');
+        mese = DateTime.fromFormat(mese, 'yyyyMM')
+          .setLocale('it-IT')
+          .toFormat('MMMM yyyy');
         item.name = mese;
       });
     });

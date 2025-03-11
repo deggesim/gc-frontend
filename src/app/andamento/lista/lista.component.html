@@ -1,5 +1,7 @@
 <form #form="ngForm">
-  <div class="d-grid gap-2 pb-3 d-flex flex-wrap flex-sm-nowrap justify-content-center">
+  <div
+    class="d-grid gap-2 pb-3 d-flex flex-wrap flex-sm-nowrap justify-content-center"
+  >
     <div class="input-group order-4 order-sm-0">
       <input
         type="text"
@@ -12,18 +14,44 @@
         (paste)="applicaFiltro($event.clipboardData?.getData('Text'))"
         placeholder="Filtro"
       />
-      <button class="btn btn-light btn-outline-primary" type="button" (click)="pulisciFiltro()">x</button>
+      <button
+        class="btn btn-light btn-outline-primary"
+        type="button"
+        (click)="pulisciFiltro()"
+      >
+        x
+      </button>
     </div>
-    <button type="button" class="btn btn-primary order-0 order-sm-1" (click)="nuova()" tooltip="Nuova voce di spesa">
+    <button
+      type="button"
+      class="btn btn-primary order-0 order-sm-1"
+      (click)="nuova()"
+      tooltip="Nuova voce di spesa"
+    >
       <fa-icon icon="plus"></fa-icon>
     </button>
-    <button type="button" class="btn btn-primary order-1 order-sm-2" (click)="spesa()" tooltip="Spesa">
+    <button
+      type="button"
+      class="btn btn-primary order-1 order-sm-2"
+      (click)="spesa()"
+      tooltip="Spesa"
+    >
       <fa-icon icon="shopping-cart"></fa-icon>
     </button>
-    <button type="button" class="btn btn-primary order-2 order-sm-3" (click)="carburante()" tooltip="Carburante">
+    <button
+      type="button"
+      class="btn btn-primary order-2 order-sm-3"
+      (click)="carburante()"
+      tooltip="Carburante"
+    >
       <fa-icon icon="car"></fa-icon>
     </button>
-    <button type="button" class="btn btn-primary order-3 order-sm-4" (click)="pulizie()" tooltip="Pulizie">
+    <button
+      type="button"
+      class="btn btn-primary order-3 order-sm-4"
+      (click)="pulizie()"
+      tooltip="Pulizie"
+    >
       <fa-icon icon="shower"></fa-icon>
     </button>
   </div>
@@ -38,13 +66,19 @@
           <div>
             <i
               class="manina fa"
-              [ngClass]="{ 'fa-chevron-up': !sortedByGiornoAsc, 'fa-chevron-circle-up': sortedByGiornoAsc }"
+              [ngClass]="{
+                'fa-chevron-up': !sortedByGiornoAsc,
+                'fa-chevron-circle-up': sortedByGiornoAsc,
+              }"
               aria-hidden="true"
               (click)="sortByGiornoAsc()"
             ></i>
             <i
               class="manina fa"
-              [ngClass]="{ 'fa-chevron-down': !sortedByGiornoDesc, 'fa-chevron-circle-down': sortedByGiornoDesc }"
+              [ngClass]="{
+                'fa-chevron-down': !sortedByGiornoDesc,
+                'fa-chevron-circle-down': sortedByGiornoDesc,
+              }"
               aria-hidden="true"
               (click)="sortByGiornoDesc()"
             ></i>
@@ -55,13 +89,19 @@
           <div>
             <i
               class="manina fa"
-              [ngClass]="{ 'fa-chevron-up': !sortedByDescrizioneAsc, 'fa-chevron-circle-up': sortedByDescrizioneAsc }"
+              [ngClass]="{
+                'fa-chevron-up': !sortedByDescrizioneAsc,
+                'fa-chevron-circle-up': sortedByDescrizioneAsc,
+              }"
               aria-hidden="true"
               (click)="sortByDescrizioneAsc()"
             ></i>
             <i
               class="manina fa"
-              [ngClass]="{ 'fa-chevron-down': !sortedByDescrizioneDesc, 'fa-chevron-circle-down': sortedByDescrizioneDesc }"
+              [ngClass]="{
+                'fa-chevron-down': !sortedByDescrizioneDesc,
+                'fa-chevron-circle-down': sortedByDescrizioneDesc,
+              }"
               aria-hidden="true"
               (click)="sortByDescrizioneDesc()"
             ></i>
@@ -72,13 +112,19 @@
           <div>
             <i
               class="manina fa"
-              [ngClass]="{ 'fa-chevron-up': !sortedByCostoAsc, 'fa-chevron-circle-up': sortedByCostoAsc }"
+              [ngClass]="{
+                'fa-chevron-up': !sortedByCostoAsc,
+                'fa-chevron-circle-up': sortedByCostoAsc,
+              }"
               aria-hidden="true"
               (click)="sortByCostoAsc()"
             ></i>
             <i
               class="manina fa"
-              [ngClass]="{ 'fa-chevron-down': !sortedByCostoDesc, 'fa-chevron-circle-down': sortedByCostoDesc }"
+              [ngClass]="{
+                'fa-chevron-down': !sortedByCostoDesc,
+                'fa-chevron-circle-down': sortedByCostoDesc,
+              }"
               aria-hidden="true"
               (click)="sortByCostoDesc()"
             ></i>
@@ -175,7 +221,11 @@
       </div>
 
       <div class="modal-body">
-        <gc-modifica [andamento]="andamentoSelected" (salva)="salva($event)" (annulla)="annulla()"></gc-modifica>
+        <gc-modifica
+          [andamento]="andamentoSelected"
+          (salva)="salva($event)"
+          (annulla)="annulla()"
+        ></gc-modifica>
       </div>
     </div>
   </div>

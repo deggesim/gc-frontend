@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { isNil } from 'lodash-es';
 import { DateTime } from 'luxon';
@@ -30,7 +38,7 @@ export class ModificaComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     public sharedService: SharedService,
-    private tipoSpesaService: TipoSpesaService,
+    private tipoSpesaService: TipoSpesaService
   ) {}
 
   ngOnInit() {
@@ -66,7 +74,9 @@ export class ModificaComponent implements OnInit, OnChanges {
     if (this.form.valid) {
       const andamento: Andamento = {
         id: this.form.value.id,
-        giorno: DateTime.fromJSDate(this.form.value.giorno as Date).toISODate() as string,
+        giorno: DateTime.fromJSDate(
+          this.form.value.giorno as Date
+        ).toISODate() as string,
         descrizione: this.form.value.descrizione as string,
         costo: this.form.value.costo as number,
         tipoSpesa: this.form.value.tipoSpesa as TipoSpesa,
