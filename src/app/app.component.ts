@@ -22,6 +22,7 @@ import { PopupConfermaComponent } from './shared/popup-conferma/popup-conferma.c
 import { SharedService } from './shared/shared.service';
 import { SpinnerService } from './shared/spinner.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ThemeService } from './shared/theme.service';
 
 @Component({
   selector: 'gc-root',
@@ -51,7 +52,8 @@ export class AppComponent implements AfterViewChecked, OnInit {
     private sharedService: SharedService,
     private authService: AuthService,
     private appUpdateService: AppUpdateService,
-    private library: FaIconLibrary
+    private themeService: ThemeService,
+    library: FaIconLibrary
   ) {
     library.addIconPacks(fas);
   }
@@ -64,6 +66,10 @@ export class AppComponent implements AfterViewChecked, OnInit {
         }
       }
     );
+
+    this.themeService.theme$.subscribe((theme) => {
+      document.documentElement.setAttribute('data-bs-theme', theme);
+    });
   }
 
   ngAfterViewChecked(): void {

@@ -13,7 +13,11 @@
           <label for="giorno" class="form-label">Giorno *</label>
           <div class="input-group">
             <button
-              class="btn btn-light btn-outline-primary"
+              class="btn btn-outline-primary"
+              [ngClass]="{
+                'btn-light': !themeService.darkMode(),
+                'btn-dark': themeService.darkMode(),
+              }"
               type="button"
               id="calendar-icon"
               (click)="dpGiorno.toggle()"
@@ -34,7 +38,11 @@
               formControlName="giorno"
             />
             <button
-              class="btn btn-light btn-outline-primary"
+              class="btn btn-outline-primary"
+              [ngClass]="{
+                'btn-light': !themeService.darkMode(),
+                'btn-dark': themeService.darkMode(),
+              }"
               type="button"
               id="calendar-icon"
               (click)="clearGiorno()"

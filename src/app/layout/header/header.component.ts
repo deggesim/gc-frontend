@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   ActivatedRoute,
@@ -18,6 +18,7 @@ import {
 } from 'ngx-bootstrap/dropdown';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
+import { ThemeService } from 'src/app/shared/theme.service';
 
 interface IBreadcrumb {
   label: string;
@@ -32,6 +33,7 @@ interface IBreadcrumb {
   imports: [
     RouterLink,
     FaIconComponent,
+    NgClass,
     NgIf,
     CollapseDirective,
     BsDropdownDirective,
@@ -46,6 +48,7 @@ export class HeaderComponent implements OnInit {
   @Output() logout: EventEmitter<void> = new EventEmitter(true);
   @Output() profile: EventEmitter<void> = new EventEmitter(true);
 
+  themeIcon = 'sun';
   isCollapsed = true;
   breadcrumbs: IBreadcrumb[] = [];
 
@@ -54,7 +57,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -118,4 +122,11 @@ export class HeaderComponent implements OnInit {
     // we should never get here, but just in case
     return breadcrumbs;
   }
+
+  toggleTheme = () => {
+    const newTheme =
+      this.themeService.getTheme() === 'light' ? 'dark' : 'light';
+    this.themeService.setTheme(newTheme);
+    this.themeIcon = newTheme === 'light' ? 'moon' : 'sun';
+  };
 }

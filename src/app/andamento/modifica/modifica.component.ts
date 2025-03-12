@@ -23,6 +23,7 @@ import {
   BsDatepickerInputDirective,
 } from 'ngx-bootstrap/datepicker';
 import { NgxCurrencyDirective } from 'ngx-currency';
+import { ThemeService } from 'src/app/shared/theme.service';
 import { Andamento } from '../../model/andamento';
 import { TipoSpesa } from '../../model/tipo-spesa';
 import { TipoSpesaService } from '../../services/tipo-spesa.service';
@@ -61,7 +62,8 @@ export class ModificaComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     public sharedService: SharedService,
-    private tipoSpesaService: TipoSpesaService
+    private tipoSpesaService: TipoSpesaService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {

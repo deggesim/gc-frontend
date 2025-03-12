@@ -10,6 +10,7 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { BarChartModule, ScaleType } from '@swimlane/ngx-charts';
 import { forEach, isEqual } from 'lodash-es';
 import { DateTime } from 'luxon';
+import { ThemeService } from 'src/app/shared/theme.service';
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
@@ -36,7 +37,8 @@ export class SpesaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
-    private statisticheService: StatisticheService
+    private statisticheService: StatisticheService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {

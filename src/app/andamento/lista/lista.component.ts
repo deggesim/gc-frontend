@@ -23,6 +23,7 @@ import * as globals from '../../shared/globals';
 import { PopupConfermaComponent } from '../../shared/popup-conferma/popup-conferma.component';
 import { SharedService } from '../../shared/shared.service';
 import { ModificaComponent } from '../modifica/modifica.component';
+import { ThemeService } from 'src/app/shared/theme.service';
 
 @Component({
   selector: 'gc-lista',
@@ -79,7 +80,8 @@ export class ListaComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private sharedService: SharedService,
-    private andamentoService: AndamentoService
+    private andamentoService: AndamentoService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {
