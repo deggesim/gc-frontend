@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
@@ -9,16 +9,18 @@ import {
 } from '@angular/router';
 import { forEach } from 'lodash-es';
 import { Statistica } from '../model/statistica';
+import { ThemeService } from '../shared/theme.service';
 
 @Component({
   selector: 'gc-statistiche',
   templateUrl: './statistiche.component.html',
-  imports: [NgIf, NgFor, RouterOutlet],
+  imports: [NgClass, NgIf, NgFor, RouterOutlet],
 })
 export class StatisticheComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public themeService: ThemeService
   ) {}
 
   showMainPage = true;

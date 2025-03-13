@@ -15,7 +15,11 @@
         placeholder="Filtro"
       />
       <button
-        class="btn btn-light btn-outline-primary"
+        class="btn btn-outline-primary"
+        [ngClass]="{
+          'btn-light': !themeService.darkMode(),
+          'btn-dark': themeService.darkMode(),
+        }"
         type="button"
         (click)="pulisciFiltro()"
       >
@@ -59,7 +63,12 @@
 
 <div class="table-responsive">
   <table class="table table-hover" aria-label="andamento">
-    <thead class="table-light">
+    <thead
+      [ngClass]="{
+        'table-light': !themeService.darkMode(),
+        'table-dark': themeService.darkMode(),
+      }"
+    >
       <tr>
         <th id="giorno">
           Giorno

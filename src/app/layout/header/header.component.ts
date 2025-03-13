@@ -17,6 +17,7 @@ import {
   BsDropdownToggleDirective,
 } from 'ngx-bootstrap/dropdown';
 import { filter } from 'rxjs/operators';
+import { ThemeService } from 'src/app/shared/theme.service';
 import { AuthService } from '../../services/auth.service';
 
 interface IBreadcrumb {
@@ -46,6 +47,7 @@ export class HeaderComponent implements OnInit {
   @Output() logout: EventEmitter<void> = new EventEmitter(true);
   @Output() profile: EventEmitter<void> = new EventEmitter(true);
 
+  themeIcon = 'sun';
   isCollapsed = true;
   breadcrumbs: IBreadcrumb[] = [];
 
@@ -54,7 +56,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -66,6 +69,8 @@ export class HeaderComponent implements OnInit {
         const root: ActivatedRoute = this.activatedRoute.root;
         this.breadcrumbs = this.getBreadcrumbs(root);
       });
+
+    this.themeIcon = this.themeService.getTheme() === 'light' ? 'moon' : 'sun';
   }
 
   private getBreadcrumbs(
@@ -118,4 +123,11 @@ export class HeaderComponent implements OnInit {
     // we should never get here, but just in case
     return breadcrumbs;
   }
+
+  toggleTheme = () => {
+    const newTheme =
+      this.themeService.getTheme() === 'light' ? 'dark' : 'light';
+    this.themeService.setTheme(newTheme);
+    this.themeIcon = newTheme === 'light' ? 'moon' : 'sun';
+  };
 }

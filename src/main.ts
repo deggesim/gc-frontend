@@ -17,7 +17,6 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   PreloadAllModules,
   provideRouter,
-  withDebugTracing,
   withPreloading,
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -58,6 +57,7 @@ import { StatisticheService } from './app/services/statistiche.service';
 import { TipoSpesaService } from './app/services/tipo-spesa.service';
 import { SharedService } from './app/shared/shared.service';
 import { SpinnerService } from './app/shared/spinner.service';
+import { ThemeService } from './app/shared/theme.service';
 import { environment } from './environments/environment';
 
 if (environment.production) {
@@ -120,12 +120,13 @@ bootstrapApplication(AppComponent, {
     StatisticheCompleteResolver,
     // altri servizi
     AndamentoService,
-    TipoSpesaService,
+    AppUpdateService,
+    AuthService,
     StatisticheService,
+    TipoSpesaService,
     SpinnerService,
     SharedService,
-    AuthService,
-    AppUpdateService,
+    ThemeService,
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
   ],

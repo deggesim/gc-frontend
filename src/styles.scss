@@ -4,6 +4,7 @@
 @import 'styles/bootswatch_5.3.3';
 
 @import 'styles/loading';
+@import 'styles/ng-select.scss';
 
 // padding per la navbar bootstrap fixed top
 body {
@@ -14,24 +15,6 @@ body {
 .navbar {
   padding-left: 1rem;
   padding-right: 1rem;
-}
-
-// ng-select
-.ng-select.ng-invalid.ng-touched .ng-select-container {
-  border-color: $danger;
-}
-.ng-select.ng-invalid.ng-touched .ng-arrow-wrapper .ng-arrow {
-  border-color: $danger transparent transparent;
-}
-.ng-select.ng-invalid.ng-touched .ng-select-container .ng-placeholder {
-  color: $danger;
-}
-.ng-select-invalid-feedback {
-  width: 100%;
-  margin-top: 0.25rem;
-  font-size: 80%;
-  color: $danger;
-  display: block !important;
 }
 
 // altre classi
@@ -52,7 +35,6 @@ body {
   .legend {
     border: 1px solid $table-border-color;
     border-radius: 0.5rem;
-    background-color: $white;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     width: inherit;
@@ -181,4 +163,14 @@ body {
 .theme-green .bs-datepicker-body table td span[class*='select-']:after,
 .theme-green .bs-datepicker-body table td[class*='select-'] span:after {
   background-color: $primary;
+}
+
+.bs-datepicker-body table td {
+  color: $body-color;
+}
+
+// ngx-charts
+.ngx-charts,
+text {
+  fill: $body-color;
 }

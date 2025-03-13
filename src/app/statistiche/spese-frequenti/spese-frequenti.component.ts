@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormsModule,
@@ -10,13 +10,14 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { PieChartModule } from '@swimlane/ngx-charts';
 import { forEach } from 'lodash-es';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { ThemeService } from 'src/app/shared/theme.service';
 import { Statistica } from '../../model/statistica';
 import { StatisticheService } from '../../services/statistiche.service';
 
 @Component({
   selector: 'gc-spese-frequenti',
   templateUrl: './spese-frequenti.component.html',
-  imports: [FormsModule, ReactiveFormsModule, PieChartModule, NgFor],
+  imports: [FormsModule, ReactiveFormsModule, PieChartModule, NgClass, NgFor],
 })
 export class SpeseFrequentiComponent implements OnInit {
   // opzioni torta
@@ -33,7 +34,8 @@ export class SpeseFrequentiComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
     private deviceService: DeviceDetectorService,
-    private statisticheService: StatisticheService
+    private statisticheService: StatisticheService,
+    public themeService: ThemeService
   ) {}
 
   speseTotali: Statistica[] = [];
