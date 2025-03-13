@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   ActivatedRoute,
@@ -17,8 +17,8 @@ import {
   BsDropdownToggleDirective,
 } from 'ngx-bootstrap/dropdown';
 import { filter } from 'rxjs/operators';
-import { AuthService } from '../../services/auth.service';
 import { ThemeService } from 'src/app/shared/theme.service';
+import { AuthService } from '../../services/auth.service';
 
 interface IBreadcrumb {
   label: string;
@@ -33,7 +33,6 @@ interface IBreadcrumb {
   imports: [
     RouterLink,
     FaIconComponent,
-    NgClass,
     NgIf,
     CollapseDirective,
     BsDropdownDirective,
