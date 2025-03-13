@@ -2,9 +2,24 @@
   class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top"
   aria-label="Barra di navigazione"
 >
-  <a class="navbar-brand" [routerLink]="(isLoggedIn$ | async) ? '/home' : null">
-    <fa-icon icon="house"></fa-icon>
-  </a>
+  <div class="d-flex align-items-center">
+    <a
+      class="navbar-brand"
+      [routerLink]="(isLoggedIn$ | async) ? '/home' : null"
+      role="button"
+      aria-label="Vai alla homepage"
+    >
+      <fa-icon icon="house"></fa-icon>
+    </a>
+    <a
+      class="nav-link d-sm-none"
+      (click)="toggleTheme()"
+      role="button"
+      aria-label="Scegli il tema"
+    >
+      <fa-icon [icon]="themeIcon"></fa-icon>
+    </a>
+  </div>
 
   <ng-container *ngIf="isLoggedIn$ | async">
     <button
@@ -94,23 +109,32 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link manina" (click)="toggleTheme()">
+        <li class="nav-item d-none d-sm-block">
+          <a
+            class="nav-link"
+            (click)="toggleTheme()"
+            role="button"
+            aria-label="Scegli il tema"
+          >
             <fa-icon [icon]="themeIcon" class="menu-padding"></fa-icon>
           </a>
         </li>
         <li class="nav-item">
           <a
-            class="nav-link manina"
+            class="nav-link"
             (click)="isCollapsed = true; logout.emit()"
+            role="button"
+            aria-label="Logout"
           >
             <fa-icon icon="sign-out" class="menu-padding"></fa-icon>Logout
           </a>
         </li>
         <li class="nav-item">
           <a
-            class="nav-link manina"
+            class="nav-link"
             (click)="isCollapsed = true; profile.emit()"
+            role="button"
+            aria-label="Profilo utente"
           >
             <fa-icon icon="user-circle" class="menu-padding"></fa-icon>Profilo
             Utente

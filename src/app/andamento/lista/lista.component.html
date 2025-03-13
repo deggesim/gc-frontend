@@ -71,72 +71,73 @@
     >
       <tr>
         <th id="giorno">
-          Giorno
-          <div>
-            <i
-              class="manina fa"
-              [ngClass]="{
-                'fa-chevron-up': !sortedByGiornoAsc,
-                'fa-chevron-circle-up': sortedByGiornoAsc,
-              }"
-              aria-hidden="true"
-              (click)="sortByGiornoAsc()"
-            ></i>
-            <i
-              class="manina fa"
-              [ngClass]="{
-                'fa-chevron-down': !sortedByGiornoDesc,
-                'fa-chevron-circle-down': sortedByGiornoDesc,
-              }"
-              aria-hidden="true"
-              (click)="sortByGiornoDesc()"
-            ></i>
+          <div class="d-flex flex-wrap">
+            <div class="pe-1">Giorno</div>
+            <div>
+              <fa-icon
+                [icon]="sortedByGiornoAsc ? 'circle-chevron-up' : 'chevron-up'"
+                (click)="sortByGiornoAsc()"
+                role="button"
+                aria-label="Ordina per giorno crescente"
+                class="pe-1"
+              />
+              <fa-icon
+                [icon]="
+                  sortedByGiornoDesc ? 'circle-chevron-down' : 'chevron-down'
+                "
+                (click)="sortByGiornoDesc()"
+                role="button"
+                aria-label="Ordina per giorno decrescente"
+              />
+            </div>
           </div>
         </th>
         <th id="descrizione">
-          Descrizione
-          <div>
-            <i
-              class="manina fa"
-              [ngClass]="{
-                'fa-chevron-up': !sortedByDescrizioneAsc,
-                'fa-chevron-circle-up': sortedByDescrizioneAsc,
-              }"
-              aria-hidden="true"
-              (click)="sortByDescrizioneAsc()"
-            ></i>
-            <i
-              class="manina fa"
-              [ngClass]="{
-                'fa-chevron-down': !sortedByDescrizioneDesc,
-                'fa-chevron-circle-down': sortedByDescrizioneDesc,
-              }"
-              aria-hidden="true"
-              (click)="sortByDescrizioneDesc()"
-            ></i>
+          <div class="d-flex flex-wrap">
+            <div class="pe-1">Descrizione</div>
+            <div>
+              <fa-icon
+                [icon]="
+                  sortedByDescrizioneAsc ? 'circle-chevron-up' : 'chevron-up'
+                "
+                (click)="sortByDescrizioneAsc()"
+                role="button"
+                aria-label="Ordina per descrizione crescente"
+                class="pe-1"
+              />
+              <fa-icon
+                [icon]="
+                  sortedByDescrizioneDesc
+                    ? 'circle-chevron-down'
+                    : 'chevron-down'
+                "
+                (click)="sortByDescrizioneDesc()"
+                role="button"
+                aria-label="Ordina per descrizione decrescente"
+              />
+            </div>
           </div>
         </th>
-        <th id="costo" class="text-end pe-4">
-          Costo
-          <div>
-            <i
-              class="manina fa"
-              [ngClass]="{
-                'fa-chevron-up': !sortedByCostoAsc,
-                'fa-chevron-circle-up': sortedByCostoAsc,
-              }"
-              aria-hidden="true"
-              (click)="sortByCostoAsc()"
-            ></i>
-            <i
-              class="manina fa"
-              [ngClass]="{
-                'fa-chevron-down': !sortedByCostoDesc,
-                'fa-chevron-circle-down': sortedByCostoDesc,
-              }"
-              aria-hidden="true"
-              (click)="sortByCostoDesc()"
-            ></i>
+        <th id="costo" class="pe-4">
+          <div class="d-flex flex-wrap justify-content-end">
+            <div class="pe-1">Costo</div>
+            <div>
+              <fa-icon
+                [icon]="sortedByCostoAsc ? 'circle-chevron-up' : 'chevron-up'"
+                (click)="sortByCostoAsc()"
+                role="button"
+                aria-label="Ordina per costo crescente"
+                class="pe-1"
+              />
+              <fa-icon
+                [icon]="
+                  sortedByCostoDesc ? 'circle-chevron-down' : 'chevron-down'
+                "
+                (click)="sortByCostoDesc()"
+                role="button"
+                aria-label="Ordina per costo decrescente"
+              />
+            </div>
           </div>
         </th>
         <th id="tipoSpesa">Tipo spesa</th>
@@ -221,7 +222,6 @@
   [config]="{ backdrop: 'static', keyboard: false, show: true }"
   tabindex="-1"
   role="dialog"
-  aria-hidden="true"
 >
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
