@@ -69,6 +69,8 @@ export class HeaderComponent implements OnInit {
         const root: ActivatedRoute = this.activatedRoute.root;
         this.breadcrumbs = this.getBreadcrumbs(root);
       });
+
+    this.themeIcon = this.themeService.getTheme() === 'light' ? 'moon' : 'sun';
   }
 
   private getBreadcrumbs(

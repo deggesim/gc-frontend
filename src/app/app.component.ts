@@ -66,9 +66,15 @@ export class AppComponent implements AfterViewChecked, OnInit {
         }
       }
     );
+    if (localStorage.getItem('theme')) {
+      this.themeService.setTheme(localStorage.getItem('theme') as string);
+    } else {
+      this.themeService.setTheme('light');
+    }
 
     this.themeService.theme$.subscribe((theme) => {
       document.documentElement.setAttribute('data-bs-theme', theme);
+      localStorage.setItem('theme', theme);
     });
   }
 
