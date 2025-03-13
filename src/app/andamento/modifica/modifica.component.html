@@ -28,7 +28,7 @@
               type="text"
               class="form-control"
               #dpGiorno="bsDatepicker"
-              [bsConfig]="sharedService.getBsConfig()"
+              [bsConfig]="sharedService.getBsConfig(themeService.getTheme())"
               readonly
               [ngClass]="{
                 'is-invalid':

@@ -165,6 +165,10 @@ body {
   background-color: $primary;
 }
 
+.bs-datepicker-body table td {
+  color: $body-color;
+}
+
 // ngx-charts
 .ngx-charts,
 text {

@@ -22,8 +22,8 @@ export class SharedService {
     this.localeService.use('it');
   }
 
-  public getBsConfig(): Partial<BsDatepickerConfig> {
-    return this.bsConfig;
+  public getBsConfig(theme: string): Partial<BsDatepickerConfig> {
+    return { ...this.bsConfig, containerClass: `theme-green bg-${theme}` };
   }
 
   public notifica(type: string, title: string, message: string) {
